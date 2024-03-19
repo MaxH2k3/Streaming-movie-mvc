@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <PreserveCompilationContext>true</PreserveCompilationContext>
+	  <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\auth\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMovie.Application\SMovie.Application.csproj" />
+    <ProjectReference Include="..\SMovie.Domain\SMovie.Domain.csproj" />
+    <ProjectReference Include="..\SMovie.Infrastructure\SMovie.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

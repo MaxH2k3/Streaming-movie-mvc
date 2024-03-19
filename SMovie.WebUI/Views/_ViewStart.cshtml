@@ -1,0 +1,24 @@
+﻿@{
+    if (ViewContext.RouteData.Values["action"]!.ToString()!.Equals("ConfirmCode", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_Layout";
+    } else if (ViewContext.RouteData.Values["action"]!.ToString()!.Equals("ConfirmMail", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_LayoutDashboard";
+    } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Login", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_LayoutMain";
+    } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Register", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_LayoutMain";
+    } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Home", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_LayoutHome";
+    } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Person", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_LayoutHome";
+    } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Dashboard", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_LayoutDashboard";
+    }
+}

@@ -1,0 +1,93 @@
+﻿@model SMovie.Domain.Models.RegisterUser
+
+<main class="main-content">
+    <!--Nav Start-->
+    <!--Nav End-->
+    <!--bread-crumb-->
+    <!--bread-crumb-->
+
+
+    <div class="vh-100" style="background: url('/home/images/pages/01.html'); background-size: cover; background-repeat: no-repeat; position: relative;min-height:500px">
+        <div class="container">
+            <div class="row justify-content-center align-items-center height-self-center vh-100">
+                <div class="col-lg-8 col-md-12 align-self-center">
+                    <form class="user-login-card bg-body" method="post" asp-action="Register" asp-controller="Register">
+                        <h4 class="text-center mb-5">Create Your Account</h4>
+                        <div class="row row-cols-1 g-2 g-lg-5">
+                            <div class="col-md-4">
+                                <label class="text-white fw-300 mb-2">First Name</label>
+                                <input type="text" id="FirstName" class="form-control rounded-0" required="" asp-for="FirstName">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="text-white fw-300 mb-2">Last Name</label>
+                                <input type="text" id="LastName" class="form-control rounded-0" required="" asp-for="LastName">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="text-white fw-300 mb-2">Display Name</label>
+                                <input type="text" id="DisplayName" class="form-control rounded-0" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-white fw-500 mb-2">UserName</label>
+                                <input type="text" id="UserName" class="form-control rounded-0" asp-for="Username">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-white fw-500 mb-2">Email *</label>
+                                <input type="email" class="form-control rounded-0" required="" asp-for="Email">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-white fw-500 mb-2">Password *</label>
+                                <input type="password" class="form-control rounded-0" required="" asp-for="Password">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-white fw-500 mb-2">Confirm Password *</label>
+                                <input type="password" class="form-control rounded-0" required="" asp-for="Password">
+                            </div>
+                        </div>
+                        <label class="list-group-item d-flex align-items-center mt-5 mb-3 text-white">
+                            <input class="form-check-input m-0 me-2" type="checkbox" required>
+                                I've read and accept the <a href="terms-of-use.html" class="ms-1">terms & conditions*</a>
+                        </label>
+                        <div class="row text-center">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6">
+                                <div class="full-button">
+                                    <div class="iq-button">
+                                        <button class="btn text-uppercase position-relative">
+                                            <span class="button-text">Sign Up</span>
+                                            <i class="fa-solid fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <p class="mt-2 mb-0 fw-normal">Already have an account<a href="login.html" class="ms-1">Login</a></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3"></div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        GenerateDisplayName();
+        
+        function GenerateDisplayName() {
+            var firstName = document.getElementById('FirstName');
+            var lastName = document.getElementById('LastName');
+            var displayName = document.getElementById('DisplayName');
+            displayName.value = firstName.value + ' ' + lastName.value;
+            firstName.addEventListener('input', function () {
+                displayName.value = firstName.value + ' ' + lastName.value;
+            });
+            lastName.addEventListener('input', function () {
+                displayName.value = firstName.value + ' ' + lastName.value;
+            });
+        }
+
+        
+    </script>
+
+</main>
+
+@await Html.PartialAsync("../Home/Components/_RTS")

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Streamit-movie</title>
+
+    @* import data css *@
+    @await Html.PartialAsync("../Dashboard/Import/_Head")
+
+</head>
+<body>
+    @* loading *@
+    @{
+        await Html.RenderPartialAsync("../Home/Components/_Loading");
+    }
+
+    @RenderBody()
+    @await RenderSectionAsync("Scripts", required: false)
+
+    @* import component *@
+    @{
+        await Html.RenderPartialAsync("../Home/Components/_RTS");
+    }
+
+    @* import toast *@
+    @{
+        await Html.RenderPartialAsync("_Toast");
+    }
+
+    @* import data js *@
+    @await Html.PartialAsync("../Dashboard/Import/_Js")
+
+</body>
+</html>
