@@ -46,6 +46,31 @@ namespace SMovie.Infrastructure.Repository
             return new PagedList<Movie>(itemsDesc, totalItemsDesc, page, eachPage);
         }
 
+        public new PagedList<Movie> GetAll(int page, int eachPage, string sortBy, bool isAscending = true)
+        {
+
+            var parameter = Expression.Parameter(typeof(Movie), "x");
+            var property = Expression.Property(parameter, sortBy);
+            var lambda = Expression.Lambda<Func<Movie, object>>(property, parameter);
+            var sortExpression = lambda.Compile();
+
+            if (isAscending)
+            {
+                var list = _context.Movies.OrderBy(sortExpression).ToList();
+                var totalItems = list.Count;
+                var items = list.Skip((page - 1) * eachPage).Take(eachPage);
+
+                return new PagedList<Movie>(items, totalItems, page, eachPage);
+            }
+
+            var listDesc = _context.Movies.OrderByDescending(sortExpression).ToList();
+            var totalItemsDesc = listDesc.Count;
+            var itemsDesc = listDesc.Skip((page - 1) * eachPage).Take(eachPage);
+
+            return new PagedList<Movie>(itemsDesc, totalItemsDesc, page, eachPage);
+
+        }
+
         public async Task<bool> CheckExistMovieName(string englishName, string vietnamName, Guid id)
         {
                 return await _context.Movies.AnyAsync(x => x.EnglishName!.ToLower().Equals(englishName.ToLower()) 

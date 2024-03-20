@@ -19,6 +19,7 @@ namespace SMovie.Application.Configuration
             CreateMap<MovieCategory, Category>()
                 .ForMember(dest => dest.Name,
                 opt => opt.MapFrom(src => src.Category!.Name));
+            CreateMap<Movie, MoviePreview>();
 
             // Person 
             CreateMap<Person, PersonPreview>();

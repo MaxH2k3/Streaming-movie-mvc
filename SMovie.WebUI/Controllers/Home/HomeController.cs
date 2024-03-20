@@ -1,8 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using SMovie.Application.IService;
+using SMovie.Domain.Constants;
+using SMovie.Domain.Entity;
+using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
+using SMovie.WebUI.Models;
+using System.Reflection;
 
 namespace SMovie.WebUI.Controllers;
 
@@ -24,6 +30,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
+        
         var tempResponse = TempData["response"] as string;
         ResponseDTO? responseDTO;
         if(!string.IsNullOrEmpty(tempResponse))
@@ -33,10 +40,16 @@ public class HomeController : Controller
             
         }
 
-        // Get all movies
-        IEnumerable<MovieSlide> movies = await _movieService.GetMovieSlide();
+        HomeModel model = new HomeModel();
+
+        // Get movies for slide
+        model.SlideMovies = await _movieService.GetMovieSlide();
         
-        return View(movies);
+        // Get newest movies
+        var moviess = _movieService.GetMovieReleased(1, 10, MovieSortType.EnglishName);
+        model.NewMovies = _mapper.Map<IEnumerable<MoviePreview>>(_movieService.GetMovies(1, 10, MovieSortType.EnglishName));
+
+        return View(model);
     }
 
     public async Task<IActionResult> Genres()

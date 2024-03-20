@@ -1,10 +1,11 @@
-﻿@using SMovie.Domain.Models
+﻿@using SMovie.WebUI.Models
 
 
 <main class="main-content">
   <section id="home-banner-slider" class="iq-main-slider p-0 swiper banner-home-swiper overflow-hidden" data-swiper="home-banner-slider">
      <div class="slider m-0 p-0 swiper-wrapper home-slider">
-         @foreach(var movie in Model) {
+            @foreach (var movie in Model.SlideMovies)
+            {
                 <div class="swiper-slide slide s-bg-1 p-0">
                     <div class="banner-home-swiper-image">
                         <img src="@movie.Thumbnail" alt="banner-home-swiper-image">
