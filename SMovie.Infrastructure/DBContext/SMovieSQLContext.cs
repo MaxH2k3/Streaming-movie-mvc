@@ -37,10 +37,9 @@ namespace SMovie.Infrastructure.DBContext
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                        .UseSqlServer(GetConnectionString(), opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery))
+                        .UseSqlServer(GetConnectionString())
                         .LogTo(Console.WriteLine, LogLevel.Information);
                 //.LogTo((message) => WatchLogger.Log($"SQL {message}"), LogLevel.Information);
-                optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             }
         }
 

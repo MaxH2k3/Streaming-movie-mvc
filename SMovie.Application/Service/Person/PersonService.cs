@@ -140,19 +140,19 @@ namespace SMovie.Application.Service
 			return new ResponseDTO(HttpStatusCode.ServiceUnavailable, MessageSystem.ServerError);
 		}
 
-		public PagedList<Person> GetActors(int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> GetActors(int page, int eachPage, PersonSortType sortBy)
 		{
 			if(sortBy == PersonSortType.NamePerson)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.NamePerson);
+				return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.NamePerson);
 			}
 			else if(sortBy == PersonSortType.BirthDate)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.BirthDate);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.BirthDate);
 			}
 			else if(sortBy == PersonSortType.DateCreated)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.DateCreated);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.DateCreated);
 			}
 
 			throw new NotFoundException(MessageException.SortByNotFound);
@@ -163,55 +163,55 @@ namespace SMovie.Application.Service
 			return await _unitOfWork.PersonRepository.GetById(id);
 		}
 
-		public PagedList<Person> GetPersons(int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> GetPersons(int page, int eachPage, PersonSortType sortBy)
 		{
 			if(sortBy == PersonSortType.NamePerson)
 			{
-				return _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.NamePerson);
+                return await _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.NamePerson);
 			}
 			else if(sortBy == PersonSortType.BirthDate)
 			{
-				return _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.BirthDate);
+                return await _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.BirthDate);
 			}
 			else if(sortBy == PersonSortType.DateCreated)
 			{
-				return _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.DateCreated);
+                return await _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.DateCreated);
 			}
 
 			throw new Exception(MessageException.SortByNotFound);
 		}
 
-		public PagedList<Person> GetProducers(int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> GetProducers(int page, int eachPage, PersonSortType sortBy)
 		{
 			if(sortBy == PersonSortType.NamePerson)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.NamePerson);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.NamePerson);
 			}
 			else if(sortBy == PersonSortType.BirthDate)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.BirthDate);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.BirthDate);
 			}
 			else if(sortBy == PersonSortType.DateCreated)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.DateCreated);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.DateCreated);
 			}
 
 			throw new Exception(MessageException.SortByNotFound);
 		}
 
-		public PagedList<Person> SearchByName(string name, int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> SearchByName(string name, int page, int eachPage, PersonSortType sortBy)
 		{
 			if(sortBy == PersonSortType.NamePerson)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.NamePerson);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.NamePerson);
 			}
 			else if(sortBy == PersonSortType.BirthDate)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.BirthDate);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.BirthDate);
 			}
 			else if(sortBy == PersonSortType.DateCreated)
 			{
-				return _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.DateCreated);
+                return await _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.DateCreated);
 			}
 
 			throw new Exception(MessageException.SortByNotFound);

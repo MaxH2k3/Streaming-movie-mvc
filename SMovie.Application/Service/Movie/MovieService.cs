@@ -30,111 +30,111 @@ namespace SMovie.Application.Service
             _mapper = mapper;
         }
 
-        public PagedList<Movie> GetMovieDeleted(int page,int eachPage, MovieSortType sortBy)
+        public async Task<PagedList<Movie>> GetMovieDeleted(int page,int eachPage, MovieSortType sortBy)
         {
             if(sortBy == MovieSortType.EnglishName)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.EnglishName);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.EnglishName);
             } else if(sortBy == MovieSortType.DateCreated)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.DateCreated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.DateCreated);
             } else if(sortBy == MovieSortType.DateDeleted)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.DateDeleted);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.DateDeleted);
             } else if(sortBy == MovieSortType.DateUpdated)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.DateUpdated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.DateUpdated);
             } else if(sortBy == MovieSortType.ProducedDate)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.ProducedDate);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.DateDeleted != null, page, eachPage, MovieSortBy.ProducedDate);
             }
 
             throw new NotFoundException(MessageMovie.TypeStatusNotFound);
         }
 
-        public PagedList<Movie> GetMoviePending(int page, int eachPage, MovieSortType sortBy)
+        public async Task<PagedList<Movie>> GetMoviePending(int page, int eachPage, MovieSortType sortBy)
         {
             if(sortBy == MovieSortType.EnglishName)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.EnglishName);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.EnglishName);
             } else if(sortBy == MovieSortType.DateCreated)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.DateCreated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.DateCreated);
             } else if(sortBy == MovieSortType.DateDeleted)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.DateDeleted);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.DateDeleted);
             } else if(sortBy == MovieSortType.DateUpdated)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.DateUpdated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.DateUpdated);
             } else if(sortBy == MovieSortType.ProducedDate)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.ProducedDate);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Pending), page, eachPage, MovieSortBy.ProducedDate);
             }
 
             throw new NotFoundException(MessageMovie.TypeStatusNotFound);
         }
 
-        public PagedList<Movie> GetMovieReleased(int page, int eachPage, MovieSortType sortBy)
+        public async Task<PagedList<Movie>> GetMovieReleased(int page, int eachPage, MovieSortType sortBy)
         {
             if(sortBy == MovieSortType.EnglishName)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.EnglishName);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.EnglishName);
             } else if(sortBy == MovieSortType.DateCreated)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.DateCreated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.DateCreated);
             } else if(sortBy == MovieSortType.DateDeleted)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.DateDeleted);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.DateDeleted);
             } else if(sortBy == MovieSortType.DateUpdated)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.DateUpdated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.DateUpdated);
             } else if(sortBy == MovieSortType.ProducedDate)
             {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.ProducedDate);
-            }
-
-            throw new NotFoundException(MessageMovie.TypeStatusNotFound);
-        }
-    
-        public PagedList<Movie> GetMovieUpcoming(int page, int eachPage, MovieSortType sortBy)
-        {
-            if(sortBy == MovieSortType.EnglishName)
-            {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.EnglishName);
-            } else if(sortBy == MovieSortType.DateCreated)
-            {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.DateCreated);
-            } else if(sortBy == MovieSortType.DateDeleted)
-            {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.DateDeleted);
-            } else if(sortBy == MovieSortType.DateUpdated)
-            {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.DateUpdated);
-            } else if(sortBy == MovieSortType.ProducedDate)
-            {
-                return _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.ProducedDate);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Released), page, eachPage, MovieSortBy.ProducedDate);
             }
 
             throw new NotFoundException(MessageMovie.TypeStatusNotFound);
         }
 
-        public PagedList<Movie> GetMovies(int page, int eachPage, MovieSortType sortBy)
+        public async Task<PagedList<Movie>> GetMovieUpcoming(int page, int eachPage, MovieSortType sortBy)
         {
             if(sortBy == MovieSortType.EnglishName)
             {
-                return _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.EnglishName);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.EnglishName);
             } else if(sortBy == MovieSortType.DateCreated)
             {
-                return _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.DateCreated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.DateCreated);
             } else if(sortBy == MovieSortType.DateDeleted)
             {
-                return _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.DateDeleted);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.DateDeleted);
             } else if(sortBy == MovieSortType.DateUpdated)
             {
-                return _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.DateUpdated);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.DateUpdated);
             } else if(sortBy == MovieSortType.ProducedDate)
             {
-                return _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.ProducedDate);
+                return await _unitOfWork.MovieRepository.GetAll(m => m.Status!.Equals(StatusMovie.Upcoming), page, eachPage, MovieSortBy.ProducedDate);
+            }
+
+            throw new NotFoundException(MessageMovie.TypeStatusNotFound);
+        }
+
+        public async Task<PagedList<Movie>> GetMovies(int page, int eachPage, MovieSortType sortBy)
+        {
+            if(sortBy == MovieSortType.EnglishName)
+            {
+                return await _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.EnglishName);
+            } else if(sortBy == MovieSortType.DateCreated)
+            {
+                return await _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.DateCreated);
+            } else if(sortBy == MovieSortType.DateDeleted)
+            {
+                return await _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.DateDeleted);
+            } else if(sortBy == MovieSortType.DateUpdated)
+            {
+                return await _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.DateUpdated);
+            } else if(sortBy == MovieSortType.ProducedDate)
+            {
+                return await _unitOfWork.MovieRepository.GetAll(page, eachPage, MovieSortBy.ProducedDate);
             }   
 
             throw new NotFoundException(MessageMovie.TypeStatusNotFound);
@@ -145,33 +145,33 @@ namespace SMovie.Application.Service
             return await _unitOfWork.MovieRepository.GetById(id);
         }
 
-        public PagedList<Movie> GetMovieByPeople(int page, int eachPage, Guid actorId)
+        public async Task<PagedList<Movie>> GetMovieByPeople(int page, int eachPage, Guid actorId)
         {
-            return _unitOfWork.MovieRepository.GetAll(m => m.Casts!.Any(ma => ma.ActorId.Equals(actorId)), 
+            return await _unitOfWork.MovieRepository.GetAll(m => m.Casts!.Any(ma => ma.ActorId.Equals(actorId)), 
                         page, eachPage, MovieSortBy.ProducedDate, false);
         }
 
-        public PagedList<Movie> GetMovieByFeature(int page, int eachPage, int featureId)
+        public async Task<PagedList<Movie>> GetMovieByFeature(int page, int eachPage, int featureId)
         {
-            return _unitOfWork.MovieRepository.GetAll(m => m.FeatureId == featureId, 
+            return await _unitOfWork.MovieRepository.GetAll(m => m.FeatureId == featureId, 
                                        page, eachPage, MovieSortBy.DateCreated, false);
         }
 
-        public PagedList<Movie> GetMovieByCategory(int page, int eachPage, int categoryId)
+        public async Task<PagedList<Movie>> GetMovieByCategory(int page, int eachPage, int categoryId)
         {
-            return _unitOfWork.MovieRepository.GetAll(m => m.MovieCategories.Any(mc => mc.CategoryId == categoryId), 
+            return await _unitOfWork.MovieRepository.GetAll(m => m.MovieCategories.Any(mc => mc.CategoryId == categoryId), 
                                                       page, eachPage, MovieSortBy.DateCreated, false);
         }
 
-        public PagedList<Movie> GetMovieByNation(int page, int eachPage, string nationId)
+        public async Task<PagedList<Movie>>  GetMovieByNation(int page, int eachPage, string nationId)
         {
-            return _unitOfWork.MovieRepository.GetAll(m => m.NationId!.Equals(nationId), 
+            return await _unitOfWork.MovieRepository.GetAll(m => m.NationId!.Equals(nationId), 
                                                       page, eachPage, MovieSortBy.DateCreated, false);
         }
 
-        public PagedList<Movie> SearchMovie(int page, int eachPage, string key)
+        public async Task<PagedList<Movie>> SearchMovie(int page, int eachPage, string key)
         {
-            return _unitOfWork.MovieRepository.GetAll(m => m.EnglishName!.ToLower().Contains(key.ToLower()) 
+            return await _unitOfWork.MovieRepository.GetAll(m => m.EnglishName!.ToLower().Contains(key.ToLower()) 
                                    || m.VietnamName!.ToLower().Contains(key.ToLower()), page, eachPage, MovieSortBy.DateCreated);
         }
 

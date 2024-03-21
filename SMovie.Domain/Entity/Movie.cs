@@ -21,10 +21,10 @@
         public string Thumbnail { get; set; } = null!;
         public string Trailer { get; set; } = null!;
         public string Status { get; set; } = null!;
-        public DateTime? DateCreated { get; set; }
-        public DateTime? DateUpdated { get; set; }
-        public DateTime? DateDeleted { get; set; }
-        public DateTime? ProducedDate { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public DateTime DateDeleted { get; set; }
+        public DateTime ProducedDate { get; set; }
         public virtual FeatureFilm Feature { get; set; } = null!;
         public virtual Nation Nation { get; set; } = null!;
         public virtual ICollection<Cast> Casts { get; set; }

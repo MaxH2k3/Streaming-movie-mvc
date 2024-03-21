@@ -40,14 +40,14 @@ public class HomeController : Controller
             
         }
 
-        HomeModel model = new HomeModel();
+        var model = new HomeModel
+        {
+            // Get movies for slide
+            SlideMovies = await _movieService.GetMovieSlide(),
 
-        // Get movies for slide
-        model.SlideMovies = await _movieService.GetMovieSlide();
-        
-        // Get newest movies
-        var moviess = _movieService.GetMovieReleased(1, 10, MovieSortType.EnglishName);
-        model.NewMovies = _mapper.Map<IEnumerable<MoviePreview>>(_movieService.GetMovies(1, 10, MovieSortType.EnglishName));
+            // Get newest movies
+            NewMovies = _mapper.Map<IEnumerable<MoviePreview>>(await _movieService.GetMovies(1, 10, MovieSortType.ProducedDate))
+        };
 
         return View(model);
     }
