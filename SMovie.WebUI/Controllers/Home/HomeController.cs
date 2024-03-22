@@ -47,6 +47,7 @@ public class HomeController : Controller
 
             // Get newest movies
             NewMovies = _mapper.Map<IEnumerable<MoviePreview>>(await _movieService.GetMovies(1, 10, MovieSortType.ProducedDate))
+
         };
 
         return View(model);

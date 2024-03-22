@@ -24,9 +24,6 @@ namespace SMovie.Infrastructure.Extentions
                 throw new ArgumentException("Property name cannot be null or empty.", nameof(propertyName));
             }
 
-            // Get the property info for the property by its name
-            //PropertyInfo? propertyInfo = typeof(T).GetProperty(propertyName);
-
             // Create parameter expression for the entity type
             ParameterExpression parameter = Expression.Parameter(typeof(T), string.Empty);
 

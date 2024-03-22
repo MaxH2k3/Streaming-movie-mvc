@@ -21,15 +21,6 @@ namespace SMovie.Infrastructure.Repository
             _context = context;
         }
 
-        public void GetTest()
-        {
-            var movies = _context.Movies.PaginateAndSort(1, 10, MovieSortBy.ProducedDate);
-            foreach (var item in movies)
-            {
-                Console.WriteLine(item.EnglishName);
-            }
-        }
-
         public new PagedList<Movie> GetAll(Expression<Func<Movie, bool>> predicate, int page, int eachPage, string sortBy, bool isAscending = false)
         {
             var parameter = Expression.Parameter(typeof(Movie), "x");
@@ -65,7 +56,6 @@ namespace SMovie.Infrastructure.Repository
 
         public async Task<Movie?> GetMovieNewest()
         {
-            GetTest();
             return await _context.Movies
                 .Include(m => m.Feature)
                 .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
