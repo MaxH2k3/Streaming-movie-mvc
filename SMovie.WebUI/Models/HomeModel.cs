@@ -24,5 +24,8 @@ namespace SMovie.WebUI.Models
 
         // Get top 10 stand alone movies newest
         public IEnumerable<MovieSlide> NewStandaloneMovies { get; set; } = null!;
+
+        // Get movie recommend
+        public IEnumerable<MoviePreview> RecommendMovies { get; set; } = null!;
     }
 }

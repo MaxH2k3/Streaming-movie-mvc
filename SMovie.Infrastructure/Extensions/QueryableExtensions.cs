@@ -63,7 +63,37 @@ namespace SMovie.Infrastructure.Extentions
             return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
+        public static IQueryable<T> SortBy<T>(this IQueryable<T> query, string propertyName, bool isAscending = false)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+            {
+                throw new ArgumentException("Property name cannot be null or empty.", nameof(propertyName));
+            }
 
+            // Create parameter expression for the entity type
+            ParameterExpression parameter = Expression.Parameter(typeof(T), string.Empty);
+
+            // Create member expression for accessing the property or field by its name
+            MemberExpression property = Expression.PropertyOrField(parameter, propertyName);
+
+            // Create lambda expression to represent the sorting logic
+            LambdaExpression lambda = Expression.Lambda(property, parameter);
+
+            // Determine the sorting method based on isAscending flag
+            string methodName = isAscending ? "OrderBy" : "OrderByDescending";
+
+            // Create method call expression for the sorting operation
+            MethodCallExpression orderByCall = Expression.Call(
+                typeof(Queryable),
+                methodName,
+                new Type[2] { typeof(T), property.Type },
+                query.Expression,
+                Expression.Quote(lambda)
+            );
+
+            // Cast the result to IOrderedQueryable<T> to maintain the sorting order
+            return (IOrderedQueryable<T>)query.Provider.CreateQuery<T>(orderByCall);
+        }
 
     }
 }

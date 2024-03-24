@@ -231,5 +231,11 @@ namespace SMovie.Application.Service
 
         }
 
+        public async Task<IEnumerable<Movie>> GetMovieRecomend()
+        {
+            var listId = (await _unitOfWork.PreviousTopMovieRepository.GetAll()).Select(p => p.MovieId).ToList();
+            return await _unitOfWork.MovieRepository.GetAll(m => listId.Contains(m.MovieId));
+        }
+
     }
 }

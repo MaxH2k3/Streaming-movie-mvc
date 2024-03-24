@@ -2,6 +2,7 @@
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
+using SMovie.Infrastructure.Extentions;
 using System.Linq.Expressions;
 
 namespace SMovie.Infrastructure.Repository
@@ -79,5 +80,5 @@ namespace SMovie.Infrastructure.Repository
         {
             return await _context.Set<T>().Where(predicate).ToListAsync();
         }
-	}
+    }
 }

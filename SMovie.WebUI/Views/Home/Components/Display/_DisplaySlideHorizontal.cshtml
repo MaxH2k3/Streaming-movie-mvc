@@ -1,12 +1,12 @@
 ﻿@using SMovie.Domain.Models
 @model IEnumerable<MovieDetail>
 
-<section class="tranding-tab-slider section-padding">
+<section class="tranding-tab-slider">
     <div class="container-fluid">
         <div class="row m-0 p-0">
             <div id="iq-trending" class="s-margin iq-tvshow-tabs iq-trending-tabs overflow-hidden">
                 <div class="d-flex align-items-center justify-content-between px-0 px-md-3">
-                    <h5 class="main-title text-capitalize mb-0">Trending</h5>
+                    <h5 class="main-title text-capitalize mb-0">@ViewData["title"]</h5>
                 </div>
                 <div class="trending-contens position-relative ">
                     <div id="gallery-top" class="swiper gallery-thumbs" data-swiper="gallery-top">

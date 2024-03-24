@@ -12,6 +12,7 @@
         public const string BackToTop = ConstantPath.PrePathCommonComponentHome + "_BackToTop";
         public const string RTS = ConstantPath.PrePathCommonComponentHome + "_RTS";
 
+        public const string DisplayBigSlider = ConstantPath.PrePathDisplayComponentHome + "_DisplayBigSlider";
         public const string DisplaySlide = ConstantPath.PrePathDisplayComponentHome + "_DisplaySlide";
         public const string DisplayTopTen = ConstantPath.PrePathDisplayComponentHome + "_DisplayTopTen";
         public const string DisplaySlideVertical = ConstantPath.PrePathDisplayComponentHome + "_DisplaySlideVertical";

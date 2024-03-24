@@ -22,3 +22,7 @@
 .swiper-slide.custom-slide-horizontal {
     width: 21vw !important;
 }
+
+.bold-800 {
+    font-weight: 800;
+}

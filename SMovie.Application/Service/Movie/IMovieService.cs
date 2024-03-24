@@ -24,7 +24,7 @@ namespace SMovie.Application.IService
         Task<IEnumerable<Movie?>> GetMovieSlide();
         Task<IEnumerable<Movie>> GetMoveTopViewer();
         Task<IEnumerable<Movie>> GetMovieTopRating();
-
         Task<IEnumerable<Movie>> GetTVSeriesDetails();
+        Task<IEnumerable<Movie>> GetMovieRecomend();
     }
 }

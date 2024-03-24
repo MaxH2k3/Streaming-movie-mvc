@@ -54,7 +54,7 @@ namespace SMovie.Infrastructure.Repository
             return await _context.Movies
                 .Include(m => m.Feature)
                 .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
-                .Where(m => m.DateDeleted == null && !m.Status!.Equals(MovieStatus.Upcoming))
+                .Where(m => m.DateDeleted == null && !m.Status.Equals(MovieStatus.Upcoming))
                 .OrderByDescending(m => m.Mark)
                 .Take(amount)
                 .ToListAsync();
@@ -65,7 +65,7 @@ namespace SMovie.Infrastructure.Repository
             return await _context.Movies
                 .Include(m => m.Feature)
                 .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
-                .Where(m => m.DateDeleted == null && !m.Status!.Equals(MovieStatus.Upcoming))
+                .Where(m => m.DateDeleted == null && !m.Status.Equals(MovieStatus.Upcoming))
                 .OrderByDescending(m => m.Viewer)
                 .Take(amount)
                 .ToListAsync();
@@ -84,5 +84,6 @@ namespace SMovie.Infrastructure.Repository
                 .Take(amount)
                 .ToListAsync();
         }
+
     }
 }

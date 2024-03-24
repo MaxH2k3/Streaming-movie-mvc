@@ -59,7 +59,10 @@ public class HomeController : Controller
             NewTVSeries = _mapper.Map<IEnumerable<MovieDetail>>(await _movieService.GetTVSeriesDetails()),
 
             // Get 10 stand alone movies newest
-            NewStandaloneMovies = _mapper.Map<IEnumerable<MovieSlide>>(await _movieService.GetMovieByFeature(SystemDefault.Page, 5, (int)FeatureFilm.Standalone))
+            NewStandaloneMovies = _mapper.Map<IEnumerable<MovieSlide>>(await _movieService.GetMovieByFeature(SystemDefault.Page, 5, (int)FeatureFilm.Standalone)),
+
+            // Get movie recommend
+            RecommendMovies = _mapper.Map<IEnumerable<MoviePreview>>(await _movieService.GetMovieRecomend())
 
         };
 
