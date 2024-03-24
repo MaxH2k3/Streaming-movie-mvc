@@ -1,3 +1,4 @@
+using SMovie.Application.Configuration;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
 using SMovie.Domain.Models;

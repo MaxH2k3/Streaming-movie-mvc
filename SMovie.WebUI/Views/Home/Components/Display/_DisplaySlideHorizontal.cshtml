@@ -16,7 +16,7 @@
                                 <li class="swiper-slide">
                                     <a href="javascript:void(0);">
                                         <div class="movie-swiper position-relative">
-                                            <img src="@movie.Thumbnail" alt="" />
+                                            <img src="@movie.Thumbnail" alt="" loading="lazy"/>
                                         </div>
                                     </a>
                                 </li>
@@ -30,7 +30,7 @@
                                 var movie = Model.ElementAt(i);
                                 <li class="swiper-slide slider-big-img-@(i + 1) p-0">
                                     <div class="trending-tab-slider-image">
-                                        <img src="@movie.Thumbnail" alt="trending-tab-slider-image">
+                                        <img src="@movie.Thumbnail" alt="trending-tab-slider-image" loading="lazy">
                                     </div>
                                     <div class="tranding-block position-relative">
                                         <div class="trending-custom-tab">
@@ -70,7 +70,7 @@
                                                         <div class="d-flex align-items-center flex-wrap series mb-4 gap-3">
                                                             <a href="javascript:void(0);">
                                                                 <img src="~/home/images/movies/trending-label.html" class="img-fluid"
-                                                                     alt="">
+                                                                    loading="lazy" alt="">
                                                             </a>
                                                             <span class="text-gold">#@(i + 1) in Series Today</span>
                                                         </div>
@@ -180,7 +180,7 @@
                                                             <div class="tab-watch-trailer-container d-inline-block rounded-3 overflow-hidden">
                                                                 <div class="tab-watch-trailer position-relative rounded-3 overflow-hidden">
                                                                     <img src="@movie.Thumbnail"
-                                                                         class="trailer-image" alt="trailer-image">
+                                                                         class="trailer-image" alt="trailer-image" loading="lazy">
                                                                     <a href="@movie.Trailer"
                                                                        class="video-open playbtn text-decoration-none" tabindex="0">
                                                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,4 @@
-﻿namespace SMovie.Domain.Models.Person
+﻿namespace SMovie.Domain.Models
 {
     public class PersonPreview
     {

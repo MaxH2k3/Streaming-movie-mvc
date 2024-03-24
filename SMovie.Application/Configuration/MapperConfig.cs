@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using FluentEmail.Core;
 using SMovie.Domain.Entity;
 using SMovie.Domain.Models;
-using SMovie.Domain.Models.Person;
 
 namespace SMovie.Application.Configuration
 {
@@ -36,6 +34,7 @@ namespace SMovie.Application.Configuration
 
             // Person 
             CreateMap<Person, PersonPreview>();
+            CreateMap<PagedList<Person>, PagedList<PersonPreview>>();
 
             CreateMap<Cast, CastCharacter>()
                 .ForMember(dest => dest.PersonId,
