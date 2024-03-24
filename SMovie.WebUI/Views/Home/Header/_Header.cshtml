@@ -1,4 +1,6 @@
-﻿@{
+﻿@using SMovie.WebUI.Constants
+
+@{
     bool authUser = !string.IsNullOrEmpty(Context.Request.Cookies["AccessToken"]);
 }
 
@@ -194,7 +196,7 @@
         </a>
             @{
                 if(authUser) 
-                    await Html.RenderPartialAsync("../Home/Components/_InfoUser");
+                    await Html.RenderPartialAsync(ConstantComponent.InforUser);
             }
       </li>
     </ul>

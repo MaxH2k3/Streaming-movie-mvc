@@ -1,0 +1,90 @@
+﻿@using SMovie.Domain.Models
+@model IEnumerable<MovieSlide>
+
+
+
+    <div class="verticle-slider section-padding-bottom">
+        <div class="container-fluid">
+            <div class="slider">
+                <div class="slider-flex position-relative">
+                    <div class="slider--col position-relative">
+                        <div class="vertical-slider-prev swiper-button"><i class="iconly-Arrow-Up-2 icli"></i></div>
+                        <div class="slider-thumbs custom-slider-vertical" data-swiper="slider-thumbs">
+                            <div class="swiper-container " data-swiper="slider-thumbs-inner">
+                                <div class="swiper-wrapper top-ten-slider-nav">
+                                @foreach (var movie in Model)
+                                {
+                                    <div class="swiper-slide swiper-bg">
+                                        <div class="block-images position-relative h-100">
+                                            <div class="img-box slider--image h-100">
+                                                <img src="@movie.Thumbnail" class="h-100" alt=""
+                                                     loading="lazy">
+                                            </div>
+                                            <div class="block-description">
+                                                <h6 class="iq-title">@movie.EnglishName</h6>
+                                                <div class="movie-time d-flex align-items-center my-2">
+                                                    <span class="text-body">@movie.Time Minuts</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vertical-slider-next swiper-button"><i class="iconly-Arrow-Down-2 icli"></i></div>
+                    </div>
+                    <div class="slider-images" data-swiper="slider-images">
+                        <div class="swiper-container " data-swiper="slider-images-inner">
+                            <div class="swiper-wrapper ">
+                                @foreach (var movie in Model)
+                                {
+                                    <div class="swiper-slide">
+                                    <div class="slider--image block-images">
+                                        <img src="@movie.Thumbnail"
+                                             loading="lazy" alt="" />
+                                    </div>
+                                    <div class="description custom-description">
+                                        <div class="block-description">
+                                            <ul class="ps-0 mb-0 mb-1 pb-1 list-inline d-flex flex-wrap align-items-center movie-tag">
+                                                @foreach (var genre in movie.Categories)
+                                                {
+                                                    <li class="position-relative text-capitalize font-size-14 letter-spacing-1">
+                                                        <a href="view-all-movie.html" class="text-white text-decoration-none">@genre.Name</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                            <h2 class="iq-title mb-3"><a href="tv-show-detail.html">@movie.EnglishName</a></h2>
+                                            <div class="d-flex align-items-center gap-3 mb-3">
+                                                <div class="slider-ratting d-flex align-items-center">
+                                                    <ul class="ratting-start p-0 m-0 list-inline text-warning d-flex align-items-center justify-content-left">
+                                                        <li>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                        </li>
+                                                    </ul>
+                                                    <span class="text-white ms-2 font-size-14 fw-500">@movie.Mark</span>
+                                                </div>
+                                                <span class="text-body">@movie.Time mins</span>
+                                            </div>
+                                            <p class="mt-0 mb-3">@movie.Description</p>
+                                            <div class="iq-button">
+                                                <a href="movie-detail.html" class="btn text-uppercase position-relative">
+                                                    <span class="button-text">play now</span>
+                                                    <i class="fa-solid fa-play"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

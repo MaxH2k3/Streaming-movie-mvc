@@ -1,0 +1,34 @@
+﻿@using SMovie.Domain.Models
+@model IEnumerable<MoviePreview>
+
+<div class="top-ten-block">
+    <div class="container-fluid">
+        <section class="overflow-hidden">
+            <div class="d-flex align-items-center justify-content-between px-md-3 px-1 mb-4">
+                <h5 class="main-title text-capitalize mb-0">top ten movies to watch</h5>
+                <a href="view-all-movie.html" class="text-primary iq-view-all text-decoration-none flex-none">View All</a>
+            </div>
+            <div class="position-relative swiper swiper-card iq-top-ten-block-slider" data-slide="6" data-laptop="6" data-tab="3" data-mobile="2" data-mobile-sm="2" data-autoplay="false" data-loop="false" data-navigation="true" data-pagination="true">
+                <ul class="p-0 swiper-wrapper mb-5 list-inline">
+                    @for(int i = 0; i < Model.Count(); i++)
+                    {
+                        <li class="swiper-slide">
+                            <div class="iq-top-ten-block">
+                                <div class="block-image position-relative">
+                                    <div class="img-box">
+                                        <a class="overly-images" href="movie-detail.html">
+                                            <img src="@Model.ElementAt(i).Thumbnail" alt="movie-card" class="img-fluid object-cover">
+                                        </a>
+                                        <span class="top-ten-numbers texture-text">@(i + 1)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <div class="swiper-button swiper-button-next"></div>
+                <div class="swiper-button swiper-button-prev"></div>
+            </div>
+        </section>
+    </div>
+</div>

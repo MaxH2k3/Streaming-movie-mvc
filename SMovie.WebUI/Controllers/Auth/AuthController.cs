@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SMovie.WebUI.Constants;
 
 namespace SMovie.WebUI.Controllers
 {
@@ -6,13 +7,12 @@ namespace SMovie.WebUI.Controllers
     {
         public IActionResult Index()
         {
-            return View("Login");
+            return View(ConstantView.Login);
         }
 
         public IActionResult VerifyCode(Guid id)
         {
-            Console.WriteLine(id);
-            return View("Login");
+            return View(ConstantView.Login);
         }
 
     }

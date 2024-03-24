@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using SMovie.Application.IService;
 using SMovie.Domain.Entity;
 using SMovie.Domain.Models;
+using SMovie.WebUI.Constants;
 using System.Net;
 
 namespace SMovie.WebUI.Controllers
@@ -22,14 +23,14 @@ namespace SMovie.WebUI.Controllers
 
         public IActionResult Index()
         {
-            var token = Request.Cookies["AccessToken"];
+            var token = Request.Cookies[UserClaimType.AccessToken];
 
             if (!string.IsNullOrEmpty(token))
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            return View("../Auth/Login");
+            return View(ConstantView.Login);
         }
 
         public async Task<IActionResult> LoginAsync(UserDTO userDTO)
@@ -62,16 +63,16 @@ namespace SMovie.WebUI.Controllers
                     };
 
                     //set information to cookie
-                    Response.Cookies.Append("DisplayName", user!.DisplayName!, cookieOptions);
-                    Response.Cookies.Append("Avatar", user.Avatar!, cookieOptions);
-                    Response.Cookies.Append("AccessToken", await _authenticationService.GenerateToken(userDTO), cookieOptions);
+                    Response.Cookies.Append(UserClaimType.DisplayName, user!.DisplayName!, cookieOptions);
+                    Response.Cookies.Append(UserClaimType.Avatar, user.Avatar!, cookieOptions);
+                    Response.Cookies.Append(UserClaimType.AccessToken, await _authenticationService.GenerateToken(userDTO), cookieOptions);
 
                     return RedirectToAction("Index", "Home");
                 }
                 ViewBag.response = response;
             }
             
-            return View("../Auth/Login");
+            return View(ConstantView.Login);
         }
 
         [HttpPost]
@@ -88,11 +89,11 @@ namespace SMovie.WebUI.Controllers
             };
 
             //set information to cookie
-            Response.Cookies.Append("DisplayName", loginWithDTO.DisplayName, cookieOptions);
-            Response.Cookies.Append("Avatar", loginWithDTO.Avatar, cookieOptions);
-            Response.Cookies.Append("AccessToken", loginWithDTO.AccessToken, cookieOptions);
+            Response.Cookies.Append(UserClaimType.DisplayName, loginWithDTO.DisplayName, cookieOptions);
+            Response.Cookies.Append(UserClaimType.Avatar, loginWithDTO.Avatar, cookieOptions);
+            Response.Cookies.Append(UserClaimType.AccessToken, loginWithDTO.AccessToken, cookieOptions);
 
-            return "Login Successfully!";
+            return ConstantMessage.LoginSuccessfully;
         }
 
         [HttpPost]
@@ -109,16 +110,16 @@ namespace SMovie.WebUI.Controllers
             };
 
             //set information to cookie
-            Response.Cookies.Append("DisplayName", loginWithDTO.DisplayName, cookieOptions);
-            Response.Cookies.Append("Avatar", loginWithDTO.Avatar, cookieOptions);
-            Response.Cookies.Append("AccessToken", loginWithDTO.AccessToken, cookieOptions);
+            Response.Cookies.Append(UserClaimType.DisplayName, loginWithDTO.DisplayName, cookieOptions);
+            Response.Cookies.Append(UserClaimType.Avatar, loginWithDTO.Avatar, cookieOptions);
+            Response.Cookies.Append(UserClaimType.AccessToken, loginWithDTO.AccessToken, cookieOptions);
 
-            return "Login Successfully!";
+            return ConstantMessage.LoginSuccessfully;
         }
 
         public IActionResult ForgotPassword()
         {
-            return View("../Auth/ForgotPassword");
+            return View(ConstantView.ForgotPassword);
         }
 
         public IActionResult Logout()
@@ -127,7 +128,7 @@ namespace SMovie.WebUI.Controllers
             {
                 Response.Cookies.Delete(cookie);
             }
-            TempData["Response"] = JsonConvert.SerializeObject(new { Status = HttpStatusCode.OK, Message = "Logout Successfully!" });
+            TempData["Response"] = JsonConvert.SerializeObject(new { Status = HttpStatusCode.OK, Message = ConstantMessage.LogoutSuccessfully });
 
             return RedirectToAction("Index", "Home");
         }

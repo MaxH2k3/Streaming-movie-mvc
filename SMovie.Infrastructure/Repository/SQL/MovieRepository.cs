@@ -21,31 +21,16 @@ namespace SMovie.Infrastructure.Repository
             _context = context;
         }
 
-        public new PagedList<Movie> GetAll(Expression<Func<Movie, bool>> predicate, int page, int eachPage, string sortBy, bool isAscending = false)
+        public new async Task<PagedList<Movie>> GetAll(Expression<Func<Movie, bool>> predicate, int page, int eachPage, string sortBy, bool isAscending = false)
         {
-            var parameter = Expression.Parameter(typeof(Movie), "x");
-            var property = Expression.Property(parameter, sortBy);
-            var lambda = Expression.Lambda<Func<Movie, object>>(property, parameter);
-            var sortExpression = lambda.Compile();
+            var movies = await _context.Movies
+                .Include(m => m.Feature)
+                .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
+                .Where(predicate)
+                .PaginateAndSort(page, eachPage, sortBy, isAscending)
+                .ToListAsync();
 
-            if (isAscending)
-            {
-                var list = _context.Movies
-                    .Include(m => m.MovieCategories).ThenInclude(mc => mc.Category)
-                    .Include(m => m.Nation)
-                    .Include(m => m.Feature)
-                    .Where(predicate).OrderBy(sortExpression).ToList();
-                var totalItems = list.Count;
-                var items = list.Skip((page - 1) * eachPage).Take(eachPage);
-
-                return new PagedList<Movie>(items, totalItems, page, eachPage);
-            }
-
-            var listDesc = _context.Movies.Where(predicate).OrderByDescending(sortExpression).ToList();
-            var totalItemsDesc = listDesc.Count;
-            var itemsDesc = listDesc.Skip((page - 1) * eachPage).Take(eachPage);
-
-            return new PagedList<Movie>(itemsDesc, totalItemsDesc, page, eachPage);
+            return new PagedList<Movie>(movies, movies.Count, page, eachPage);
         }
 
         public async Task<bool> CheckExistMovieName(string englishName, string vietnamName, Guid id)
@@ -59,30 +44,45 @@ namespace SMovie.Infrastructure.Repository
             return await _context.Movies
                 .Include(m => m.Feature)
                 .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
-                .Where(m => m.DateDeleted == null && !m.Status!.Equals(StatusMovie.Upcoming))
+                .Where(m => m.DateDeleted == null && !m.Status!.Equals(MovieStatus.Upcoming))
                 .OrderByDescending(m => m.ProducedDate)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Movie?> GetMovieTopRating()
+        public async Task<IEnumerable<Movie>> GetMovieTopRating(int amount = 10)
         {
             return await _context.Movies
                 .Include(m => m.Feature)
                 .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
-                .Where(m => m.DateDeleted == null && !m.Status!.Equals(StatusMovie.Upcoming))
+                .Where(m => m.DateDeleted == null && !m.Status!.Equals(MovieStatus.Upcoming))
                 .OrderByDescending(m => m.Mark)
-                .FirstOrDefaultAsync();
+                .Take(amount)
+                .ToListAsync();
         }
 
-        public async Task<Movie?> GetMovieTopViewer()
+        public async Task<IEnumerable<Movie>> GetMovieTopViewer(int amount)
         {
             return await _context.Movies
                 .Include(m => m.Feature)
                 .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
-                .Where(m => m.DateDeleted == null && !m.Status!.Equals(StatusMovie.Upcoming))
+                .Where(m => m.DateDeleted == null && !m.Status!.Equals(MovieStatus.Upcoming))
                 .OrderByDescending(m => m.Viewer)
-                .FirstOrDefaultAsync();
+                .Take(amount)
+                .ToListAsync();
         }
 
+        public async Task<IEnumerable<Movie>> GetMovieDetails(int amount, Domain.Enum.FeatureFilm feature)
+        {
+            return await _context.Movies
+                .Include(m => m.Nation)
+                .Include(m => m.Feature)
+                .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
+                .Include(m => m.Casts).ThenInclude(ma => ma.Actor)
+                .Include(m => m.Seasons).ThenInclude(s => s.Episodes)
+                .Where(m => m.DateDeleted == null && !m.Status!.Equals(MovieStatus.Upcoming) && m.FeatureId == (int)feature)
+                .OrderByDescending(m => m.ProducedDate)
+                .Take(amount)
+                .ToListAsync();
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using SMovie.WebUI.Constants
+
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
@@ -6,13 +8,13 @@
     <title>Streamit-movie</title>
     
     @* import data css *@
-    @await Html.PartialAsync("../Home/Import/_Head")
+    @await Html.PartialAsync(ConstantSystem.ImportHome.ImportCss)
 
 </head>
 <body class="  ">
 @* loading *@
 @{
-    await Html.RenderPartialAsync("../Home/Components/_Loading");
+    await Html.RenderPartialAsync(ConstantComponent.Loading);
 }
 
 @RenderBody()
@@ -21,17 +23,17 @@
 
 @* import component *@
     @{
-        await Html.RenderPartialAsync("../Home/Components/_BackToTop");
-        await Html.RenderPartialAsync("../Home/Components/_RTS");
+        await Html.RenderPartialAsync(ConstantComponent.BackToTop);
+        await Html.RenderPartialAsync(ConstantComponent.RTS);
     }
 
     @* import toast *@
     @{
-        await Html.RenderPartialAsync("_Toast");
+        await Html.RenderPartialAsync(ConstantComponent.Toast);
     }
 
 @* import data js *@
-@await Html.PartialAsync("../Home/Import/_Js")
+@await Html.PartialAsync(ConstantSystem.ImportHome.ImportJs)
 
 </body>
 </html>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SMovie.Application.IService;
 using SMovie.Domain.Enum;
 using SMovie.Domain.Models.Person;
+using SMovie.WebUI.Constants;
 
 namespace SMovie.WebUI.Controllers.Home
 {
@@ -22,7 +23,7 @@ namespace SMovie.WebUI.Controllers.Home
         {
             var persons = _mapper.Map<IEnumerable<PersonPreview>>(_personService.GetPersons(1, 12, PersonSortType.NamePerson));
 
-            return View("../Home/Body/Cast", persons);
+            return View(ConstantView.Cast, persons);
         }
 
 

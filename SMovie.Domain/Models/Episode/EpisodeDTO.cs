@@ -7,5 +7,5 @@ public class EpisodeDTO
     public string Name { get; set; } = null!;
     public string Video { get; set; } = null!;
     public DateTime DateCreated { get; set; }
-    public DateTime DateUpdated { get; set; }
+    public DateTime? DateUpdated { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SMovie.Domain.Constants
 {
-    public class StatusMovie
+    public class MovieStatus
     {
         public const string Upcoming = "Upcoming";
         public const string Pending = "Pending";

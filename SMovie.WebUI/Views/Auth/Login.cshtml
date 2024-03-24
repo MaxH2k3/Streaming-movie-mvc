@@ -1,10 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
 @model SMovie.Domain.Models.UserDTO
 
-@{
-    Console.WriteLine(Context.Request.GetEncodedUrl());
-}
-
 <main class="main-content">
 
     <div class="vh-100"
@@ -124,5 +120,4 @@
 
 </main>
 
-@await Html.PartialAsync("../home/Components/_RTS")
 <script src="~/auth/js/login.js" defer type="module"></script>

@@ -1,4 +1,6 @@
 ﻿@using SMovie.WebUI.Utilities
+@using SMovie.WebUI.Constants
+
 @{
     string controllerName = ViewContext.RouteData.Values["action"]!.ToString()!;
     string className = "custom-header-relative";
@@ -16,18 +18,18 @@
     <title>Streamit-movie</title>
     
     @* import data css *@
-    @await Html.PartialAsync("../Home/Import/_Head")
+    @await Html.PartialAsync(ConstantSystem.ImportHome.ImportCss)
 
 </head>
 <body class=" @className ">
 @* loading *@
 @{
-    await Html.RenderPartialAsync("../Home/Components/_Loading");
+    await Html.RenderPartialAsync(ConstantComponent.Loading);
 }
 
 @* import header *@
 @{
-        await Html.RenderPartialAsync("../Home/Header/_Header");
+        await Html.RenderPartialAsync(ConstantComponent.HomeHeader);
 }
 
 @RenderBody()
@@ -35,22 +37,22 @@
 
 @* import footer *@
     @{
-        await Html.RenderPartialAsync("../Home/Footer/_Footer");
+        await Html.RenderPartialAsync(ConstantComponent.HomeFooter);
     }
 
     @* import component *@
     @{
-        await Html.RenderPartialAsync("../Home/Components/_BackToTop");
-        await Html.RenderPartialAsync("../Home/Components/_RTS");
+        await Html.RenderPartialAsync(ConstantComponent.BackToTop);
+        await Html.RenderPartialAsync(ConstantComponent.RTS);
     }
 
 @* import toast *@
     @{
-        await Html.RenderPartialAsync("_Toast");
+        await Html.RenderPartialAsync(ConstantComponent.Toast);
     }
 
 @* import data js *@
-@await Html.PartialAsync("../Home/Import/_Js")
+@await Html.PartialAsync(ConstantSystem.ImportHome.ImportJs)
 
 </body>
 </html>
