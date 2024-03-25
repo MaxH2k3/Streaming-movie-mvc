@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SMovie.Application.IService;
+using SMovie.Domain.Constants;
 using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
 using SMovie.WebUI.Constants;
@@ -19,9 +20,10 @@ namespace SMovie.WebUI.Controllers.Home
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var persons = _mapper.Map<PagedList<PersonPreview>>(_personService.GetPersons(SystemDefault.Page, 12, PersonSortType.NamePerson));
+            var test = await _personService.GetPersons(SystemDefault.Page, 12, PersonSortBy.NamePerson);
+            var persons = _mapper.Map<PagedList<PersonPreview>>(test);
 
             return View(ConstantView.Cast, persons);
         }

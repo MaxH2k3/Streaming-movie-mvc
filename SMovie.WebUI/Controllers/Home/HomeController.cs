@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FluentEmail.Core;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SMovie.Application.IService;
@@ -82,11 +81,6 @@ public class HomeController : Controller
     public IActionResult Movie()
     {
         return View(ConstantView.StandaloneMovie);
-    }
-
-    public IActionResult MovieDetail()
-    {
-        return View(ConstantView.MovieDetail);
     }
 
     public IActionResult AccountDetail()

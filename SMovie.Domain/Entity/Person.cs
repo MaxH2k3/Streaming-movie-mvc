@@ -16,10 +16,5 @@
         public DateTime? DateCreated { get; set; }
         public virtual Nation Nation { get; set; } = null!;
         public virtual ICollection<Cast> Casts { get; set; } = null!;
-
-        public override string ToString()
-        {
-            return $"ActorId: {PersonId}, LinkImage: {Thumbnail}, NameActor: {NamePerson}, NationId: {NationId}, DoB: {DoB}";
-        }
     }
 }

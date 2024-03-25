@@ -17,6 +17,9 @@
     } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Person", StringComparison.OrdinalIgnoreCase))
     {
         Layout = "_LayoutHome";
+    } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Movie", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_LayoutHome";
     } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Dashboard", StringComparison.OrdinalIgnoreCase))
     {
         Layout = "_LayoutDashboard";

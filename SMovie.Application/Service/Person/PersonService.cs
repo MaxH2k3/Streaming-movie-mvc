@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using SMovie.Application.Extension;
 using SMovie.Application.Helper;
 using SMovie.Application.IService;
 using SMovie.Application.MessageService;
 using SMovie.Domain.Constants;
 using SMovie.Domain.Entity;
-using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
 using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.UnitOfWork;
@@ -140,82 +138,30 @@ namespace SMovie.Application.Service
 			return new ResponseDTO(HttpStatusCode.ServiceUnavailable, MessageSystem.ServerError);
 		}
 
-		public async Task<PagedList<Person>> GetActors(int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> GetActors(int page, int eachPage, string sortBy)
 		{
-			if(sortBy == PersonSortType.NamePerson)
-			{
-				return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.NamePerson);
-			}
-			else if(sortBy == PersonSortType.BirthDate)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.BirthDate);
-			}
-			else if(sortBy == PersonSortType.DateCreated)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, PersonSortBy.DateCreated);
-			}
-
-			throw new NotFoundException(MessageException.SortByNotFound);
-		}
+            return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleActor), page, eachPage, sortBy);
+        }
 
 		public async Task<Person?> GetPerson(Guid id)
 		{
 			return await _unitOfWork.PersonRepository.GetById(id);
 		}
 
-		public async Task<PagedList<Person>> GetPersons(int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> GetPersons(int page, int eachPage, string sortBy)
 		{
-			if(sortBy == PersonSortType.NamePerson)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.NamePerson);
-			}
-			else if(sortBy == PersonSortType.BirthDate)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.BirthDate);
-			}
-			else if(sortBy == PersonSortType.DateCreated)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(page, eachPage, PersonSortBy.DateCreated);
-			}
+            return await _unitOfWork.PersonRepository.GetAll(page, eachPage, sortBy);
+        }
 
-			throw new Exception(MessageException.SortByNotFound);
-		}
-
-		public async Task<PagedList<Person>> GetProducers(int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> GetProducers(int page, int eachPage, string sortBy)
 		{
-			if(sortBy == PersonSortType.NamePerson)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.NamePerson);
-			}
-			else if(sortBy == PersonSortType.BirthDate)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.BirthDate);
-			}
-			else if(sortBy == PersonSortType.DateCreated)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, PersonSortBy.DateCreated);
-			}
+            return await _unitOfWork.PersonRepository.GetAll(p => p.Role!.Equals(Role.RoleProducer), page, eachPage, sortBy);
+        }
 
-			throw new Exception(MessageException.SortByNotFound);
-		}
-
-		public async Task<PagedList<Person>> SearchByName(string name, int page, int eachPage, PersonSortType sortBy)
+		public async Task<PagedList<Person>> SearchByName(string name, int page, int eachPage, string sortBy)
 		{
-			if(sortBy == PersonSortType.NamePerson)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.NamePerson);
-			}
-			else if(sortBy == PersonSortType.BirthDate)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.BirthDate);
-			}
-			else if(sortBy == PersonSortType.DateCreated)
-			{
-                return await _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, PersonSortBy.DateCreated);
-			}
-
-			throw new Exception(MessageException.SortByNotFound);
-		}
+            return await _unitOfWork.PersonRepository.GetAll(p => p.NamePerson!.Contains(name), page, eachPage, sortBy);
+        }
 
 		
 	}

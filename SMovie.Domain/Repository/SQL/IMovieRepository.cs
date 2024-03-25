@@ -9,5 +9,6 @@ namespace SMovie.Domain.Repository
         Task<IEnumerable<Movie>> GetMovieTopRating(int amount);
         Task<Movie?> GetMovieNewest();
         Task<IEnumerable<Movie>> GetMovieDetails(int amount, Domain.Enum.FeatureFilm feature);
+        Task<Movie?> GetById(Guid id);
     }
 }

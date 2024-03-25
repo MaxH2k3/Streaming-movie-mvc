@@ -1,4 +1,10 @@
-﻿<main class="main-content">
+﻿@model SMovie.Domain.Models.MovieDetail
+
+@{
+    var movie = Model;
+}
+
+<main class="main-content">
 
     <!-- Banner Start -->
     <div class="iq-main-slider site-video">
@@ -8,7 +14,7 @@
             <div class="pt-0">
               <video id="my-video" poster="https://i.ytimg.com/vi_webp/rKVEoyTedv4/maxresdefault.webp"
                 class="video-js vjs-big-play-centered w-100" controls preload="auto" autoplay
-                data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watchv=QCGq1epI9pQ"}], "youtube": { "iv_load_policy": 1 } }'>
+                data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "(Model.Trailer)"}], "youtube": { "iv_load_policy": 1 } }'>
                 <source src="home/images/video/sample-video.mp4" type="video/mp4" />
                 <source src="MY_VIDEO.html" type="video/webm" />
               </video>
@@ -31,7 +37,7 @@
                     <h2
                       class="trending-text fw-bold texture-text text-uppercase my-0 fadeInLeft animated d-inline-block"
                       data-animation-in="fadeInLeft" data-delay-in="0.6" style="opacity: 1; animation-delay: 0.6s">
-                      Zombie Island
+                      @movie.EnglishName
                     </h2>
                     <div class="slider-ratting d-flex align-items-center ms-lg-3 ms-0">
                       <ul
@@ -42,19 +48,20 @@
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star-half" aria-hidden="true"></i></li>
                       </ul>
-                      <span class="text-white ms-2">4.8 (imdb)</span>
+                      <span class="text-white ms-2">@movie.Mark (imdb)</span>
                     </div>
                   </div>
                   <ul class="p-0 mt-2 list-inline d-flex flex-wrap movie-tag">
-                    <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Action</a></li>
-                    <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Adventure</a></li>
-                    <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Drama</a></li>
+                    @foreach(var category in movie.Categories)
+                    {
+                        <li class="trending-list"><a class="text-primary" href="view-all-movie.html">@category.Name</a></li>    
+                    }
                   </ul>
                   <div class="d-flex flex-wrap align-items-center text-white text-detail flex-wrap mb-4">
-                    <span class="badge bg-secondary">Horror</span>
-                    <span class="ms-3 font-Weight-500 genres-info">1hr : 48mins</span>
+                    <span class="badge bg-secondary">@movie.Feature.Name</span>
+                    <span class="ms-3 font-Weight-500 genres-info">@(movie.Time) mins</span>
                     <span class="trending-year trending-year-list font-Weight-500 genres-info">
-                      Feb 2017
+                      @movie.ProducedDate.ToString("dd/MM/yyyy")
                     </span>
                   </div>
                   <div class="d-flex align-items-center gap-4 flex-wrap mb-4">

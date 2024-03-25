@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SMovie.Domain.Constants;
 using SMovie.Domain.Entity;
-using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
@@ -83,6 +82,17 @@ namespace SMovie.Infrastructure.Repository
                 .OrderByDescending(m => m.ProducedDate)
                 .Take(amount)
                 .ToListAsync();
+        }
+
+        public async Task<Movie?> GetById(Guid id)
+        {
+            return await _context.Movies
+                .Include(m => m.Nation)
+                .Include(m => m.Feature)
+                .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
+                .Include(m => m.Casts).ThenInclude(ma => ma.Actor)
+                .Include(m => m.Seasons).ThenInclude(s => s.Episodes)
+                .FirstOrDefaultAsync(m => m.MovieId.Equals(id));
         }
 
     }

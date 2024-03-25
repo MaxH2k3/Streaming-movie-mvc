@@ -237,5 +237,10 @@ namespace SMovie.Application.Service
             return await _unitOfWork.MovieRepository.GetAll(m => listId.Contains(m.MovieId));
         }
 
+        public async Task<Movie?> GetMovieDetail(Guid movieId)
+        { 
+            return await _unitOfWork.MovieRepository.GetById(movieId);
+        }
+
     }
 }

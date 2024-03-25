@@ -1,4 +1,5 @@
-﻿using SMovie.Infrastructure.Extensions;
+﻿using Microsoft.EntityFrameworkCore;
+using SMovie.Infrastructure.Extensions;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -6,6 +7,24 @@ namespace SMovie.Infrastructure.Extentions
 {
     public static class QueryableExtensions
     {
+        /// <summary>
+        /// Include any table you want to get details
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <param name="tableNames"></param>
+        /// <returns></returns>
+        public static IQueryable<T> Details<T>(this IQueryable<T> query, params string[] tableNames) where T : class
+        {
+
+            foreach (var tableName in tableNames)
+            {
+                query = query.Include(tableName);
+            }
+
+            return query;
+        }
+
         /// <summary>
         /// Paginate and sort the queryable
         /// </summary>
@@ -63,6 +82,15 @@ namespace SMovie.Infrastructure.Extentions
             return query.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
+        /// <summary>
+        /// Sort the queryable by the specified property name
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="isAscending"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static IQueryable<T> SortBy<T>(this IQueryable<T> query, string propertyName, bool isAscending = false)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
