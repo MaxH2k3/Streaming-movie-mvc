@@ -1,0 +1,57 @@
+﻿@using SMovie.Domain.Models
+@model IEnumerable<SeasonDTO>
+
+@{
+    var episodes = Model.FirstOrDefault()?.Episodes ?? new List<EpisodeDTO>();
+}
+
+<div class="source-list-content table-responsive">
+    <table class="table custom-table">
+        <thead>
+            <tr>
+                <th>
+                    Links
+                </th>
+                <th>
+                    Quality
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Player
+                </th>
+                <th>
+                    Date Added
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var episode in episodes)
+            {
+                <tr>
+                    <td>
+                        <div class="iq-button">
+                            <a href="movie-detail.html" class="btn text-uppercase position-relative">
+                                <span class="button-text"> Play Now</span>
+                                <i class="fa-solid fa-play"></i>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        1080p
+                    </td>
+                    <td>
+                        @episode.Name
+                    </td>
+                    <td>
+                        Google Drive
+                    </td>
+                    <td>
+                        @episode.DateCreated.ToString("dd/MM/yyyy")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

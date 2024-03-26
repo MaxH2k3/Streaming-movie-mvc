@@ -1,0 +1,128 @@
+﻿@using SMovie.Domain.Models
+@using SMovie.Domain.Enum
+@model IEnumerable<SeasonDTO>
+
+@{
+    var seasons = Model.OrderBy(s => s.SeasonNumber);
+    bool authUser = !string.IsNullOrEmpty(Context.Request.Cookies["AccessToken"]);
+    string account = Context.Request.Cookies["Account"] ?? "";
+}
+
+<div class="source-list-content table-responsive">
+    <div class="iq-custom-select d-inline-block float-end">
+        <select id="season-number" class="select2-basic-single js-states form-control">
+            @foreach (var season in seasons)
+            {
+                <option value="@season.SeasonNumber">Season @(season.SeasonNumber)</option>
+            }
+        </select>
+    </div>
+    <table class="table custom-table text-center">
+        <thead>
+            <tr>
+                <th>
+                    Google drive
+                </th>
+                <th>
+                    Microsoft
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Quality
+                </th>
+                <th>
+                    Date Added
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tv-series">
+            @foreach(var season in seasons)
+            {
+                var episodes = season.Episodes.OrderBy(e => e.EpisodeNumber);
+                @foreach (var episode in episodes)
+                {
+                    <tr class="season-@(season.SeasonNumber)">
+                        <td>
+                            <div class="iq-button">
+                                <a href="movie-detail.html" class="btn text-uppercase position-relative">
+                                    <span class="button-text"> Play Now</span>
+                                    <i class="fa-solid fa-play"></i>
+                                </a>
+                            </div>
+                        </td>
+                        @{
+                            if(authUser && account.Equals(AccountType.Microsoft.ToString()))
+                            {
+                                <td>
+                                    <div class="iq-button">
+                                        <a href="movie-detail.html" class="btn text-uppercase position-relative">
+                                            <span class="button-text"> Play Now</span>
+                                            <i class="fa-solid fa-play"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                            } else
+                            {
+                                <td>
+                                    <span>You need to login with microsoft</span> <br />
+                                    <span>to use this option</span>
+                                </td>
+                            }
+                        }
+                        
+                        <td>
+                            @episode.Name
+                        </td>
+                        <td>
+                            1080p
+                        </td>
+                        
+                        <td>
+                            @episode.DateCreated.ToString("dd/MM/yyyy")
+                        </td>
+                    </tr>
+                }
+            }
+            
+        </tbody>
+    </table>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    // global data
+    let oldSeasonNumber = 1;
+
+    $(document).ready(() => { 
+        showSeason(1);
+        $('#season-number').change(function () { 
+            hideSeason();
+            oldSeasonNumber = $(this).val();
+            showSeason(oldSeasonNumber);
+        });
+    });
+
+    const showSeason = (season) => {
+        var listEpisodes = $(`.season-${season}`);
+        listEpisodes.each((index, episode) => {
+            $(episode).css("display", "table-row");
+        });
+    }
+
+    const hideSeason = () => {
+        // for (let i = 0; i < 4; i++) {
+        //     if($(`.season-${i}`).hasClass("show")) {
+        //         $(`.season-${i}`).removeClass("show");
+        //         $(`.season-${i}`).css("display", "none");
+        //     }
+        // }
+        var listEpisodes = $(`.season-${oldSeasonNumber}`);
+        listEpisodes.each((index, episode) => {
+            $(episode).css("display", "none");
+        });
+    }
+
+</script>

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SMovie.Application.IService;
 using SMovie.Domain.Entity;
+using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
 using SMovie.WebUI.Constants;
 using System.Net;
@@ -66,6 +67,7 @@ namespace SMovie.WebUI.Controllers
                     Response.Cookies.Append(UserClaimType.DisplayName, user!.DisplayName!, cookieOptions);
                     Response.Cookies.Append(UserClaimType.Avatar, user.Avatar!, cookieOptions);
                     Response.Cookies.Append(UserClaimType.AccessToken, await _authenticationService.GenerateToken(userDTO), cookieOptions);
+                    Response.Cookies.Append(UserClaimType.Account, AccountType.System.ToString(), cookieOptions);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -92,6 +94,7 @@ namespace SMovie.WebUI.Controllers
             Response.Cookies.Append(UserClaimType.DisplayName, loginWithDTO.DisplayName, cookieOptions);
             Response.Cookies.Append(UserClaimType.Avatar, loginWithDTO.Avatar, cookieOptions);
             Response.Cookies.Append(UserClaimType.AccessToken, loginWithDTO.AccessToken, cookieOptions);
+            Response.Cookies.Append(UserClaimType.Account, AccountType.Google.ToString(), cookieOptions);
 
             return ConstantMessage.LoginSuccessfully;
         }
@@ -113,6 +116,7 @@ namespace SMovie.WebUI.Controllers
             Response.Cookies.Append(UserClaimType.DisplayName, loginWithDTO.DisplayName, cookieOptions);
             Response.Cookies.Append(UserClaimType.Avatar, loginWithDTO.Avatar, cookieOptions);
             Response.Cookies.Append(UserClaimType.AccessToken, loginWithDTO.AccessToken, cookieOptions);
+            Response.Cookies.Append(UserClaimType.Account, AccountType.Microsoft.ToString(), cookieOptions);
 
             return ConstantMessage.LoginSuccessfully;
         }

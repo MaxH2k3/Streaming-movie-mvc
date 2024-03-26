@@ -26,3 +26,11 @@
 .bold-800 {
     font-weight: 800;
 }
+
+.tv-series tr {
+    display: none;
+}
+
+.show tr {
+    display: table-row;
+}

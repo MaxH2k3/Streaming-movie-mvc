@@ -18,9 +18,9 @@ namespace SMovie.WebUI.Controllers.Home
             _mapper = mapper;
         }
 
-        [Route("Movie/{movieId}")]
         public async Task<IActionResult> MovieDetail(Guid movieId)
         {
+            Console.WriteLine("MovieDetail");
             var movie = _mapper.Map<MovieDetail>(await _movieService.GetMovieDetail(movieId));
 
             return View(ConstantView.MovieDetail, movie);

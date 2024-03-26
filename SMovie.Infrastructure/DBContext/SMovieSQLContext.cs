@@ -37,8 +37,8 @@ namespace SMovie.Infrastructure.DBContext
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                        .UseSqlServer(GetConnectionString())
-                        .LogTo(Console.WriteLine, LogLevel.Information);
+                        .UseSqlServer(GetConnectionString());
+                        //.LogTo(Console.WriteLine, LogLevel.Information);
                 //.LogTo((message) => WatchLogger.Log($"SQL {message}"), LogLevel.Information);
             }
         }

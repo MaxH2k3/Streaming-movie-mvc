@@ -5,42 +5,42 @@
 <main class="main-content">
 
     @{
-        @await Html.PartialAsync(ConstantComponent.DisplayBigSlider, (IEnumerable<MovieSlide>)Model.SlideMovies);
+        await Html.RenderPartialAsync(ConstantComponent.DisplayBigSlider, (IEnumerable<MovieSlide>)Model.SlideMovies);
     }
 
     @{
         ViewData["title"] = "Upcoming Movies";
-        @await Html.PartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.UpcomingMovies);
+        await Html.RenderPartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.UpcomingMovies);
     }
   
     @{
         ViewData["title"] = "Top Ten Movies";
-        @await Html.PartialAsync(ConstantComponent.DisplayTopTen, (IEnumerable<MoviePreview>)Model.TopRatingMovies);
+        await Html.RenderPartialAsync(ConstantComponent.DisplayTopTen, (IEnumerable<MoviePreview>)Model.TopRatingMovies);
     }
 
     @{
         ViewData["title"] = "Latest Movies";
-        @await Html.PartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.NewMovies);
+        await Html.RenderPartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.NewMovies);
     }
 
     @{
         ViewData["title"] = "Standalone Movies";
-        @await Html.PartialAsync(ConstantComponent.DisplaySlideVertical, (IEnumerable<MovieSlide>)Model.NewStandaloneMovies);
+        await Html.RenderPartialAsync(ConstantComponent.DisplaySlideVertical, (IEnumerable<MovieSlide>)Model.NewStandaloneMovies);
     }
 
     @{
         ViewData["title"] = "Top Movies most Viewer";
-        @await Html.PartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.TopViewedMovies);
+        await Html.RenderPartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.TopViewedMovies);
     }
 
     @{
         ViewData["title"] = "TV Series";
-        @await Html.PartialAsync(ConstantComponent.DisplaySlideHorizontal, (IEnumerable<MovieDetail>)Model.NewTVSeries);
+        await Html.RenderPartialAsync(ConstantComponent.DisplaySlideHorizontal, (IEnumerable<MovieDetail>)Model.NewTVSeries);
     }
 
     @{
         ViewData["title"] = "Recommend Movies";
-        @await Html.PartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.RecommendMovies);
+        await Html.RenderPartialAsync(ConstantComponent.DisplaySlide, (IEnumerable<MoviePreview>)Model.RecommendMovies);
     }
   
   

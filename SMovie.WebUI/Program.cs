@@ -4,6 +4,7 @@ using SMovie.Application.Service;
 using SMovie.Domain.Models;
 using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.Configuration;
+using SMovie.Infrastructure.DBContext;
 using SMovie.Infrastructure.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<JWTSetting>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddDbContext<SMovieSQLContext>();
 
 builder.Services.AddHttpContextAccessor();
 

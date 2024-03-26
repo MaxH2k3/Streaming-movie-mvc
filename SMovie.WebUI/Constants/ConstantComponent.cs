@@ -17,6 +17,8 @@
         public const string DisplayTopTen = ConstantPath.PrePathDisplayComponentHome + "_DisplayTopTen";
         public const string DisplaySlideVertical = ConstantPath.PrePathDisplayComponentHome + "_DisplaySlideVertical";
         public const string DisplaySlideHorizontal = ConstantPath.PrePathDisplayComponentHome + "_DisplaySlideHorizontal";
-    
+        public const string DisplayMovieNormal = ConstantPath.PrePathDisplayComponentHome + "_DisplayMovieNormal";
+        public const string DisplayMovieTVSeries = ConstantPath.PrePathDisplayComponentHome + "_DisplayMovieTVSeries";
+        
     }
 }
