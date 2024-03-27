@@ -9,6 +9,7 @@ namespace SMovie.Domain.Models
         public int Time { get; set; }
         public string EnglishName { get; set; } = null!;
         public string Thumbnail { get; set; } = null!;
+        public string Trailer { get; set; } = null!;
         public virtual FeatureFilm Feature { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateTime ProducedDate { get; set; }

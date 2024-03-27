@@ -1,11 +1,16 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using SMovie.Application.Configuration;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
+using SMovie.Domain.Constants.User;
 using SMovie.Domain.Models;
 using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.Configuration;
 using SMovie.Infrastructure.DBContext;
 using SMovie.Infrastructure.UnitOfWork;
+using System.Data;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +36,33 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<SMovieSQLContext>();
 
 builder.Services.AddHttpContextAccessor();
+
+// set up JWT
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["JWTSetting:Issuer"],
+        ValidAudience = builder.Configuration["JWTSetting:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSetting:Securitykey"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        RequireExpirationTime = true
+    };
+});
+
+builder.Services.AddAuthorization(opt =>
+{
+    opt.AddPolicy(UserRole.User, policy => policy.RequireClaim("Role", UserRole.User));
+    opt.AddPolicy(UserRole.Admin, policy => policy.RequireClaim("Role", UserRole.Admin));
+});
 
 var app = builder.Build();
 

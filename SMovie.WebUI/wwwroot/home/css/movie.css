@@ -34,3 +34,15 @@
 .show tr {
     display: table-row;
 }
+
+.modal-dialog.custom-modal-trailer {
+    --bs-modal-width: 85%;
+}
+
+.h-90vh {
+    height: 90vh;
+}
+
+.z-index-9999 {
+    z-index: 9999;
+}
