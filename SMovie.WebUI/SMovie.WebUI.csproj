@@ -22,4 +22,16 @@
     <ProjectReference Include="..\SMovie.Infrastructure\SMovie.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Dashboard\Import\_Head.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Dashboard\Import\_Js.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Dashboard\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Dashboard\Import\_Head.cshtml" />
+    <AdditionalFiles Include="Views\Dashboard\Import\_Js.cshtml" />
+    <AdditionalFiles Include="Views\Dashboard\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

@@ -6,7 +6,10 @@
 
         public const string HomeHeader = "../Home/Header/_Header";
         public const string HomeFooter = "../Home/Footer/_Footer";
-
+        public const string DashboardHeader = "../Dashboard/Header/_Header";
+        public const string DashboardFooter = "../Dashboard/Footer/_Footer";
+        public const string Sidebar = "../Dashboard/Header/_SideBar";
+        
         public const string InforUser = ConstantPath.PrePathCommonComponentHome + "_InfoUser"; 
         public const string Loading = ConstantPath.PrePathCommonComponentHome + "_Loading";
         public const string BackToTop = ConstantPath.PrePathCommonComponentHome + "_BackToTop";
@@ -20,6 +23,7 @@
         public const string DisplayMovieNormal = ConstantPath.PrePathDisplayComponentHome + "_DisplayMovieNormal";
         public const string DisplayMovieTVSeries = ConstantPath.PrePathDisplayComponentHome + "_DisplayMovieTVSeries";
         public const string DisplayTrailerModal = ConstantPath.PrePathDisplayComponentHome + "_DisplayTrailerModal";
+        public const string LiveCustomizer = ConstantPath.PrePathCommonComponentDashboard + "_LiveCustomizer";
         
     }
 }

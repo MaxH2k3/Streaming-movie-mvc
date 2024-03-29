@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SMovie.Application.IService;
 
 namespace SMovie.WebUI.Controllers.Dashboard;
 
 public class DashboardController : Controller
 {
-    // GET
+    
+    
     public IActionResult Index()
     {
         return View();

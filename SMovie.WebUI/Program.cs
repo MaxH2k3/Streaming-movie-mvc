@@ -49,7 +49,7 @@ builder.Services.AddAuthentication(opt =>
     {
         ValidIssuer = builder.Configuration["JWTSetting:Issuer"],
         ValidAudience = builder.Configuration["JWTSetting:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSetting:Securitykey"])),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSetting:Securitykey"]!)),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,

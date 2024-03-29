@@ -11,27 +11,42 @@
     @await Html.PartialAsync(ConstantSystem.ImportDashboard.ImportCss)
 
 </head>
-<body>
-    @* loading *@
+<body class="  ">
+@* loading *@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.Loading);
+}
+
+@*Sidebar*@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.Sidebar);
+}
+    
+@*Main content*@
+<main class="main-content">    
     @{
-        await Html.RenderPartialAsync(ConstantComponent.Loading);
+        await Html.RenderPartialAsync(ConstantComponent.DashboardHeader);
+
+        @RenderBody();
+
+        await Html.RenderPartialAsync(ConstantComponent.DashboardFooter);
     }
+</main>
+    
+@await RenderSectionAsync("Scripts", required: false)
 
-    @RenderBody()
-    @await RenderSectionAsync("Scripts", required: false)
+@* import toast *@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.Toast);
+}
 
-    @* import component *@
-    @{
-        await Html.RenderPartialAsync(ConstantComponent.RTS);
-    }
-
-    @* import toast *@
-    @{
-        await Html.RenderPartialAsync(ConstantComponent.Toast);
-    }
-
-    @* import data js *@
-    @await Html.PartialAsync(ConstantSystem.ImportDashboard.ImportJs)
+@*Live Customizer*@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.LiveCustomizer);
+}
+    
+@* import data js *@
+@await Html.PartialAsync(ConstantSystem.ImportDashboard.ImportJs)
 
 </body>
 </html>
