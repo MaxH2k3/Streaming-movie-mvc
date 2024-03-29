@@ -1,5 +1,6 @@
 ﻿@using SMovie.Domain.Models
 @using SMovie.WebUI.Constants
+@using SMovie.Domain.Entity
 @model IEnumerable<MovieSlide>
 
 
@@ -45,10 +46,10 @@
                                     <span class="badge rounded-0 text-white text-uppercase p-2 mx-3 bg-secondary">@(movie.Feature.Name)</span>
                                     @if (movie.Feature.FeatureId == 3)
                                     {
-                                        <span class="font-size-14 fw-500 time">@(movie.Time) Minutes/ Episode</span>
+                                        <span class="font-size-14 fw-500 time">@(movie.Time) Mins/ Episode</span>
                                     } else
                                     {
-                                        <span class="font-size-14 fw-500 time">@(movie.Time) Minutes</span>
+                                        <span class="font-size-14 fw-500 time">@(movie.Time) Mins</span>
                                     }
 
                                 </div>
@@ -78,8 +79,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-12 trailor-video iq-slider d-none d-lg-block">
-                                <a href="@movie.Trailer" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="video-open playbtn text-decoration-none"
-                                   tabindex="0">
+                                <input type="hidden" name="trailer"  value="@(movie.Trailer)" />
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#trailer-@(movie.MovieId)" 
+                                            class="video-open playbtn text-decoration-none trailer" tabindex="0">
                                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                                          y="0px" width="80px" height="80px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
                                          xml:space="preserve">
@@ -120,5 +122,10 @@
 </section>
 
 @{
-    await Html.RenderPartialAsync(ConstantComponent.DisplayTrailerModal);
+    foreach (var movie in Model)
+    {
+        await Html.RenderPartialAsync(ConstantComponent.DisplayTrailerModal, movie);
+    }
+    //await Html.RenderPartialAsync(ConstantComponent.DisplayTrailerModal, Model.ElementAt(0));
+    
 }

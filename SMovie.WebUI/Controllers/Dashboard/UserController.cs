@@ -2,7 +2,7 @@
 
 namespace SMovie.WebUI.Controllers.Dashboard;
 
-public class DashboardController : Controller
+public class UserController : Controller
 {
     // GET
     public IActionResult Index()
