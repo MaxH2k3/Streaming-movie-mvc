@@ -242,5 +242,9 @@ namespace SMovie.Application.Service
             return await _unitOfWork.MovieRepository.GetById(movieId);
         }
 
+        public async Task<PagedList<Movie>> GetMovieRelated(Guid movieId, int page, int eachPage)
+        {
+            return await _unitOfWork.MovieRepository.GetMovieRelated(movieId, page, eachPage);
+        }
     }
 }

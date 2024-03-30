@@ -2,9 +2,9 @@
 {
     public class ConstantPath
     {
-        public const string PrePathCommonComponentHome = "../Home/Components/Common/";
-        public const string PrePathDisplayComponentHome = "../Home/Components/Display/";
-        public const string PrePathCommonComponentDashboard = "../Dashboard/Components/Common/";
-        public const string PrePathDisplayComponentDashboard = "../Dashboard/Components/Display/";
+        public const string PrePathCommonHome = "../Home/Common/";
+        public const string PrePathComponentHome = "../Home/Components/";
+        public const string PrePathCommonDashboard = "../Dashboard/Common/";
+        public const string PrePathComponentDashboard = "../Dashboard/Components/";
     }
 }

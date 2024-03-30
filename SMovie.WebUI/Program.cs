@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using SMovie.Application.Configuration;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
-using SMovie.Domain.Constants.User;
+using SMovie.Domain.Enum.User;
 using SMovie.Domain.Models;
 using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.Configuration;
 using SMovie.Infrastructure.DBContext;
 using SMovie.Infrastructure.UnitOfWork;
-using System.Data;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,8 +58,8 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddAuthorization(opt =>
 {
-    opt.AddPolicy(UserRole.User, policy => policy.RequireClaim("Role", UserRole.User));
-    opt.AddPolicy(UserRole.Admin, policy => policy.RequireClaim("Role", UserRole.Admin));
+    opt.AddPolicy(UserRole.User.ToString(), policy => policy.RequireClaim("Role", UserRole.User.ToString()));
+    opt.AddPolicy(UserRole.Admin.ToString(), policy => policy.RequireClaim("Role", UserRole.Admin.ToString()));
 });
 
 var app = builder.Build();

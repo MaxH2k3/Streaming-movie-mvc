@@ -95,5 +95,25 @@ namespace SMovie.Infrastructure.Repository
                 .FirstOrDefaultAsync(m => m.MovieId.Equals(id));
         }
 
+        public async Task<PagedList<Movie>> GetMovieRelated(Guid movieId, int page, int eachPage)
+        {
+            var skipElement = (page - 1) * eachPage;
+
+            var listCategoryId = await _context.MovieCategories.Where(mc => mc.MovieId.Equals(movieId)).Select(mc => mc.CategoryId).ToListAsync();
+
+            var query = $@"SELECT m.* 
+                FROM Movies m 
+                LEFT JOIN MovieCategory mc ON m.MovieID = mc.MovieID 
+                WHERE m.MovieID != '{movieId}' 
+                GROUP BY m.MovieID, m.FeatureId, m.NationID, m.Mark, m.Time, m.Viewer, m.Description, m.EnglishName, 
+                m.VietnamName, m.Thumbnail, m.Trailer, m.Status, m.ProducedDate, m.DateCreated, m.DateUpdated, m.DateDeleted 
+                ORDER BY {(listCategoryId.Count > 0 ? $"COUNT(CASE WHEN mc.CategoryID IN ({string.Join(',', listCategoryId)}) THEN 1 ELSE NULL END) DESC," : "")}  m.ProducedDate DESC 
+                OFFSET {skipElement} ROWS FETCH NEXT {eachPage} ROWS ONLY";
+        
+            var movies = await _context.Movies.FromSqlRaw(query).ToListAsync();
+
+            return new PagedList<Movie>(movies, movies.Count, page, eachPage);
+        }
+
     }
 }

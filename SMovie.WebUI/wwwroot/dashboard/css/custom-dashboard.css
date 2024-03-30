@@ -1,0 +1,11 @@
+﻿td {
+    text-transform: none!important;
+}
+
+ul.select2-results__options li {
+    text-transform: capitalize;
+}
+
+span.select2-selection__rendered {
+    text-transform: capitalize;
+}

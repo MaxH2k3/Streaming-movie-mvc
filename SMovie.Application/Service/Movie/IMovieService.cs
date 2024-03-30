@@ -26,7 +26,7 @@ namespace SMovie.Application.IService
         Task<IEnumerable<Movie>> GetMovieTopRating();
         Task<IEnumerable<Movie>> GetTVSeriesDetails();
         Task<IEnumerable<Movie>> GetMovieRecomend();
-
         Task<Movie?> GetMovieDetail(Guid movieId);
+        Task<PagedList<Movie>> GetMovieRelated(Guid movieId, int page, int eachPage);
     }
 }

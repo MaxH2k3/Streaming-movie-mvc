@@ -10,6 +10,8 @@ namespace SMovie.Application.Configuration
         {
             // Mapping User
             CreateMap<User, UserTemporary>().ReverseMap();
+            CreateMap<User, UserDetail>().ReverseMap();
+            CreateMap<PagedList<User>, PagedList<UserDetail>>();
 
             // Mapping Movie
             CreateMap<Movie, MovieSlide>()
@@ -21,6 +23,8 @@ namespace SMovie.Application.Configuration
                 opt => opt.MapFrom(src => src.Category!.Name));
 
             CreateMap<Movie, MoviePreview>();
+            CreateMap<PagedList<Movie>, PagedList<MoviePreview>>();
+
 
             CreateMap<Movie, MovieDetail>()
                 .ForMember(dest => dest.CastCharacteries,

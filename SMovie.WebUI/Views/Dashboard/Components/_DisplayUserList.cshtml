@@ -1,0 +1,38 @@
+﻿@using SMovie.Domain.Models
+@model IEnumerable<UserDetail>
+
+@{
+    var users = Model;
+}
+
+@foreach (var user in users)
+{
+    <tr>
+        <td class="text-center">
+            <img class="bg-soft-primary rounded img-fluid avatar-40 me-3"
+                 src="@user.Avatar" alt="profile" loading="lazy">
+        </td>
+        <td>@user.DisplayName</td>
+        <td>@user.Username</td>
+        <td>@user.Email</td>
+        <td>@user.Role</td>
+        <td><span class="badge bg-primary">@user.Status</span></td>
+        <td>@user.DateCreated.ToString("dd/MM/yyyy")</td>
+        <td>
+            <div class="flex align-items-center list-user-action">
+                <a class="btn btn-sm btn-icon btn-success rounded" data-bs-toggle="tooltip"
+                   data-placement="top" title="" data-bs-original-title="Add" href="#">
+                    <span class="btn-inner">
+                        <i class="fa-solid fa-user-plus fa-xs"></i>
+                    </span>
+                </a>
+                <a class="btn btn-sm btn-icon btn-danger rounded delete-btn" data-bs-toggle="tooltip"
+                   data-placement="top" title="" data-bs-original-title="Delete" href="#">
+                    <span class="btn-inner">
+                        <i class="fa-solid fa-trash fa-xs"></i>
+                    </span>
+                </a>
+            </div>
+        </td>
+    </tr>
+}

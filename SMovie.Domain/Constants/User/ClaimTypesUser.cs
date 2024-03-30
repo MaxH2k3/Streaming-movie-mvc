@@ -1,4 +1,4 @@
-﻿namespace SMovie.Domain.Constant
+﻿namespace SMovie.Domain.Constants
 {
 	public static class ClaimTypesUser
     {

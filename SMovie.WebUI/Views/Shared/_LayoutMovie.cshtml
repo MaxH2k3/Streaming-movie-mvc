@@ -1,0 +1,48 @@
+﻿@using SMovie.WebUI.Utilities
+@using SMovie.WebUI.Constants
+
+@{
+    string controllerName = ViewContext.RouteData.Values["action"]!.ToString()!;
+    string className = "custom-header-relative";
+    if (Resources.Pages.Contains(className))
+    {
+        className = "";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Streamit-movie</title>
+
+    @* import data css *@
+    @await Html.PartialAsync(ConstantSystem.ImportHome.ImportCss)
+
+</head>
+<body class=" @className ">
+    @* loading *@
+    @{
+        await Html.RenderPartialAsync(ConstantComponent.Loading);
+    }
+
+    @* import header *@
+    @{
+        await Html.RenderPartialAsync(ConstantComponent.HomeHeader);
+    }
+
+    @RenderBody()
+    @await RenderSectionAsync("Scripts", required: false)
+
+    @* import component *@
+    @{
+        await Html.RenderPartialAsync(ConstantComponent.BackToTop);
+        await Html.RenderPartialAsync(ConstantComponent.RTS);
+    }
+
+    @* import data js *@
+    @await Html.PartialAsync(ConstantSystem.ImportHome.ImportJs)
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 ﻿using SMovie.Domain.Entity;
+using SMovie.Domain.Models;
 
 namespace SMovie.Domain.Repository
 {
@@ -10,5 +11,6 @@ namespace SMovie.Domain.Repository
         Task<Movie?> GetMovieNewest();
         Task<IEnumerable<Movie>> GetMovieDetails(int amount, Domain.Enum.FeatureFilm feature);
         Task<Movie?> GetById(Guid id);
+        Task<PagedList<Movie>> GetMovieRelated(Guid movieId, int page, int eachPage);
     }
 }

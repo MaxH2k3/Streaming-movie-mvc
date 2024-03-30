@@ -1,8 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SMovie.Application.IService;
-using SMovie.Domain.Constant;
+using SMovie.Domain.Constants;
 using SMovie.Domain.Models;
-using SMovie.Domain.Repository;
 using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.UnitOfWork;
 using System.IdentityModel.Tokens.Jwt;

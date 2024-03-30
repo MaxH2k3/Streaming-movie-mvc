@@ -3,10 +3,11 @@ using SMovie.Domain.Entity;
 using SMovie.Domain.Enum;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
+using SMovie.Infrastructure.Repository.Common;
 
 namespace SMovie.Infrastructure.Repository
 {
-    public class UserRepository : SQLRepository<User>, IUserRepository
+    public class UserRepository : SQLExtendRepository<User>, IUserRepository
     {
         private readonly SMovieSQLContext _context;
 

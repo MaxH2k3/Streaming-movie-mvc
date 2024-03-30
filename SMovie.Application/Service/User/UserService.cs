@@ -4,7 +4,6 @@ using SMovie.Application.Extension;
 using SMovie.Application.Helper;
 using SMovie.Application.IService;
 using SMovie.Application.MessageService;
-using SMovie.Domain.Constant;
 using SMovie.Domain.Constants;
 using SMovie.Domain.Entity;
 using SMovie.Domain.Enum;
@@ -15,7 +14,7 @@ using System.Net;
 
 namespace SMovie.Application.Service
 {
-	public class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMailService _mailService;
@@ -65,7 +64,7 @@ namespace SMovie.Application.Service
             {
                 return new ResponseDTO(HttpStatusCode.BadRequest, MessageUser.WrongPassword);
             }
-            if (user.Status!.Equals(StatusAccount.BLOCK))
+            if (user.Status!.Equals(AccountStatus.Blocked.ToString()))
             {
                 return new ResponseDTO(HttpStatusCode.Forbidden, MessageUser.UserBlocked);
             }
@@ -97,7 +96,7 @@ namespace SMovie.Application.Service
                 Username = registerUser.Username,
                 DisplayName = registerUser.FirstName + " " + registerUser.LastName,
                 Avatar = $"{UserCommon.PrePathUserAvatar}avatar{Utilities.RandomNumber(1, 4)}.jpg",
-                Status = StatusAccount.PENDING,
+                Status = AccountStatus.Pending.ToString(),
                 ExpiredDate = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["RegisterData:ExpireTimeForStorage"]!))
             });
             
@@ -172,7 +171,7 @@ namespace SMovie.Application.Service
             user.UserId = userId;
 
 			//active account
-			user.Status = StatusAccount.ACTIVE;
+			user.Status = AccountStatus.Active.ToString();
 			user.DateCreated = DateTimeHelper.GetDateTimeNow();
             await _unitOfWork.UserRepository.Add(user);
 
@@ -209,7 +208,7 @@ namespace SMovie.Application.Service
 			User user = _mapper.Map<User>(userTemporary);
 
 			//active account
-			user.Status = StatusAccount.ACTIVE;
+			user.Status = AccountStatus.Active.ToString();
 			user.DateCreated = DateTimeHelper.GetDateTimeNow();
             await _unitOfWork.UserRepository.Add(user);
 
@@ -223,5 +222,19 @@ namespace SMovie.Application.Service
 			}
 			return new ResponseDTO(HttpStatusCode.BadRequest, MessageUser.FailToVerify);
 		}
-	}
+
+        public async Task<PagedList<User>> GetUserByStatus(AccountStatus status, int page, int eachPage)
+        {
+            PagedList<User> users;
+            if(status == AccountStatus.All)
+            {
+                users = await _unitOfWork.UserRepository.GetAll(page, eachPage, UserSortBy.DateCreated);
+            } else
+            {
+                users = await _unitOfWork.UserRepository.GetAll(user => user.Status.Equals(status.ToString()), page, eachPage, UserSortBy.DateCreated);
+            }
+
+            return users;
+        }
+    }
 }

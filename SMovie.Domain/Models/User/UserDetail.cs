@@ -1,12 +1,10 @@
-﻿namespace SMovie.Domain.Entity
+﻿namespace SMovie.Domain.Models
 {
-    public class User
+    public class UserDetail
     {
         public Guid UserId { get; set; }
         public string Email { get; set; } = null!;
         public string Username { get; set; } = null!;
-        public byte[] Password { get; set; } = null!;
-        public byte[] PasswordSalt { get; set; } = null!;
         public string Role { get; set; } = null!;
         public string Status { get; set; } = null!;
         public string DisplayName { get; set; } = null!;

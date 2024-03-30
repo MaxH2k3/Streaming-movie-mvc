@@ -12,5 +12,8 @@
         public const string PersonDetail = "../Home/Body/PersonDetail";
         public const string PlayList = "../Home/Body/PlayList";
         public const string Cast = "../Home/Body/Cast";
+
+        public const string UserList = "../Dashboard/Body/UserList";
+        public const string MovieList = "../Dashboard/Body/MovieList";
     }
 }

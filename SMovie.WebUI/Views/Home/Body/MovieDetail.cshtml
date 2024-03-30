@@ -16,7 +16,7 @@
           <div class="col-lg-12">
             <div class="pt-0">
               <video id="my-video" poster="https://i.ytimg.com/vi_webp/rKVEoyTedv4/maxresdefault.webp"
-                class="video-js vjs-big-play-centered w-100" controls preload="auto" autoplay
+                class="video-js vjs-big-play-centered w-100" controls preload="auto" autoplay muted
                 data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "@(Model.Trailer)"}], "youtube": { "iv_load_policy": 1 } }'>
                 <source src="home/images/video/sample-video.mp4" type="video/mp4" />
                 <source src="MY_VIDEO.html" type="video/webm" />
@@ -192,4 +192,47 @@
       </div>
     </div>
 
+    <!-- Movie List Start -->
+    <section class="related-block mb-4">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between px-3 pt-2 my-4">
+                <h5 class="main-title text-capitalize mb-0">Movies Related</h5>
+            </div>
+            <div class="card-style-slider row g-5 p-lg-5 display-normal-movie">
+                
+
+            </div>
+
+        </div>
+    </section>
+
   </main>
+
+
+@section scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        let currentPage = 1;
+        $(document).ready(function () {
+            GetMovieRelated(4);
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    GetMovieRelated(8);
+                }
+            });
+        });
+
+        const GetMovieRelated = async (eachPage) => {
+            $.ajax({
+                url: "/FilterMovie/FilterMovieRelated",
+                type: "Post",
+                data: { movieId: `@movie.MovieId.ToString()`, page: currentPage, eachPage: eachPage },
+                success: function (response) {
+                    $(".display-normal-movie").append(response);
+                    currentPage++;
+                }
+            });
+        }
+
+    </script>
+}
