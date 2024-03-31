@@ -22,14 +22,24 @@ public class DashboardController : Controller
     
     public IActionResult Index()
     {
+        ViewData["Menu"] = 1;
         return View();
     }
 
     public async Task<IActionResult> MovieList()
     {
-        var movies = await _movieService.GetMovies(SystemDefault.Page, SystemDefault.EachPage, MovieSortBy.DateCreated, MovieStatusType.Deleted);
-        var result = _mapper.Map<PagedList<MoviePreview>>(movies);
+        ViewData["Menu"] = 3;
+        var movies = await _movieService.GetMovies(SystemDefault.Page, 999999, MovieSortBy.DateCreated, MovieStatusType.Deleted);
+        var result = _mapper.Map<PagedList<InfoMovie>>(movies);
         return View(ConstantView.MovieList, result);
     }
+
+    public async Task<IActionResult> ListMovieDeleted()
+    {
+        var movies = await _movieService.GetMovieDeleted(SystemDefault.Page, 999999, MovieSortBy.DateCreated);
+        var result = _mapper.Map<PagedList<InfoMovie>>(movies);
+        return View(ConstantView.MovieList, result);
+    }
+
 
 }

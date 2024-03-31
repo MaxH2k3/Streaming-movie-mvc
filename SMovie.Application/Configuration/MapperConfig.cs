@@ -25,6 +25,14 @@ namespace SMovie.Application.Configuration
             CreateMap<Movie, MoviePreview>();
             CreateMap<PagedList<Movie>, PagedList<MoviePreview>>();
 
+            CreateMap<Movie, InfoMovie>()
+                .ForMember(dest => dest.FeatureName,
+                    opt => opt.MapFrom(src => src.Feature.Name))
+                .ForMember(dest => dest.NationName,
+                    opt => opt.MapFrom(src => src.Nation.Name))
+                .ForMember(dest => dest.Categories,
+                opt => opt.MapFrom(src => src.MovieCategories));
+            CreateMap<PagedList<Movie>, PagedList<InfoMovie>>();
 
             CreateMap<Movie, MovieDetail>()
                 .ForMember(dest => dest.CastCharacteries,

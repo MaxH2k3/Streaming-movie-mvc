@@ -25,6 +25,7 @@ namespace SMovie.Infrastructure.Repository
             var movies = await _context.Movies
                 .Include(m => m.Feature)
                 .Include(m => m.MovieCategories).ThenInclude(c => c.Category)
+                .Include(m => m.Nation)
                 .Where(predicate)
                 .PaginateAndSort(page, eachPage, sortBy, isAscending)
                 .ToListAsync();

@@ -1,4 +1,9 @@
-﻿<aside class="sidebar sidebar-base sidebar-white sidebar-default navs-rounded-all " id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
+﻿@{
+    var currentMenu = 1;
+    currentMenu = ViewData["Menu"] != null ? (int)ViewData["Menu"]! : currentMenu;
+}
+
+<aside class="sidebar sidebar-base sidebar-white sidebar-default navs-rounded-all " id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
             <a href="index-2.html" class="navbar-brand">
                 
@@ -115,8 +120,7 @@
                             </i>
                             <span class="item-name">Pricing</span>
                         </a>
-                    </li>
-                
+                    </li>         
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-auth" role="button" aria-expanded="false"
                             aria-controls="sidebar-auth">
@@ -194,9 +198,28 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-controller="Dashboard" asp-action="ListMovieDeleted">
+                        <i class="fa-solid fa-trash" style="color: #d1d0cf" data-bs-toggle="tooltip" title="Trash" aria-label="Trash" data-bs-original-title="Trash"></i>
+                            <span class="item-name">Trash</span>
+                        </a>
+                    </li>
                 </ul>
                 
                 <!-- Sidebar Menu End -->        </div>
         </div>
         <div class="sidebar-footer"></div>
     </aside>
+
+
+@section script {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        let currentMenu = `@(ViewData["Menu"])`;
+        $(document).ready(function () {
+            console.log(currentMenu)
+            $('.nav-link').eq(0).removeClass('active');
+            $('.nav-link').eq(currentMenu).addClass('active');
+        });
+    </script>
+}

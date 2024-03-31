@@ -9,3 +9,83 @@ ul.select2-results__options li {
 span.select2-selection__rendered {
     text-transform: capitalize;
 }
+
+table tr, table th {
+    text-align: center!important;
+}
+
+.bg-1 {
+    background-color: blue;
+}
+
+.bg-2 {
+    background-color: darkred;
+}
+
+.bg-3 {
+    background-color: darkgreen;
+}
+
+.bg-4 {
+    background-color: darkblue;
+}
+
+.bg-5 {
+    background-color: darkcyan;
+}
+
+.bg-6 {
+    background-color: darkmagenta;
+}
+
+.bg-7 {
+    background-color: #979494;
+}
+
+.bg-8 {
+    background-color: slateblue;
+}
+
+.bg-9 {
+    background-color: darkorange;
+}
+
+.bg-10 {
+    background-color: darkturquoise;
+}
+
+.bg-11 {
+    background-color: tomato;
+}
+
+.bg-12 {
+    background-color: darkolivegreen;
+}
+
+.bg-13 {
+    background-color: teal;
+}
+
+.bg-14 {
+    background-color: cadetblue;
+}
+
+.bg-15 {
+    background-color: chocolate;
+}
+
+.bg-16 {
+    background-color: cornflowerblue;
+}
+
+.feature-standalone {
+    color: cyan!important;
+}
+
+.feature-tvseries {
+    color: greenyellow!important;
+}
+
+.feature-cinema {
+    color: khaki!important;
+}

@@ -23,9 +23,11 @@
         public const string DisplayMovieNormal = ConstantPath.PrePathComponentHome + "_DisplayMovieNormal";
         public const string DisplayMovieTVSeries = ConstantPath.PrePathComponentHome + "_DisplayMovieTVSeries";
         public const string DisplayTrailerModal = ConstantPath.PrePathComponentHome + "_DisplayTrailerModal";
+        public const string DisplayNormal = ConstantPath.PrePathComponentHome + "_DisplayNormal";
+
         public const string LiveCustomizer = ConstantPath.PrePathCommonDashboard + "_LiveCustomizer";
         public const string DisplayUserList = ConstantPath.PrePathComponentDashboard + "_DisplayUserList";
-        public const string DisplayNormal = ConstantPath.PrePathComponentHome + "_DisplayNormal";
+        public const string DisplayMovieList = ConstantPath.PrePathComponentDashboard + "_DisplayMovieList";
         
     }
 }

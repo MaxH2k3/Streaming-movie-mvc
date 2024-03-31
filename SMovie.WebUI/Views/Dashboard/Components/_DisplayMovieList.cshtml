@@ -1,0 +1,47 @@
+﻿
+@using SMovie.Domain.Models
+@model PagedList<InfoMovie>
+@using SMovie.WebUI.Utilities
+
+@{
+    var movies = Model.Items;
+}
+
+@foreach(var movie in movies)
+{
+    <tr>
+        <td>
+            <div class="d-flex align-items-center">
+                <img class="rounded img-fluid avatar-60 me-3"
+                     src="@movie.Thumbnail" alt="" loading="lazy">
+            </div>
+        </td>
+        <td class="">@movie.EnglishName</td>
+        <td class="feature-@(movie.FeatureName.Replace(" ", "").ToLower())">@movie.FeatureName</td>
+        <td class="">@movie.NationName</td>
+        <td class="">
+            @foreach (var category in movie.Categories)
+            {
+                <span class="badge me-1 bg-@(category.CategoryId)">@category.Name</span>
+            }
+        </td>
+        <td class="">@movie.ProducedDate.ToString("dd/MM/yyyy")</td>
+        <td>
+            <span class="p-2 @(Helper.ConvertStatusToClass(movie.Status))">@movie.Status</span>
+        </td>
+        <td>
+            <div class="d-flex justify-content-evenly">
+                <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
+                    <span class="btn-inner">
+                        <i class="fa-solid fa-pen"></i>
+                    </span>
+                </a>
+                <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
+                    <span class="btn-inner">
+                        <i class="fa-solid fa-trash"></i>
+                    </span>
+                </a>
+            </div>
+        </td>
+    </tr>
+}
