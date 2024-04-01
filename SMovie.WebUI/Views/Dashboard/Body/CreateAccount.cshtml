@@ -1,5 +1,11 @@
-﻿@model SMovie.Domain.Models.RegisterUser
-@using SMovie.WebUI.Constants
+﻿@using SMovie.WebUI.Constants
+@using SMovie.Domain.Models
+@using SMovie.Domain.Enum
+
+@{
+    var registerUser = (RegisterUser)Model.RegisterUser;
+    var users = (IEnumerable<UserChosen>)Model.Users;
+}
 
 <main class="main-content">
 
@@ -9,15 +15,15 @@
             <div class="row justify-content-center align-items-center height-self-center vh-100">
                 <div class="col-lg-8 col-md-12 align-self-center">
                     <form class="user-login-card bg-body" method="post" asp-action="Register" asp-controller="Register">
-                        <h4 class="text-center mb-5">Create Your Account</h4>
+                        <h4 class="text-center mb-5">Create Account For Management</h4>
                         <div class="row row-cols-1 g-2 g-lg-5">
                             <div class="col-md-4">
                                 <label class="text-white fw-300 mb-2">First Name</label>
-                                <input type="text" id="FirstName" class="form-control rounded-0" required="" asp-for="FirstName">
+                                <input type="text" id="FirstName" class="form-control rounded-0" required="" asp-for="@(registerUser.FirstName)">
                             </div>
                             <div class="col-md-4">
                                 <label class="text-white fw-300 mb-2">Last Name</label>
-                                <input type="text" id="LastName" class="form-control rounded-0" required="" asp-for="LastName">
+                                <input type="text" id="LastName" class="form-control rounded-0" required="" asp-for="@(registerUser.LastName)">
                             </div>
                             <div class="col-md-4">
                                 <label class="text-white fw-300 mb-2">Display Name</label>
@@ -25,26 +31,37 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="text-white fw-500 mb-2">UserName</label>
-                                <input type="text" id="UserName" class="form-control rounded-0" asp-for="Username">
+                                <input type="text" id="UserName" class="form-control rounded-0" asp-for="@(registerUser.Username)">
                             </div>
                             <div class="col-md-6">
                                 <label class="text-white fw-500 mb-2">Email *</label>
-                                <input type="email" class="form-control rounded-0" required="" asp-for="Email">
+                                <input type="email" class="form-control rounded-0" required="" asp-for="@(registerUser.Email)">
                             </div>
                             <div class="col-md-6">
                                 <label class="text-white fw-500 mb-2">Password *</label>
-                                <input type="password" class="form-control rounded-0" required="" asp-for="Password">
+                                <input type="password" class="form-control rounded-0" required="" asp-for="@(registerUser.Password)">
                             </div>
                             <div class="col-md-6">
                                 <label class="text-white fw-500 mb-2">Confirm Password *</label>
-                                <input type="password" class="form-control rounded-0" required="" asp-for="Password">
+                                <input type="password" class="form-control rounded-0" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <select id="select-user-create" class="form-select" required aria-label="select example">
+                                    <option value="">Choose User</option>
+                                    @foreach(var user in users)
+                                    {
+                                        <option value="@user.UserId" data-image="@user.Avatar">@user.DisplayName</option>
+                                    }
+                                </select>
+                            </div><div class="col-md-6">
+                                <select id="select-role-user" class="form-control select2-basic-multiple" required>
+                                    <option value="">Choose Role</option>
+                                    <option value="@((int)UserRole.Admin)">@UserRole.Admin.ToString()</option>
+                                    <option value="@((int)UserRole.User)">@UserRole.User.ToString()</option>
+                                </select>
                             </div>
                         </div>
-                        <label class="list-group-item d-flex align-items-center mt-5 mb-3 text-white">
-                            <input class="form-check-input m-0 me-2" type="checkbox" required>
-                                I've read and accept the <a class="ms-1">terms & conditions*</a>
-                        </label>
-                        <div class="row text-center">
+                        <div class="row text-center mt-5">
                             <div class="col-lg-3"></div>
                             <div class="col-lg-6">
                                 <div class="full-button">
@@ -54,11 +71,12 @@
                                             <i class="fa-solid fa-play"></i>
                                         </button>
                                     </div>
-                                    <p class="mt-2 mb-0 fw-normal">Already have an account<a asp-controller="Login" asp-action="Index" class="ms-1">Login</a></p>
                                 </div>
                             </div>
                             <div class="col-lg-3"></div>
                         </div>
+
+                        
 
                     </form>
                 </div>
@@ -66,9 +84,10 @@
         </div>
     </div>
 
+    <script src="/lib/jquery/dist/jquery.min.js" ></script>
     <script>
         GenerateDisplayName();
-        
+
         function GenerateDisplayName() {
             let firstName = document.getElementById('FirstName');
             let lastName = document.getElementById('LastName');
@@ -81,6 +100,21 @@
                 displayName.value = firstName.value + ' ' + lastName.value;
             });
         }
+
+        $(document).ready(function () {
+            $('#select-user-create').select2({
+                templateResult: function (data) {
+                    if (!data.id) {
+                        return data.text;
+                    }
+
+                    var image = $(data.element).data('image');
+                    var $result = $('<span><img src="' + image + '" class="img-thumbnail" style="width: 30px; height: 30px; margin-right: 10px;" />' + data.text + '</span>');
+
+                    return $result;
+                }
+            });
+        });
     </script>
 
 </main>

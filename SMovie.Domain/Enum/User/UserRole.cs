@@ -1,4 +1,4 @@
-﻿namespace SMovie.Domain.Enum.User
+﻿namespace SMovie.Domain.Enum
 {
     public enum UserRole
     {

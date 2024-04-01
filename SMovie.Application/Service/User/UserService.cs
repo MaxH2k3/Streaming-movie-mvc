@@ -48,9 +48,19 @@ namespace SMovie.Application.Service
             return await _unitOfWork.UserRepository.GetById(userId);
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetAll()
         {
             return await _unitOfWork.UserRepository.GetAll();
+        }
+
+        public async Task<IEnumerable<User>> GetUser()
+        {
+            return await _unitOfWork.UserRepository.GetAll(user => user.Role.Equals(UserRole.User.ToString()));
+        }
+
+        public async Task<IEnumerable<User>> GetAdmin()
+        {
+            return await _unitOfWork.UserRepository.GetAll(user => user.Role.Equals(UserRole.Admin.ToString()));
         }
 
         public async Task<ResponseDTO> Login(UserDTO userDTO)

@@ -89,3 +89,16 @@ table tr, table th {
 .feature-cinema {
     color: khaki!important;
 }
+
+input.select2-search__field {
+    color: white;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #b00c1f;
+    color: white;
+}
+
+.select2-container--default .select2-results__option--selected {
+    background-color: #9f9898;
+}

@@ -29,7 +29,7 @@
 
         @RenderBody();
 
-        await Html.RenderPartialAsync(ConstantComponent.DashboardFooter);
+        //await Html.RenderPartialAsync(ConstantComponent.DashboardFooter);
     }
 </main>
     
@@ -48,5 +48,20 @@
 @* import data js *@
 @await Html.PartialAsync(ConstantSystem.ImportDashboard.ImportJs)
 
+
+@* active sidebar *@
+    @{
+        var currentMenu = 1;
+        currentMenu = ViewData["Menu"] != null ? (int)ViewData["Menu"]! : currentMenu;
+        Console.WriteLine(currentMenu);
+    }
+ <script>
+    $(document).ready(function () {
+        var currentMenu = @(currentMenu);
+        changeActiveSideBar(currentMenu);
+    });
+ </script>
+
 </body>
 </html>
+

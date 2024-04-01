@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SMovie.Application.IService;
 using SMovie.Domain.Models;
+using SMovie.WebUI.Constants;
 using System.Net;
 
 namespace Streamit_movie_mvc.Controllers.Main
@@ -23,7 +24,7 @@ namespace Streamit_movie_mvc.Controllers.Main
                 return RedirectToAction("Index", "Home");
             }
 
-            return View("../Auth/Register");
+            return View(ConstantView.Register);
         }
 
         public async Task<IActionResult> Register(RegisterUser registerUser)
@@ -38,13 +39,13 @@ namespace Streamit_movie_mvc.Controllers.Main
 
             ViewBag.response = response;
 
-            return View("../Auth/Register", registerUser);
+            return View(ConstantView.Register, registerUser);
         }
 
         public IActionResult ConfirmCode()
         {
             ViewBag.UserId = "aaaa";
-            return View("../Auth/ConfirmCode");
+            return View(ConstantView.ConfirmCode);
         }
     }
 }

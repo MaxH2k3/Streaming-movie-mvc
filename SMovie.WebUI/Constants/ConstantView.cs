@@ -13,7 +13,12 @@
         public const string PlayList = "../Home/Body/PlayList";
         public const string Cast = "../Home/Body/Cast";
 
+        public const string Register = "../Auth/Register";
+        public const string ConfirmCode = "../Auth/ConfirmCode";
+        public const string ConfirmMail = "../Auth/ConfirmMail";
+
         public const string UserList = "../Dashboard/Body/UserList";
         public const string MovieList = "../Dashboard/Body/MovieList";
+        public const string CreateAccount = "../Dashboard/Body/CreateAccount";
     }
 }

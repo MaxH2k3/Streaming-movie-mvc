@@ -12,6 +12,7 @@ namespace SMovie.Application.Configuration
             CreateMap<User, UserTemporary>().ReverseMap();
             CreateMap<User, UserDetail>().ReverseMap();
             CreateMap<PagedList<User>, PagedList<UserDetail>>();
+            CreateMap<User, UserChosen>();
 
             // Mapping Movie
             CreateMap<Movie, MovieSlide>()

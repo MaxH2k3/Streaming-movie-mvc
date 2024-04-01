@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
-using SMovie.Domain.Enum.User;
+using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
 using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.Configuration;

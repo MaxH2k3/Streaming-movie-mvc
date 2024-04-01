@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SMovie.Application.IService;
 using SMovie.Domain.Models;
 using SMovie.WebUI.Constants;
+using SMovie.WebUI.Enums;
+using SMovie.WebUI.Models;
 
 namespace SMovie.WebUI.Controllers.Dashboard;
 
@@ -20,7 +22,9 @@ public class UserController : Controller
     
     public async Task<IActionResult> Index()
     {
-        var users = await _userService.GetUsers();
+        ViewData["Menu"] = (int)MenuDashboard.Users;
+
+        var users = await _userService.GetAll();
 
         if(users == null)
         {
@@ -32,6 +36,15 @@ public class UserController : Controller
         return View(ConstantView.UserList, result);
     }
 
-    
+    public async Task<IActionResult> CreateAccount()
+    {
+        ViewData["Menu"] = (int)MenuDashboard.CreateAccount;
+        var users = await _userService.GetAdmin();
+        var model = new CreateModelAccount()
+        {
+            Users = _mapper.Map<IEnumerable<UserChosen>>(users)
+        };
+        return View(ConstantView.CreateAccount, model);
+    }
 
 }
