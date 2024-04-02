@@ -9,11 +9,15 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentEmail.Core" Version="3.0.2" />
+    <PackageReference Include="FluentEmail.MailKit" Version="3.0.2" />
+    <PackageReference Include="FluentEmail.Razor" Version="3.0.2" />
+    <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.28" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SMovie.Domain\SMovie.Domain.csproj" />
-    <ProjectReference Include="..\SMovie.Infrastructure\SMovie.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,8 @@
 ﻿using SMovie.Domain.Repository;
 using SMovie.Domain.Repository.Mongo;
-using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.DBContext;
-using SMovie.Infrastructure.Repository;
 
-namespace SMovie.Infrastructure.UnitOfWork
+namespace SMovie.Infrastructure.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

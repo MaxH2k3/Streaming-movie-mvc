@@ -1,0 +1,75 @@
+﻿<div class="notifications-toast"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        @if(ViewBag.response != null)
+        {
+            if(ViewBag.response.Status == System.Net.HttpStatusCode.OK)
+            {
+                <text>createSuccess('@ViewBag.response.Message'); </text>
+            } else 
+            {
+                <text>createError('@ViewBag.response.Message'); </text>
+            }
+
+        }
+        
+    })
+
+    let notifications = document.querySelector('.notifications-toast');
+    let success = document.getElementById('success');
+    let error = document.getElementById('error');
+    let warning = document.getElementById('warning');
+    let info = document.getElementById('info');
+    let maxNotifications = 3;
+    let toastArray = [];
+
+    function createToast(type, icon, title, text) {
+        let newToast = document.createElement('div');
+        newToast.innerHTML = `
+                    <div class="toast ${type}">
+                    <i class="${icon}"></i>
+                    <div class="content">
+                        <div class="title">${title}</div>
+                        <span>${text}</span>
+                    </div>
+                    <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+                    </div>`;
+        notifications.appendChild(newToast);
+        newToast.timeOut = setTimeout(() => {
+            newToast.remove();
+            toastArray.shift(); // Xóa thông báo cũ nhất khỏi mảng
+        }, 5000);
+        toastArray.push(newToast); // Thêm thông báo mới vào mảng
+        if (toastArray.length > maxNotifications) {
+            let toastToRemove = toastArray.shift(); // Lấy thông báo cũ nhất từ mảng
+            clearTimeout(toastToRemove.timeOut); // Hủy bỏ timeout của thông báo cũ nhất
+            toastToRemove.remove(); // Xóa thông báo cũ nhất khỏi DOM
+        }
+    }
+
+    function createSuccess(text) {
+        let type = 'success';
+        let icon = 'fa-solid fa-circle-check';
+        let title = 'Success';
+        createToast(type, icon, title, text);
+    }
+    function createError(text) {
+        let type = 'error';
+        let icon = 'fa-solid fa-circle-exclamation';
+        let title = 'Error';
+        createToast(type, icon, title, text);
+    }
+    function createWarning(text) {
+        let type = 'warning';
+        let icon = 'fa-solid fa-triangle-exclamation';
+        let title = 'Warning';
+        createToast(type, icon, title, text);
+    }
+    function createInfo(text) {
+        let type = 'info';
+        let icon = 'fa-solid fa-circle-info';
+        let title = 'Info';
+        createToast(type, icon, title, text);
+    }
+</script>

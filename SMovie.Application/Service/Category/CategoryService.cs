@@ -1,22 +1,17 @@
 ﻿using SMovie.Application.IService;
 using SMovie.Domain.Entity;
-using SMovie.Infrastructure.UnitOfWork;
+using SMovie.Domain.Repository;
 
 namespace SMovie.Application.Service;
 
 public class CategoryService : ICategoryService
 {
-    private readonly UnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CategoryService(UnitOfWork unitOfWork)
+    public CategoryService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
-
-    public CategoryService()
-    {
-        _unitOfWork = new UnitOfWork();
-	}
 
     public async Task<IEnumerable<Category>> GetCategories()
     {

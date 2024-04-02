@@ -5,8 +5,7 @@ using SMovie.Application.MessageService;
 using SMovie.Domain.Constants;
 using SMovie.Domain.Entity;
 using SMovie.Domain.Models;
-using SMovie.Domain.UnitOfWork;
-using SMovie.Infrastructure.UnitOfWork;
+using SMovie.Domain.Repository;
 using System.Net;
 
 namespace SMovie.Application.Service
@@ -19,12 +18,6 @@ namespace SMovie.Application.Service
 		public PersonService(IUnitOfWork unitOfWork, IMapper mapper)
 		{
 			_unitOfWork = unitOfWork;
-			_mapper = mapper;
-		}
-
-		public PersonService(IMapper mapper)
-		{
-			_unitOfWork = new UnitOfWork();
 			_mapper = mapper;
 		}
 

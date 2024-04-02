@@ -1,66 +1,9 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using SMovie.Application.IService;
-using SMovie.Application.Service;
-using SMovie.Domain.Enum;
-using SMovie.Domain.Models;
-using SMovie.Domain.UnitOfWork;
 using SMovie.Infrastructure.Configuration;
-using SMovie.Infrastructure.DBContext;
-using SMovie.Infrastructure.UnitOfWork;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-
-builder.Services.AddControllersWithViews();
-builder.Services.AddFluentEmail();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddScoped<IMailService, MailService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IFeatureService, FeatureService>();
-builder.Services.AddScoped<IPersonService, PersonService>();
-builder.Services.AddScoped<INationService, NationService>();
-builder.Services.AddScoped<IMovieCategoryService, MovieCategoryService>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IMovieService, MovieService>();
-builder.Services.AddScoped<JWTSetting>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-builder.Services.AddDbContext<SMovieSQLContext>();
-
-builder.Services.AddHttpContextAccessor();
-
-// set up JWT
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidIssuer = builder.Configuration["JWTSetting:Issuer"],
-        ValidAudience = builder.Configuration["JWTSetting:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSetting:Securitykey"]!)),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        RequireExpirationTime = true
-    };
-});
-
-builder.Services.AddAuthorization(opt =>
-{
-    opt.AddPolicy(UserRole.User.ToString(), policy => policy.RequireClaim("Role", UserRole.User.ToString()));
-    opt.AddPolicy(UserRole.Admin.ToString(), policy => policy.RequireClaim("Role", UserRole.Admin.ToString()));
-});
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 

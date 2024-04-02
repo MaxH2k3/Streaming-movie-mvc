@@ -1,7 +1,6 @@
-﻿using SMovie.Domain.Repository;
-using SMovie.Domain.Repository.Mongo;
+﻿using SMovie.Domain.Repository.Mongo;
 
-namespace SMovie.Domain.UnitOfWork
+namespace SMovie.Domain.Repository
 {
     public interface IUnitOfWork : IDisposable
     {

@@ -1,7 +1,6 @@
 ﻿using SMovie.Application.IService;
-using SMovie.Domain.UnitOfWork;
 using SMovie.Domain.Entity;
-using SMovie.Infrastructure.UnitOfWork;
+using SMovie.Domain.Repository;
 
 namespace SMovie.Application.Service
 {
@@ -13,11 +12,6 @@ namespace SMovie.Application.Service
         {
             _unitOfWork = unitOfWork;
         }
-
-        public NationService()
-        {
-            _unitOfWork = new UnitOfWork();
-		}
 
         public async Task<IEnumerable<Nation>> GetNations()
         {

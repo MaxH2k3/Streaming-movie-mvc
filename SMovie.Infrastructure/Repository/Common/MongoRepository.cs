@@ -1,7 +1,9 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
+using System;
 using System.Linq.Expressions;
 
 namespace SMovie.Infrastructure.Repository
@@ -86,6 +88,16 @@ namespace SMovie.Infrastructure.Repository
         public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate)
         {
             return await _collection.Find(predicate).ToListAsync();
+        }
+
+        public async Task<int> Count(Expression<Func<T, bool>> predicate)
+        {
+            return (int)await _collection.CountDocumentsAsync(predicate);
+        }
+
+        public async Task<int> Count()
+        {
+            return (int)await _collection.EstimatedDocumentCountAsync();
         }
     }
 }

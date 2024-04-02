@@ -1,13 +1,9 @@
-﻿
-
-using Microsoft.EntityFrameworkCore;
-using SMovie.Application.IService;
-using SMovie.Domain.Models;
-using SMovie.Domain.Entity;
-using SMovie.Domain.UnitOfWork;
-using System.Net;
+﻿using SMovie.Application.IService;
 using SMovie.Application.MessageService;
-using SMovie.Infrastructure.UnitOfWork;
+using SMovie.Domain.Entity;
+using SMovie.Domain.Models;
+using SMovie.Domain.Repository;
+using System.Net;
 
 namespace SMovie.Application.Service
 {
@@ -18,11 +14,6 @@ namespace SMovie.Application.Service
         public MovieCategoryService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-        }
-
-        public MovieCategoryService()
-        {
-            _unitOfWork = new UnitOfWork();
         }
 
         public async Task<ResponseDTO> CreateMovieCategory(Guid movieId, IEnumerable<int> movieCategories)

@@ -8,8 +8,7 @@ using SMovie.Domain.Constants;
 using SMovie.Domain.Entity;
 using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
-using SMovie.Domain.UnitOfWork;
-using SMovie.Infrastructure.UnitOfWork;
+using SMovie.Domain.Repository;
 using System.Net;
 
 namespace SMovie.Application.Service
@@ -27,16 +26,6 @@ namespace SMovie.Application.Service
             IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            _mailService = mailService;
-            _authenticationService = authenticationService;
-            _configuration = configuration;
-            _mapper = mapper;
-        }
-
-        public UserService(IMailService mailService, IAuthenticationService authenticationService,
-            IConfiguration configuration, IMapper mapper)
-        {
-            _unitOfWork = new UnitOfWork();
             _mailService = mailService;
             _authenticationService = authenticationService;
             _configuration = configuration;

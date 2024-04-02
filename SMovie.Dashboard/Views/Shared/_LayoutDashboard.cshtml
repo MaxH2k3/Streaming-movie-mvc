@@ -1,0 +1,67 @@
+﻿@using SMovie.Dashboard.Constants
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Streamit-movie</title>
+
+    @* import data css *@
+    @await Html.PartialAsync(ConstantSystem.ImportDashboard.ImportCss)
+
+</head>
+<body class="  ">
+@* loading *@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.Loading);
+}
+
+@*Sidebar*@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.Sidebar);
+}
+    
+@*Main content*@
+<main class="main-content">    
+    @{
+        await Html.RenderPartialAsync(ConstantComponent.DashboardHeader);
+
+        @RenderBody();
+
+        //await Html.RenderPartialAsync(ConstantComponent.DashboardFooter);
+    }
+</main>
+    
+@await RenderSectionAsync("Scripts", required: false)
+
+@* import toast *@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.Toast);
+}
+
+@*Live Customizer*@
+@{
+    await Html.RenderPartialAsync(ConstantComponent.LiveCustomizer);
+}
+    
+@* import data js *@
+@await Html.PartialAsync(ConstantSystem.ImportDashboard.ImportJs)
+
+
+@* active sidebar *@
+    @{
+        var currentMenu = 1;
+        currentMenu = ViewData["Menu"] != null ? (int)ViewData["Menu"]! : currentMenu;
+        Console.WriteLine(currentMenu);
+    }
+ <script>
+    $(document).ready(function () {
+        var currentMenu = @(currentMenu);
+        changeActiveSideBar(currentMenu);
+    });
+ </script>
+
+</body>
+</html>
+

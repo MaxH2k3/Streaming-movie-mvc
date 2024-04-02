@@ -2,8 +2,7 @@
 using SMovie.Application.IService;
 using SMovie.Domain.Constants;
 using SMovie.Domain.Models;
-using SMovie.Domain.UnitOfWork;
-using SMovie.Infrastructure.UnitOfWork;
+using SMovie.Domain.Repository;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -22,10 +21,10 @@ namespace SMovie.Application.Service
             _jwtsetting = jWTSetting;
         }
 
-        public AuthenticationService()
+        public AuthenticationService(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork();
             _jwtsetting = new JWTSetting();
+            _unitOfWork = unitOfWork;
         }
 
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

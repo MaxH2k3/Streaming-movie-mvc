@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <PreserveCompilationContext>true</PreserveCompilationContext>
+	  <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMovie.Application\SMovie.Application.csproj" />
+    <ProjectReference Include="..\SMovie.Domain\SMovie.Domain.csproj" />
+    <ProjectReference Include="..\SMovie.Infrastructure\SMovie.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

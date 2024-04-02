@@ -2,7 +2,6 @@
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
-using SMovie.Infrastructure.Extentions;
 using System.Linq.Expressions;
 
 namespace SMovie.Infrastructure.Repository
@@ -79,6 +78,16 @@ namespace SMovie.Infrastructure.Repository
         public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate)
         {
             return await _context.Set<T>().Where(predicate).ToListAsync();
+        }
+
+        public Task<int> Count(Expression<Func<T, bool>> predicate)
+        {
+            return _context.Set<T>().CountAsync(predicate);
+        }
+
+        public Task<int> Count()
+        {
+            return _context.Set<T>().CountAsync();
         }
     }
 }

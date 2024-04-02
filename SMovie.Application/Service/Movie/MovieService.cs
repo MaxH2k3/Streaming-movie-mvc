@@ -6,8 +6,8 @@ using SMovie.Domain.Constants;
 using SMovie.Domain.Entity;
 using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
-using SMovie.Domain.UnitOfWork;
-using SMovie.Infrastructure.UnitOfWork;
+using SMovie.Domain.Repository;
+using System.Data;
 using System.Net;
 
 namespace SMovie.Application.Service
@@ -20,12 +20,6 @@ namespace SMovie.Application.Service
         public MovieService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
-
-        public MovieService(IMapper mapper)
-        {
-            _unitOfWork = new UnitOfWork();
             _mapper = mapper;
         }
 
@@ -246,5 +240,18 @@ namespace SMovie.Application.Service
         {
             return await _unitOfWork.MovieRepository.GetMovieRelated(movieId, page, eachPage);
         }
+
+        public async Task<Dictionary<string, int>> GetStatistic()
+        {
+            Dictionary<string, int> statistics = new Dictionary<string, int>();
+            var movies = await _unitOfWork.MovieRepository.GetAll();
+            statistics.Add(MovieStatus.Upcoming.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Upcoming.ToString()) && m.DateDeleted == null));
+            statistics.Add(MovieStatus.Pending.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Pending.ToString()) && m.DateDeleted == null));
+            statistics.Add(MovieStatus.Released.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Deleted.ToString()) && m.DateDeleted == null));
+            statistics.Add(MovieStatus.Deleted.ToString(), movies.Count(m => m.DateDeleted != null));
+
+            return statistics;
+        }
+
     }
 }
