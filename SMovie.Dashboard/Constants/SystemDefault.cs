@@ -1,4 +1,6 @@
-﻿namespace SMovie.Dashboard.Constants
+﻿using SMovie.Dashboard.Models;
+
+namespace SMovie.Dashboard.Constants
 {
     public class SystemDefault
     {

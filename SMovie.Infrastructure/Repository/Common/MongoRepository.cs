@@ -3,7 +3,6 @@ using MongoDB.Driver;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
-using System;
 using System.Linq.Expressions;
 
 namespace SMovie.Infrastructure.Repository

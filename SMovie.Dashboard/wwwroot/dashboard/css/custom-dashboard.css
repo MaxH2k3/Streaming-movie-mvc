@@ -102,3 +102,22 @@ input.select2-search__field {
 .select2-container--default .select2-results__option--selected {
     background-color: #9f9898;
 }
+
+.movie-info .col-md-6, .movie-info .col-md-3 {
+    margin-top: 1rem;
+}
+
+textarea {
+    resize: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+option.flatpickr-monthDropdown-month {
+    background-color: #857e7e!important;
+    color: white!important;
+}

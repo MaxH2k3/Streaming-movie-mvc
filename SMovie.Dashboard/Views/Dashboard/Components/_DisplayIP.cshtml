@@ -1,0 +1,31 @@
+﻿@using SMovie.Domain.Models
+@model IEnumerable<BlackIP>
+@using SMovie.Dashboard.Utilities
+
+@{
+    var ips = Model;
+}
+
+@foreach (var ip in ips)
+{
+    <tr>
+        <td class="">@ip.IP.ToString()</td>
+        <td >@ip.Note</td>
+        <td class="">@ip.Status</td>
+        <td class="">@ip.DateCreated</td>
+        <td>
+            <div class="d-flex justify-content-evenly">
+                <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
+                    <span class="btn-inner">
+                        <i class="fa-solid fa-pen"></i>
+                    </span>
+                </a>
+                <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
+                    <span class="btn-inner">
+                        <i class="fa-solid fa-trash"></i>
+                    </span>
+                </a>
+            </div>
+        </td>
+    </tr>
+}

@@ -60,8 +60,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-Shows" role="button" aria-expanded="false"
-                       aria-controls="sidebar-user">
+                    <a class="nav-link" role="button" asp-controller="Dashboard" asp-action="CreateMovie">
                         <i class="icon" data-bs-toggle="tooltip" title="TV Shows" data-bs-placement="right" aria-label="TV Shows" data-bs-original-title="TV Shows">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path opacity="0.4" d="M13.7505 9.70303V7.68318C13.354 7.68318 13.0251 7.36377 13.0251 6.97859V4.57356C13.0251 4.2532 12.764 4.00049 12.4352 4.00049H5.7911C3.70213 4.00049 2 5.653 2 7.68318V10.1155C2 10.3043 2.07737 10.4828 2.21277 10.6143C2.34816 10.7449 2.53191 10.8201 2.72534 10.8201C3.46035 10.8201 4.02128 11.3274 4.02128 11.9944C4.02128 12.6905 3.45068 13.2448 2.73501 13.2533C2.33849 13.2533 2 13.5257 2 13.9203V16.3262C2 18.3555 3.70213 19.9995 5.78143 19.9995H12.4352C12.764 19.9995 13.0251 19.745 13.0251 19.4265V17.3963C13.0251 17.0027 13.354 16.6917 13.7505 16.6917V14.8701C13.354 14.8701 13.0251 14.5497 13.0251 14.1655V10.4076C13.0251 10.0224 13.354 9.70303 13.7505 9.70303Z" fill="currentColor"></path>
@@ -94,6 +93,13 @@
                     <a class="nav-link ">
                         <i class="fa-solid fa-file-waveform" style="color: #d1d0cf" data-bs-toggle="tooltip" title="Pricing" data-bs-placement="right" aria-label="Pricing" data-bs-original-title="Notification"></i>
                         <span class="item-name">System Logs</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " asp-controller="Dashboard" asp-action="IpAddress">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span class="item-name">Manage IP Address</span>
                     </a>
                 </li>
 

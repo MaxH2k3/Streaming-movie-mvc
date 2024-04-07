@@ -10,6 +10,8 @@
         Notification = 5,
         SystemLogs = 6,
         Settings = 7,
-        Trash = 8
+        IpAddress = 8,
+        Trash = 9
     }
+
 }

@@ -34,6 +34,7 @@ namespace SMovie.Infrastructure.Configuration
             services.AddScoped<Application.IService.IAuthenticationService, Application.Service.AuthenticationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IIPService, IPService>();
             services.AddScoped<JWTSetting>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
