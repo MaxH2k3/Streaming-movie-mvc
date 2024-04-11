@@ -84,8 +84,6 @@ public class SMovieMongoContext
 
             //set complete config index
             _isIndexCreated = true;
-
-            Console.WriteLine("Create Index successfully!");
         }
         catch (Exception e)
         {

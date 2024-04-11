@@ -28,14 +28,5 @@ namespace SMovie.Domain.Models
             Mail = config["GmailSetting:Mail"]!;
             Password = config["GmailSetting:Password"]!;
         }
-
-        public override string ToString()
-        {
-            return "DisplayName: " + DisplayName + "\n" +
-                   "SmtpServer: " + SmtpServer + "\n" +
-                   "Port: " + Port + "\n" +
-                   "Mail: " + Mail + "\n" +
-                   "Password: " + Password + "\n";
-        }
     }
 }

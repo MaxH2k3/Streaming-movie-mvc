@@ -1,5 +1,6 @@
 ﻿@using SMovie.Domain.Enum
 @using SMovie.Dashboard.Models
+@using SMovie.Dashboard.Constants
 @model CreateModelMovie
 
 <div class="content-inner container-fluid pb-0" id="page_layout">
@@ -157,15 +158,22 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group position-relative">
                                                 <label class="form-label">Trailer: *</label>
-                                                <input type="email" class="form-control" name="Trailer" placeholder="Link Trailer">
+                                                <div class="position-relative">
+                                                    <input oninput="checkLinkTrailer(this)" type="email" class="form-control pr-6rem" name="Trailer" placeholder="Link Trailer">
+                                                    <a type="button" data-bs-toggle="modal" class="check-link-trailer preview-link"></a>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Thumbnail: *</label>
-                                                <input type="email" class="form-control" name="Thumbnail" placeholder="Link Thumbnail">
+                                                <div class="position-relative">
+                                                    <input oninput="checkLinkImage(this)" type="email" class="form-control pr-6rem" name="Thumbnail" placeholder="Link Thumbnail">
+                                                    <a type="button" data-bs-toggle="modal" class="check-link-thumbnail preview-link"></a>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -266,6 +274,10 @@
     </div>
 </div>
 
+@{
+    await Html.RenderPartialAsync(ConstantComponent.DisplayTrailerModal);
+}
+
 
 @section scripts {
     <script>
@@ -273,5 +285,69 @@
         var currentDate = new Date();
         var formattedDate = (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + "/" + currentDate.getFullYear();
         releaseDateInput.value = formattedDate;
+
+
+        function checkLinkTrailer(trailerInput) {
+            var checkLink = document.querySelector('.check-link-trailer');
+            var link = trailerInput.value;
+            var pattern = "https://www.youtube.com/watch?v=";
+
+            if (link.startsWith(pattern)) {
+                checkLink.classList.add('success');
+                checkLink.classList.remove('error');
+                checkLink.setAttribute("data-bs-target", "#trailer-123");
+                
+                checkLink.addEventListener('click', function () {
+                    previewTrailer();
+                });
+
+            } else {
+                checkLink.classList.add('error');
+                checkLink.classList.remove('success');
+            }
+
+        }
+
+        function checkLinkImage(input) {
+            var checkLink = document.querySelector('.check-link-thumbnail');
+            var imageUrl = input.value;
+            var image = new Image();
+
+            image.onload = function () {
+                // Hình ảnh tồn tại
+                checkLink.classList.add('success');
+                checkLink.classList.remove('error');
+                checkLink.setAttribute("data-bs-target", "#trailer-123");
+                
+                checkLink.addEventListener('click', function () {
+                    previewImage();
+                });
+            };
+
+            image.onerror = function () {
+                // Hình ảnh không tồn tại
+                checkLink.classList.add('error');
+                checkLink.classList.remove('success');
+            };
+
+            image.src = imageUrl;
+        }
+
+        function previewTrailer() {
+            var previewTrailer = document.getElementById('preview-trailer');
+            var previewImage = document.getElementById('preview-image');
+
+            previewTrailer.classList.remove('d-none');
+            previewImage.classList.add('d-none');
+        }
+
+        function previewImage() {
+            var previewTrailer = document.getElementById('preview-trailer');
+            var previewImage = document.getElementById('preview-image');
+
+            previewTrailer.classList.add('d-none');
+            previewImage.classList.remove('d-none');
+        }
+
     </script>
 }

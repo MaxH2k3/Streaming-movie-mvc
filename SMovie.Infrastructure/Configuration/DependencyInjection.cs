@@ -1,9 +1,4 @@
-﻿using MailKit;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.DependencyInjection;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
 using SMovie.Domain.Enum;
@@ -11,7 +6,6 @@ using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
 using SMovie.Infrastructure.Repository;
-using System.Text;
 
 namespace SMovie.Infrastructure.Configuration
 {
@@ -22,24 +16,30 @@ namespace SMovie.Infrastructure.Configuration
             // Add services to the container.
             services.AddControllersWithViews();
 
+            // Set up FluentEmail
             services.AddFluentEmail();
+
+            // Set up AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<Application.IService.IMailService, Application.Service.MailService>();
+            // Set up services
+            services.AddScoped<IMailService, MailService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IFeatureService, FeatureService>();
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<INationService, NationService>();
             services.AddScoped<IMovieCategoryService, MovieCategoryService>();
-            services.AddScoped<Application.IService.IAuthenticationService, Application.Service.AuthenticationService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IIPService, IPService>();
             services.AddScoped<JWTSetting>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            // Set up Context
             services.AddDbContext<SMovieSQLContext>();
 
+            // Set up repositories
             services.AddHttpContextAccessor();
 
             // Set up policies
@@ -49,31 +49,8 @@ namespace SMovie.Infrastructure.Configuration
                 opt.AddPolicy(UserRole.Admin.ToString(), policy => policy.RequireClaim("Role", UserRole.Admin.ToString()));
             });
 
-            // set up JWT
-            IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true)
-                .Build();
-
-            services.AddAuthentication(opt =>
-            {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = configuration["JWTSetting:Issuer"],
-                    ValidAudience = configuration["JWTSetting:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWTSetting:Securitykey"]!)),
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    RequireExpirationTime = true
-                };
-            });
+            // Set up JWT
+            services.AddJwt();
 
             return services;
         }

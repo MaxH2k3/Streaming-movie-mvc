@@ -13,6 +13,7 @@
         public const string DisplayUserList = ConstantPath.PrePathComponentDashboard + "_DisplayUserList";
         public const string DisplayMovieList = ConstantPath.PrePathComponentDashboard + "_DisplayMovieList";
         public const string DisplayIP = ConstantPath.PrePathComponentDashboard + "_DisplayIP";
-        
+
+        public const string DisplayTrailerModal = ConstantPath.PrePathComponentDashboard + "_DisplayTrailerModal";
     }
 }

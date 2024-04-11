@@ -1,4 +1,8 @@
-﻿td {
+﻿.pr-6rem {
+    padding-right: 6rem;
+}
+
+td {
     text-transform: none!important;
 }
 
@@ -120,4 +124,43 @@ input::-webkit-inner-spin-button {
 option.flatpickr-monthDropdown-month {
     background-color: #857e7e!important;
     color: white!important;
+}
+
+[class^="check-link"] {
+    position: absolute;
+    bottom: 6px;
+    right: 1rem;
+}
+
+.success::after {
+    content: '✓';
+    color: green;
+    font-size: 1.5rem;
+}
+
+.success:hover::after {
+    content: 'Preview';
+    font-size: 1rem;
+}
+
+.success:hover {
+    bottom: 9px;
+}
+
+.error::after {
+    content: '✗';
+    color: red;
+    font-size: 1.3rem;
+}
+
+.modal-dialog.custom-modal-trailer {
+    --bs-modal-width: 85%;
+}
+
+.h-90vh {
+    height: 90vh;
+}
+
+.z-index-9999 {
+    z-index: 9999;
 }
