@@ -1,11 +1,27 @@
+using Microsoft.Extensions.Options;
 using SMovie.Infrastructure.Configuration;
+using SMovie.WebUI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddInfrastructure();
+builder.Services.AddControllersWithViews(option =>
+{
+    option.Filters.Add<AuthenFilter>();
+});
+builder.Services.AddInfrastructure(builder.Configuration);
+
+//builder.Services.AddScoped<AuthenFilter>();
 
 var app = builder.Build();
+
+// Configure cors
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -24,6 +40,8 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+//app.UseMiddleware<AuthenFilter>();
 
 app.MapControllerRoute(
     name: "default",

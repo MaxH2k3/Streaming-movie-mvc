@@ -100,12 +100,11 @@ namespace SMovie.Application.Service
             });
             
             //create token verify
-            string token = _authenticationService.CreateRandomToken();
+
             int code = new Random().Next(1000, 10000);
             await _unitOfWork.VerifyTokenRepository.Add(new VerifyToken()
             {
 				MID = id,
-                Token = token,
                 Code = code,
                 CreatedDate = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["RegisterData:ExpireTimeForVerification"]!)),
                 ExpiredDate = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["RegisterData:ExpireTimeForStorage"]!))
@@ -116,7 +115,6 @@ namespace SMovie.Application.Service
             {
                 UserName = registerUser.Username,
                 UserId = id.ToString(),
-                Token = token,
                 Email = registerUser.Email,
                 Code = code
             });

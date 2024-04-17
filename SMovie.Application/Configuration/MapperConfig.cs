@@ -48,6 +48,8 @@ namespace SMovie.Application.Configuration
             // Person 
             CreateMap<Person, PersonPreview>();
             CreateMap<PagedList<Person>, PagedList<PersonPreview>>();
+            CreateMap<Person, CastCharacter>();
+            CreateMap<PagedList<Person>, PagedList<CastCharacter>>();
 
             CreateMap<Cast, CastCharacter>()
                 .ForMember(dest => dest.PersonId,

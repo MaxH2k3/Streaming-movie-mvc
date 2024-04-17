@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SMovie.Application.IService;
 using SMovie.Domain.Models;
@@ -6,6 +7,7 @@ using SMovie.WebUI.Constants;
 
 namespace SMovie.WebUI.Controllers.Home
 {
+    [Authorize]
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;

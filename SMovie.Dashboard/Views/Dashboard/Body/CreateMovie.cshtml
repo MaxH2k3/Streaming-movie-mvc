@@ -1,4 +1,6 @@
 ﻿@using SMovie.Domain.Enum
+@using SMovie.Domain.Entity
+@using SMovie.Domain.Models
 @using SMovie.Dashboard.Models
 @using SMovie.Dashboard.Constants
 @model CreateModelMovie
@@ -133,9 +135,9 @@
                                             <div class="form-group d-flex flex-column">
                                                 <label class="form-label">Feature: *</label>
                                                 <select type="select" class="feature-movie form-control select2-basic-multiple" placeholder="No Action">
-                                                    <option value="@((int)FeatureFilm.Cinema)">@FeatureFilm.Cinema.ToString()</option>
-                                                    <option value="@((int)FeatureFilm.Standalone)">@FeatureFilm.Standalone.ToString()</option>
-                                                    <option value="@((int)FeatureFilm.TVSeries)">@FeatureFilm.TVSeries.ToString()</option>
+                                                    <option value="@((int)FeatureMovie.Cinema)">@FeatureMovie.Cinema.ToString()</option>
+                                                    <option value="@((int)FeatureMovie.Standalone)">@FeatureMovie.Standalone.ToString()</option>
+                                                    <option value="@((int)FeatureMovie.TVSeries)">@FeatureMovie.TVSeries.ToString()</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -190,31 +192,55 @@
                                             <h2 class="steps text-end fs-5">Step 2 - 4</h2>
                                         </div>
                                     </div>
+                                    <div class="row d-flex justify-content-end">
+                                        <button type="button" class="btn btn-primary mt-2 btn-add-person" data-bs-toggle="modal"
+                                                data-bs-target="#add-person">
+                                            <i class="fa-solid fa-square-plus me-2"></i>Add Cast
+                                        </button>
+                                        <button type="button" class="btn btn-primary mt-2 btn-add-person" data-bs-toggle="modal"
+                                                data-bs-target="#create-person">
+                                            <i class="fa-solid fa-square-plus me-2"></i>Create Person
+                                        </button>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">First Name: *</label>
-                                                <input type="text" class="form-control" name="fname" placeholder="First Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Last Name: *</label>
-                                                <input type="text" class="form-control" name="lname" placeholder="Last Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Contact No.: *</label>
-                                                <input type="text" class="form-control" name="phno" placeholder="Contact No.">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Alternate Contact No.: *</label>
-                                                <input type="text" class="form-control" name="phno_2" placeholder="Alternate Contact No.">
-                                            </div>
-                                        </div>
+                                        <table class="table table-strip">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>Thumbnail</th>
+                                                    <th>Person</th>
+                                                    <th>Role</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td>Cast</td>
+                                                    <td>ABC</td>
+                                                    <td>James</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-center">
+                                                            <a aria-current="page" href="#"
+                                                               class="active text-danger" title="Delete">
+                                                                <i class="fa-solid fa-trash me-4"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-center">
+                                                    <td>Crew</td>
+                                                    <td>XYZ</td>
+                                                    <td>Producer</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-center">
+                                                            <a aria-current="page" href="#"
+                                                               class="active text-danger" title="Delete">
+                                                                <i class="fa-solid fa-trash me-4"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
@@ -276,11 +302,14 @@
 
 @{
     await Html.RenderPartialAsync(ConstantComponent.DisplayTrailerModal);
+    await Html.RenderPartialAsync(ConstantComponent.DisplayAddPersonModal, (IEnumerable<PersonPreview>)Model.Persons);
+    await Html.RenderPartialAsync(ConstantComponent.DisplayCreatePersonModal, (IEnumerable<Nation>)Model.Nations);
 }
 
 
 @section scripts {
     <script>
+
         var releaseDateInput = document.querySelector('input[name="DateCreated"]');
         var currentDate = new Date();
         var formattedDate = (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + "/" + currentDate.getFullYear();

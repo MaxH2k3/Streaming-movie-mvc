@@ -178,7 +178,7 @@
                 </div>
                 <div id="source-01" class="tab-pane animated fadeInUp" role="tabpanel">
                   @{
-                    if(movie.Feature.FeatureId != ((int)FeatureFilm.TVSeries)) 
+                    if(movie.Feature.FeatureId != ((int)FeatureMovie.TVSeries)) 
                         await Html.RenderPartialAsync(ConstantComponent.DisplayMovieNormal, (IEnumerable<SeasonDTO>)movie.Seasons);
                     else
                         await Html.RenderPartialAsync(ConstantComponent.DisplayMovieTVSeries, (IEnumerable<SeasonDTO>)movie.Seasons);

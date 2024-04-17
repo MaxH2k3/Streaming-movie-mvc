@@ -15,5 +15,7 @@
         public const string DisplayIP = ConstantPath.PrePathComponentDashboard + "_DisplayIP";
 
         public const string DisplayTrailerModal = ConstantPath.PrePathComponentDashboard + "_DisplayTrailerModal";
+        public const string DisplayCreatePersonModal = ConstantPath.PrePathComponentDashboard + "_DisplayCreatePersonModal";
+        public const string DisplayAddPersonModal = ConstantPath.PrePathComponentDashboard + "_DisplayAddPersonModal";
     }
 }

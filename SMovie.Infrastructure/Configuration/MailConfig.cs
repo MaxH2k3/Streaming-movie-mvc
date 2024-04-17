@@ -1,17 +1,19 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using SMovie.Domain.Models;
 
 namespace SMovie.Infrastructure.Configuration;
 
 public static class MailConfig
 {
-    public static void AddFluentEmail(this IServiceCollection services)
+    public static void AddFluentEmail(this IServiceCollection services, IConfiguration configuration)
     {
-        var gmailSetting = new MailSetting();
+        var mailSetting = configuration.GetSection("GmailSetting").Get<MailSetting>();
 
-        services.AddFluentEmail(gmailSetting.Mail)
-        .AddSmtpSender(gmailSetting.SmtpServer, gmailSetting.Port,
-                        gmailSetting.DisplayName, gmailSetting.Password)
+        services.AddFluentEmail(mailSetting.Mail)
+        .AddSmtpSender(mailSetting.SmtpServer, mailSetting.Port,
+                        mailSetting.DisplayName, mailSetting.Password)
         .AddRazorRenderer();
     }
 }

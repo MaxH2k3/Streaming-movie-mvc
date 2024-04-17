@@ -1,0 +1,81 @@
+﻿@using SMovie.Domain.Models
+@model IEnumerable<PersonPreview>
+
+<div class="modal fade overflow-hidden" id="add-person" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog custom-modal-person" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cast-modal-label">Add Cast/Crew</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="section-form">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group ">
+                                <label class="form-label flex-grow-1"
+                                       for="Person">
+                                    <strong>Name Person</strong> :
+                                </label>
+
+                                <!-- textarea input -->
+                                <!-- toggle switch -->
+                                <!-- common inputs -->
+                                <input id="Person" type="text"
+                                       class="form-control "
+                                       placeholder="Enter Name" value="" min=""
+                                       multiple="" />
+                            </div>
+                            <div id="table-add-person" class="custom-table-effect table-responsive h-70vh border rounded py-4 custom-scroll-content">
+                                <table class="table table-striped mb-0" id="basic-table" role="grid">
+                                    <thead>
+                                        <tr class="bg-white">
+                                            <th scope="col">Thumbnail</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="movie-list-table">
+                                        @foreach (var person in Model)
+                                        {
+                                            <tr>
+                                                <input type="hidden" class="person-id" value="@person.PersonId" />
+                                                <td class="w-25">
+                                                    <img src="@person.Thumbnail" class="w-100"/>
+                                                </td>
+                                                <td>@person.NamePerson</td>
+                                                <td>
+                                                    <div class="d-flex justify-content-evenly">
+                                                        <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
+                                                            <span class="btn-inner">
+                                                                <i class="fa-solid fa-user-plus"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+                                                       
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    
+
+    $(document).ready(function () {
+        fetchDataAndAppendToTable();
+    });
+</script>

@@ -1,7 +1,7 @@
 ﻿@using SMovie.WebUI.Constants
 
 @{
-    bool authUser = !string.IsNullOrEmpty(Context.Request.Cookies["AccessToken"]);
+    bool authUser = !string.IsNullOrEmpty(Context.Request.Cookies["token"]);
 }
 
 <!--Nav Start-->

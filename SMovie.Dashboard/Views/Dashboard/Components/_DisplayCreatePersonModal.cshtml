@@ -1,0 +1,91 @@
+﻿@using SMovie.Domain.Entity
+@model IEnumerable<Nation>
+
+<div class="modal fade" id="create-person" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cast-modal-label">Add Cast/Crew</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="section-form">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group ">
+                                <label class="form-label flex-grow-1"
+                                       for="Person">
+                                    <strong>Name Person</strong> :
+                                </label>
+
+                                <!-- textarea input -->
+                                <!-- toggle switch -->
+                                <!-- common inputs -->
+                                <input id="Person" type="text"
+                                       class="form-control "
+                                       placeholder="Enter Name" value="" min=""
+                                       multiple="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group d-flex flex-column">
+                                <label class="form-label flex-grow-1"
+                                       for="role-person"><strong>Role:</strong></label>
+                                <select id="role-person" type="select"
+                                        class="form-control select2-basic-multiple"
+                                        placeholder="Select Occupation">
+                                    <option value="Actor">Actor</option>
+                                    <option value="Producer">Producer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group d-flex flex-column">
+                                <label class="form-label flex-grow-1"
+                                       for="nation"><strong>Nation:</strong></label>
+                                <select type="select" class="form-control select2-basic-multiple" placeholder="No Action">
+                                    @foreach (var nation in Model)
+                                    {
+                                        <option value="@nation.NationId">@nation.Name</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group d-flex flex-column">
+                                <label class="form-label flex-grow-1"
+                                       for="Dob"><strong>Dob:</strong></label>
+                                <input class="form-control flatpickr_humandate" type="text"
+                                       placeholder="Date of Birthday" data-id="multiple">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group d-flex flex-column">
+                                <label class="form-label flex-grow-1"
+                                       for="Dob"><strong>Thumbnail:</strong></label>
+                                <input id="thumbnail-person" type="text"
+                                       class="form-control "
+                                       placeholder="Thumbnail URL" value=""
+                                       multiple="" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Save
+                    changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

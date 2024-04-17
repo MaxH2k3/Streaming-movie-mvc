@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SMovie.Application.IService;
 using SMovie.Dashboard.Constants;
@@ -10,26 +11,30 @@ using SMovie.Domain.Models;
 
 namespace SMovie.Dashboard.Controllers;
 
+
 public class DashboardController : Controller
 {
     private readonly IMovieService _movieService;
     private readonly IIPService _ipService;
     private readonly INationService _nationService;
     private readonly ICategoryService _categoryService;
+    private readonly IPersonService _personService;
     private readonly IMapper _mapper;
 
     public DashboardController(IMovieService movieService,
                 IMapper mapper, INationService nationService,
-                IIPService ipService, ICategoryService categoryService)
+                IIPService ipService, ICategoryService categoryService,
+                IPersonService personService)
     {
         _movieService = movieService;
         _mapper = mapper;
         _ipService = ipService;
         _nationService = nationService;
         _categoryService = categoryService;
+        _personService = personService;
     }
 
-    public IActionResult Index()
+    public IActionResult Dashboard()
     {
         ViewData["Menu"] = 0;
         return View();
@@ -58,7 +63,8 @@ public class DashboardController : Controller
         var model = new CreateModelMovie
         {
             Categories = await _categoryService.GetCategories(),
-            Nations = await _nationService.GetNations()
+            Nations = await _nationService.GetNations(),
+            Persons = _mapper.Map<PagedList<PersonPreview>>(await _personService.GetPersons(SystemDefault.Page, SystemDefault.EachPage, PersonSortBy.NamePerson))
         };
 
         return View(ConstantView.CreateMovie, model);

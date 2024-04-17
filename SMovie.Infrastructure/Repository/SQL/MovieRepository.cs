@@ -71,7 +71,7 @@ namespace SMovie.Infrastructure.Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Movie>> GetMovieDetails(int amount, Domain.Enum.FeatureFilm feature)
+        public async Task<IEnumerable<Movie>> GetMovieDetails(int amount, Domain.Enum.FeatureMovie feature)
         {
             return await _context.Movies
                 .Include(m => m.Nation)
@@ -116,5 +116,9 @@ namespace SMovie.Infrastructure.Repository
             return new PagedList<Movie>(movies, movies.Count, page, eachPage);
         }
 
+        public async Task<bool> IsExisted(Guid id)
+        {
+            return await _context.Movies.AnyAsync(m => m.MovieId.Equals(id));
+        }
     }
 }

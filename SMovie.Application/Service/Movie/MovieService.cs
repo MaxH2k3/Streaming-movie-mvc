@@ -221,7 +221,7 @@ namespace SMovie.Application.Service
 
         public async Task<IEnumerable<Movie>> GetTVSeriesDetails()
         {
-            return await _unitOfWork.MovieRepository.GetMovieDetails(10, Domain.Enum.FeatureFilm.TVSeries);
+            return await _unitOfWork.MovieRepository.GetMovieDetails(10, Domain.Enum.FeatureMovie.TVSeries);
 
         }
 

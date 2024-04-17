@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
-using SMovie.Domain.Enum;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
@@ -11,13 +11,14 @@ namespace SMovie.Infrastructure.Configuration
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfigurationManager configuration)
         {
-            // Add services to the container.
-            services.AddControllersWithViews();
-
             // Set up FluentEmail
-            services.AddFluentEmail();
+            services.AddFluentEmail(configuration);
+
+            // Set up cookie authen
+            services.Configure<CookieSetting>(configuration.GetSection("CookieSetting"));
+            services.AddCustomCookie(configuration);
 
             // Set up AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -32,8 +33,8 @@ namespace SMovie.Infrastructure.Configuration
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<ICastService, CastService>();
             services.AddScoped<IIPService, IPService>();
-            services.AddScoped<JWTSetting>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // Set up Context
@@ -42,15 +43,7 @@ namespace SMovie.Infrastructure.Configuration
             // Set up repositories
             services.AddHttpContextAccessor();
 
-            // Set up policies
-            services.AddAuthorization(opt =>
-            {
-                opt.AddPolicy(UserRole.User.ToString(), policy => policy.RequireClaim("Role", UserRole.User.ToString()));
-                opt.AddPolicy(UserRole.Admin.ToString(), policy => policy.RequireClaim("Role", UserRole.Admin.ToString()));
-            });
-
-            // Set up JWT
-            services.AddJwt();
+            services.AddCors();
 
             return services;
         }
