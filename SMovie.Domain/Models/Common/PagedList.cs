@@ -4,12 +4,21 @@ namespace SMovie.Domain.Models
 {
     public class PagedList<T> : IEnumerable<T> where T : class
     {
-        public IEnumerable<T> Items { get; set; }
-        public int TotalItems { get; set; }
-        public int TotalPages { get; set; }
-        public int CurrentPage { get; set; }
-        public int EachPage { get; set; }
+        public IEnumerable<T> Items { get; init; }
+        public int TotalItems { get; init; }
+        public int TotalPages { get; init; }
+        public int CurrentPage { get; init; }
+        public int EachPage { get; init; }
 
+        public PagedList()
+        {
+            Items = null!;
+            TotalItems = 0;
+            TotalPages = 0;
+            CurrentPage = 0;
+            EachPage = 0;
+        }
+        
         public PagedList(IEnumerable<T> items, int totalItems, int currentPage, int eachPage)
         {
             Items = items;

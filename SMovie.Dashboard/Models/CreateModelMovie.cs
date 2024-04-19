@@ -7,6 +7,6 @@ namespace SMovie.Dashboard.Models
     {
         public IEnumerable<Nation> Nations { get; set; } = new List<Nation>();
         public IEnumerable<Category> Categories { get; set; } = new List<Category>();
-        public IEnumerable<PersonPreview> Persons { get; set; } = new List<PersonPreview>();
+        public PagedList<PersonPreview> Persons { get; set; } = new PagedList<PersonPreview>();
     }
 }

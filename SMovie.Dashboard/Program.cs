@@ -1,14 +1,9 @@
-using Microsoft.Extensions.Options;
-using SMovie.Dashboard.Middleware;
 using SMovie.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(option =>
-{
-    option.Filters.Add<AuthenFilter>();
-});
+builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
@@ -33,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Dashboard}/{id?}");
+    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();

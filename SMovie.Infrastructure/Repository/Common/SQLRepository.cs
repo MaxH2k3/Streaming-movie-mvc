@@ -37,7 +37,7 @@ namespace SMovie.Infrastructure.Repository
             _context.Set<T>().Remove(entity);
         }
 
-        public void Update(T entity)
+        public Task Update(T entity)
         {
             var entry = _context.Entry(entity);
             if (entry.State == EntityState.Detached)
@@ -45,6 +45,8 @@ namespace SMovie.Infrastructure.Repository
                 _context.Set<T>().Attach(entity);
                 entry.State = EntityState.Modified;
             }
+
+            return Task.CompletedTask;
         }
 
         public async Task<T?> GetById(dynamic id)

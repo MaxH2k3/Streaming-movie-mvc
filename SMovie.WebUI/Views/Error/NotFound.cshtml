@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@using SMovie.WebUI.Constants
+
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
 
 
@@ -8,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Not Found</title>
 
-    @await Html.PartialAsync("../Home/Import/_Head")
+    @await Html.PartialAsync(ConstantSystem.ImportHome.ImportCss)
 
 </head>
 
@@ -155,7 +157,7 @@
         </a>
     </div>
     
-    @await Html.PartialAsync("../Home/Import/_Js")
+    @await Html.PartialAsync(ConstantSystem.ImportHome.ImportJs)
 </body>
 
 

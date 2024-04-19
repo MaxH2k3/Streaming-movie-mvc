@@ -54,7 +54,7 @@ namespace SMovie.Domain.Repository
         /// Update an entity in database
         /// </summary>
         /// <param name="entity"></param>
-        void Update(T entity);
+        Task Update(T entity);
 
         /// <summary>
         /// Delete an entity from database

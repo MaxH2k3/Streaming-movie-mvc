@@ -5,6 +5,7 @@
 
 @{
     var movies = Model.Items;
+    var menu = int.Parse(ViewData["menu"]!.ToString()!);
 }
 
 @foreach(var movie in movies)
@@ -31,16 +32,35 @@
         </td>
         <td>
             <div class="d-flex justify-content-evenly">
-                <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
-                    <span class="btn-inner">
-                        <i class="fa-solid fa-pen"></i>
-                    </span>
-                </a>
-                <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
-                    <span class="btn-inner">
-                        <i class="fa-solid fa-trash"></i>
-                    </span>
-                </a>
+                @if(menu == 9)
+                {
+                    <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" role="button"
+                       asp-controller="dashboard" asp-action="RestoreMovie" asp-route-movieId="@movie.MovieId">
+                        <span class="btn-inner">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </span>
+                    </a>
+                    <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" role="button"
+                       asp-controller="dashboard" asp-action="DeleteMovie" asp-route-movieId="@movie.MovieId" asp-route-isPermanently="@true">
+                        <span class="btn-inner">
+                            <i class="fa-solid fa-trash"></i>
+                        </span>
+                    </a>
+                } else
+                {
+                    <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" role="button"
+                       asp-controller="dashboard" asp-action="Index" asp-route-movieId="@movie.MovieId">
+                        <span class="btn-inner">
+                            <i class="fa-solid fa-pen"></i>
+                        </span>
+                    </a>
+                    <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" role="button"
+                       asp-controller="dashboard" asp-action="DeleteMovie" asp-route-movieId="@movie.MovieId" asp-route-isPermanently="@false">
+                        <span class="btn-inner">
+                            <i class="fa-solid fa-trash"></i>
+                        </span>
+                    </a>
+                }
             </div>
         </td>
     </tr>

@@ -23,6 +23,9 @@ public static class CookieConfig
                 options.Cookie.SecurePolicy = (CookieSecurePolicy)cookieSetting.SecurePolicy;
                 options.Cookie.SameSite = (SameSiteMode)cookieSetting.SameSite;
                 options.Cookie.Name = cookieSetting.Name;
+                options.LoginPath = cookieSetting.LoginPath;
+                options.LogoutPath = cookieSetting.LogoutPath;
+                options.AccessDeniedPath = cookieSetting.AccessDeniedPath;
             });
     }
 }

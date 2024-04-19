@@ -74,7 +74,7 @@ namespace SMovie.Application.Service
 			person = _mapper.Map<Person>(newPerson);
 
 			// Update person
-			_unitOfWork.PersonRepository.Update(person);
+			await _unitOfWork.PersonRepository.Update(person);
 
 			if (await _unitOfWork.SaveChangesAsync())
 			{

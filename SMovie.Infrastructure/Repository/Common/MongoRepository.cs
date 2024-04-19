@@ -41,7 +41,7 @@ namespace SMovie.Infrastructure.Repository
             await _collection.InsertOneAsync(entity);
         }
 
-        public async void Update(T entity)
+        public async Task Update(T entity)
         {
             var filter = Builders<T>.Filter.Eq("MID", GetEntityId(entity));
             await _collection.ReplaceOneAsync(filter, entity);

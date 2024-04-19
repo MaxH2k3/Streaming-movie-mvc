@@ -16,4 +16,11 @@
     <ProjectReference Include="..\SMovie.Infrastructure\SMovie.Infrastructure.csproj" />
   </ItemGroup>
 
+
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Error\NotFound.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Error\ServerError.cshtml" />
+  </ItemGroup>
+
 </Project>

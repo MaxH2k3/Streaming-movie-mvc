@@ -48,6 +48,7 @@ namespace SMovie.WebUI.Controllers
 
         public async Task<IActionResult> LoginAsync(UserDTO userDTO)
         {
+
             if(userDTO.UserName != null || userDTO.Password != null)
             {
                 var response = await _userService.Login(userDTO);

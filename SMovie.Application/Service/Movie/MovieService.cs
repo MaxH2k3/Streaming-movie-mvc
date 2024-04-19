@@ -158,7 +158,7 @@ namespace SMovie.Application.Service
             movie = _mapper.Map<Movie>(newMovie);
 
             // Update movie
-            _unitOfWork.MovieRepository.Update(movie);
+            await _unitOfWork.MovieRepository.Update(movie);
 
             // Delete old movie category
             _unitOfWork.MovieCategoryRepository.DeleteMovieCategory(movie.MovieCategories);
@@ -243,7 +243,7 @@ namespace SMovie.Application.Service
 
         public async Task<Dictionary<string, int>> GetStatistic()
         {
-            Dictionary<string, int> statistics = new Dictionary<string, int>();
+            Dictionary<string, int> statistics = new();
             var movies = await _unitOfWork.MovieRepository.GetAll();
             statistics.Add(MovieStatus.Upcoming.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Upcoming.ToString()) && m.DateDeleted == null));
             statistics.Add(MovieStatus.Pending.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Pending.ToString()) && m.DateDeleted == null));
@@ -251,6 +251,52 @@ namespace SMovie.Application.Service
             statistics.Add(MovieStatus.Deleted.ToString(), movies.Count(m => m.DateDeleted != null));
 
             return statistics;
+        }
+
+        public async Task<ResponseDTO> UpdateStatusMovie(Guid movieId, string status)
+        {
+            var movie = await _unitOfWork.MovieRepository.GetById(movieId);
+            if (movie == null)
+            {
+                return new ResponseDTO(HttpStatusCode.NotFound, MessageMovie.MovieNotFound);
+            }
+
+            if (status.Equals(MovieStatus.Deleted))
+            {
+                movie.DateDeleted = DateTime.Now;
+            } else if (status.Equals(MovieStatus.Reverted))
+            {
+                movie.DateDeleted = null;
+            } else
+            {
+                movie.DateDeleted = null;
+                movie.Status = status;
+                movie.DateUpdated = DateTime.Now;
+            }
+
+            await _unitOfWork.MovieRepository.Update(movie);
+            if (await _unitOfWork.SaveChangesAsync())
+            {
+                return new ResponseDTO(HttpStatusCode.OK, MessageCommon.SavingSuccesfully);
+            }
+            return new ResponseDTO(HttpStatusCode.ServiceUnavailable, MessageCommon.SavingFailed);
+        }
+
+        public async Task<ResponseDTO> DeleteMovie(Guid id)
+        {
+            Movie? movie = await _unitOfWork.MovieRepository.GetById(id);
+            if (movie == null)
+            {
+                return new ResponseDTO(HttpStatusCode.NotFound, MessageMovie.MovieNotFound);
+            }
+
+            await _unitOfWork.MovieRepository.Delete(movie);
+
+            if (await _unitOfWork.SaveChangesAsync())
+            {
+                return new ResponseDTO(HttpStatusCode.OK, MessageCommon.SavingSuccesfully);
+            }
+            return new ResponseDTO(HttpStatusCode.ServiceUnavailable, MessageCommon.SavingFailed);
         }
 
     }

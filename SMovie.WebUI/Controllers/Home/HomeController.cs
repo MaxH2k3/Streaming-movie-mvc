@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SMovie.Application.IService;
@@ -88,6 +89,7 @@ public class HomeController : Controller
         return View(ConstantView.AccountDetail);
     }
 
+    [Authorize(Policy = "Admin")]
     public IActionResult PricingPlan()
     {
         return View(ConstantView.PricingPlan);

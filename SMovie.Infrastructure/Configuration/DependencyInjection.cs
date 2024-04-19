@@ -2,10 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
+using SMovie.Domain.Constants;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
 using SMovie.Infrastructure.Repository;
+using System.Data;
 
 namespace SMovie.Infrastructure.Configuration
 {
@@ -44,6 +46,12 @@ namespace SMovie.Infrastructure.Configuration
             services.AddHttpContextAccessor();
 
             services.AddCors();
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("User", policy => policy.RequireClaim(UserClaimType.Role, Role.RoleUser));
+                opt.AddPolicy("Admin", policy => policy.RequireClaim(UserClaimType.Role, Role.RoleAdmin));
+            });
 
             return services;
         }

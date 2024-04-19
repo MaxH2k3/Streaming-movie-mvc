@@ -6,5 +6,7 @@
         public const string Pending = "Pending";
         public const string Released = "Released";
         public const string Deleted = "Deleted";
+        public const string Reverted = "Reverted";
+
     }
 }

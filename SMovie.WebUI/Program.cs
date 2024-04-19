@@ -1,14 +1,9 @@
-using Microsoft.Extensions.Options;
 using SMovie.Infrastructure.Configuration;
-using SMovie.WebUI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(option =>
-{
-    option.Filters.Add<AuthenFilter>();
-});
+builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 //builder.Services.AddScoped<AuthenFilter>();

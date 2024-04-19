@@ -1,4 +1,6 @@
 ﻿@using SMovie.Domain.Models
+@using System.Text.Json
+
 @model IEnumerable<PersonPreview>
 
 <div class="modal fade overflow-hidden" id="add-person" tabindex="-1" role="dialog"
@@ -24,7 +26,7 @@
                                 <!-- textarea input -->
                                 <!-- toggle switch -->
                                 <!-- common inputs -->
-                                <input id="Person" type="text"
+                                <input id="search-name-person" type="text"
                                        class="form-control "
                                        placeholder="Enter Name" value="" min=""
                                        multiple="" />
@@ -38,7 +40,7 @@
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="movie-list-table">
+                                    <tbody id="person-list-table">
                                         @foreach (var person in Model)
                                         {
                                             <tr>
@@ -46,10 +48,10 @@
                                                 <td class="w-25">
                                                     <img src="@person.Thumbnail" class="w-100"/>
                                                 </td>
-                                                <td>@person.NamePerson</td>
+                                                <td class="name-person">@person.NamePerson</td>
                                                 <td>
                                                     <div class="d-flex justify-content-evenly">
-                                                        <a class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
+                                                        <a onclick="addPersonToCast(event)" class="btn btn-primary btn-icon btn-sm rounded-pill ms-2" href="#" role="button">
                                                             <span class="btn-inner">
                                                                 <i class="fa-solid fa-user-plus"></i>
                                                             </span>
@@ -72,10 +74,10 @@
 
                                                        
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/dashboard/js/page/create-movie.js" asp-append-version="true"></script>
 <script>
+    let currentPagePerson = 2;
+    let listSelectedPerson = [];
     
 
-    $(document).ready(function () {
-        fetchDataAndAppendToTable();
-    });
 </script>

@@ -34,7 +34,7 @@ public class DashboardController : Controller
         _personService = personService;
     }
 
-    public IActionResult Dashboard()
+    public IActionResult Index()
     {
         ViewData["Menu"] = 0;
         return View();
@@ -75,6 +75,34 @@ public class DashboardController : Controller
         ViewData["Menu"] = (int)MenuDashboard.IpAddress;
         var ips = await _ipService.GetIPAddress();
         return View(ConstantView.IPAdress, ips);
+    }
+
+    public async Task<IActionResult> DeleteMovie(Guid movieId, bool isPermanently)
+    {
+        if(isPermanently)
+        {
+            await _movieService.DeleteMovie(movieId);
+        }
+        else
+        {
+            await _movieService.UpdateStatusMovie(movieId, MovieStatus.Deleted);
+        }
+
+        ViewData["Menu"] = (int)MenuDashboard.MovieList;
+        var movies = await _movieService.GetMovies(SystemDefault.Page, 999999, MovieSortBy.DateCreated, MovieStatusType.Deleted);
+        var result = _mapper.Map<PagedList<InfoMovie>>(movies);
+
+        return View(ConstantView.MovieList, result);
+    }
+
+    public async Task<IActionResult> RestoreMovie(Guid movieId)
+    {
+        await _movieService.UpdateStatusMovie(movieId, MovieStatus.Reverted);
+
+        ViewData["Menu"] = (int)MenuDashboard.Trash;
+        var movies = await _movieService.GetMovieDeleted(SystemDefault.Page, 999999, MovieSortBy.DateCreated);
+        var result = _mapper.Map<PagedList<InfoMovie>>(movies);
+        return View(ConstantView.MovieList, result);
     }
 
 }
