@@ -1,4 +1,5 @@
-﻿using SMovie.Domain.Constants;
+﻿using SMovie.Dashboard.Constants;
+using SMovie.Domain.Constants;
 
 namespace SMovie.Dashboard.Utilities
 {
@@ -20,10 +21,10 @@ namespace SMovie.Dashboard.Utilities
             return "";
         }
 
-        /*public static string ConvertCategoryToClass()
+        public static string? GetIconCategory(int categoryId)
         {
-
-        }*/
+            return IconDefault.IconCategories.ElementAtOrDefault(categoryId);
+        }
 
     }
 }

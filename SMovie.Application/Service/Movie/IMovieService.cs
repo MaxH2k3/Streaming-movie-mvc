@@ -30,5 +30,6 @@ namespace SMovie.Application.IService
         Task<PagedList<Movie>> GetMovieRelated(Guid movieId, int page, int eachPage);
         Task<ResponseDTO> UpdateStatusMovie(Guid movieId, string status);
         Task<ResponseDTO> DeleteMovie(Guid id);
+        Task<IEnumerable<NumofMovieCategory>> GetNumOfMovieByCategory();
     }
 }

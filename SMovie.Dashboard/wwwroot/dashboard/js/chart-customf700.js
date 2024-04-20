@@ -1820,45 +1820,48 @@ $(document).ready(function() {
       
       }
 
-    // top chart 2
- if(jQuery('#view-chart-02').length){
+// top chart 2
+$(document).ready(() => {
+    if (jQuery('#view-chart-02').length) {
         var options = {
-          series: [44, 30, 20, 43, 22,20],
-          chart: {
-          width: 250,
-          type: 'donut',
-        },
-        colors:['#e20e02','#83878a', '#007aff','#f68a04', '#14e788','#545e75'],
-        labels: ['Actions', 'Comedy', 'Harror', 'Drama', 'Kids','Thrilled'],
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-            show: false,
-            width: 0
-        },
-        legend: {
-            show: false,
-          formatter: function(val, opts) {
-            return val + " - " + opts.w.globals.series[opts.seriesIndex]
-          }
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
+            series: listNumOfMovie,
             chart: {
-              width: 200
+                width: 380,
+                type: 'donut',
+            },
+            colors: listColorCategory,
+            labels: listNameCategory,
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 0
             },
             legend: {
-              position: 'bottom'
-            }
-          }
-        }]
+                show: true,
+                formatter: function (val, opts) {
+                    let percentage = opts.w.globals.seriesPercent[opts.seriesIndex][0].toFixed(1);
+                    return val + " - " + percentage + "%";
+                }
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
         };
 
         var chart = new ApexCharts(document.querySelector("#view-chart-02"), options);
         chart.render();
     }
+})
       
 // top chart 2
  if(jQuery('#view-chart-03').length){

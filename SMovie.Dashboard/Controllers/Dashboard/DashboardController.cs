@@ -34,10 +34,16 @@ public class DashboardController : Controller
         _personService = personService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> IndexAsync()
     {
         ViewData["Menu"] = 0;
-        return View();
+
+        DashboardData model = new DashboardData()
+        {
+            listMovieCategory = await _movieService.GetNumOfMovieByCategory()
+        };
+
+        return View(model);
     }
 
     public async Task<IActionResult> MovieList()

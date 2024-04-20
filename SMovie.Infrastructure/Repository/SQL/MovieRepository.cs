@@ -120,5 +120,27 @@ namespace SMovie.Infrastructure.Repository
         {
             return await _context.Movies.AnyAsync(m => m.MovieId.Equals(id));
         }
+
+        public async Task<IEnumerable<NumofMovieCategory>> GetNumOfMovieByCategory()
+        {
+            var result = await (from c in _context.Categories
+                                join mc in _context.MovieCategories
+                                on c.CategoryId equals mc.CategoryId
+                                into movieCategories
+                                from subMC in movieCategories.DefaultIfEmpty()
+                                group subMC by new { c.CategoryId, c.Name } into g
+                                select new NumofMovieCategory
+                                {
+                                    CategoryId = g.Key.CategoryId,
+                                    CategoryName = g.Key.Name,
+                                    NumOfMovie = g.Count(x => x != null)
+                                })
+                                .OrderBy(x => x.CategoryId)
+                                .ToListAsync();
+                
+
+            return result;
+        }
+
     }
 }

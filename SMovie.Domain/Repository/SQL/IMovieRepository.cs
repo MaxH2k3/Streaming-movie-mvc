@@ -13,5 +13,6 @@ namespace SMovie.Domain.Repository
         Task<Movie?> GetById(Guid id);
         Task<PagedList<Movie>> GetMovieRelated(Guid movieId, int page, int eachPage);
         Task<bool> IsExisted(Guid id);
+        Task<IEnumerable<NumofMovieCategory>> GetNumOfMovieByCategory();
     }
 }

@@ -299,5 +299,10 @@ namespace SMovie.Application.Service
             return new ResponseDTO(HttpStatusCode.ServiceUnavailable, MessageCommon.SavingFailed);
         }
 
+        public async Task<IEnumerable<NumofMovieCategory>> GetNumOfMovieByCategory()
+        {
+            return await _unitOfWork.MovieRepository.GetNumOfMovieByCategory();
+        }
+
     }
 }
