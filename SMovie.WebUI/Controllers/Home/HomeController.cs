@@ -14,17 +14,15 @@ namespace SMovie.WebUI.Controllers;
 public class HomeController : Controller
 {
     private readonly IMovieService _movieService;
-    private readonly ICategoryService _categoryService;
-    private readonly INationService _nationService;
+    private readonly ICommonService _commonService;
     private readonly IMapper _mapper;
 
-    public HomeController(IMovieService movieService, ICategoryService categoryService,
-            IMapper mapper, INationService nationService)
+    public HomeController(IMovieService movieService, ICommonService commonService,
+            IMapper mapper)
     {
         _movieService = movieService;
-        _categoryService = categoryService;
+        _commonService = commonService;
         _mapper = mapper;
-        _nationService = nationService;
     }
 
     public async Task<IActionResult> Index()
@@ -71,8 +69,8 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Genres()
     {
-        var categories = await _categoryService.GetCategories();
-        var nations = await _nationService.GetNations();
+        var categories = await _commonService.GetCategories();
+        var nations = await _commonService.GetNations();
 
         var model = new { Categories = categories, Nations = nations };
 

@@ -1782,46 +1782,48 @@ $(document).ready(function() {
 });
 
 
-// top chart 1
- if(jQuery('#view-chart-01').length){
-       var options = {
-          series: [44, 55, 30, 30],
-          chart: {
-        width: 250,
-          type: 'donut',
-        },
-        colors:['#e20e02', '#f68a04', '#007aff','#545e75'],
-        labels: ["New Customer", "Exsisting Subscriber's", "Daily Visitor's", "Extented Subscriber's"],
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-            show: false,
-            width: 0
-        },
-        legend: {
-            show: false,
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
+
+
+$(document).ready(() => {
+    // top chart 1
+    if (jQuery('#view-chart-01').length) {
+        var options = {
+            series: listNumOfMovieByStatus,
             chart: {
-              width: 200
+                width: 250,
+                type: 'donut',
+            },
+            colors: ['#f68a04', '#08b1ba', '#1aa053', '#e20e02'],
+            labels: listNameMovieStatus,
+            dataLabels: {
+                enabled: true
+            },
+            stroke: {
+                show: true,
+                width: 0
             },
             legend: {
-              position: 'bottom'
-            }
-          }
-        }]
+                show: false,
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
         };
 
         var chart = new ApexCharts(document.querySelector("#view-chart-01"), options);
         chart.render();
-      
-      }
 
-// top chart 2
-$(document).ready(() => {
+    }
+
+    // top chart 2
     if (jQuery('#view-chart-02').length) {
         var options = {
             series: listNumOfMovie,

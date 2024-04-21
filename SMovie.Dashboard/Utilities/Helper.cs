@@ -9,13 +9,13 @@ namespace SMovie.Dashboard.Utilities
         {
             if(status.Equals(MovieStatus.Upcoming))
             {
-                return "badge bg-soft-warning text-warning";
+                return "badge bg-soft-warning text-upcoming";
             } else if(status.Equals(MovieStatus.Pending))
             {
-                return "badge bg-soft-info text-info";
+                return "badge bg-soft-info text-pending";
             } else if(status.Equals(MovieStatus.Released))
             {
-                return "badge bg-soft-success text-success";
+                return "badge bg-soft-success text-released";
             }
 
             return "";

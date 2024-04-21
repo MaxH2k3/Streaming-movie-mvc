@@ -16,21 +16,18 @@ public class DashboardController : Controller
 {
     private readonly IMovieService _movieService;
     private readonly IIPService _ipService;
-    private readonly INationService _nationService;
-    private readonly ICategoryService _categoryService;
+    private readonly ICommonService _commonService;
     private readonly IPersonService _personService;
     private readonly IMapper _mapper;
 
     public DashboardController(IMovieService movieService,
-                IMapper mapper, INationService nationService,
-                IIPService ipService, ICategoryService categoryService,
-                IPersonService personService)
+                IMapper mapper, ICommonService commonService,
+                IIPService ipService, IPersonService personService)
     {
         _movieService = movieService;
         _mapper = mapper;
         _ipService = ipService;
-        _nationService = nationService;
-        _categoryService = categoryService;
+        _commonService = commonService;
         _personService = personService;
     }
 
@@ -38,9 +35,11 @@ public class DashboardController : Controller
     {
         ViewData["Menu"] = 0;
 
-        DashboardData model = new DashboardData()
+        DashboardData model = new()
         {
-            listMovieCategory = await _movieService.GetNumOfMovieByCategory()
+            ListMovieCategory = await _movieService.GetNumOfMovieByCategory(),
+            ListMovieTop = await _movieService.GetCurrentTopMovie(),
+            ListMovieOnPage = await _movieService.GetStatistic()
         };
 
         return View(model);
@@ -68,8 +67,8 @@ public class DashboardController : Controller
 
         var model = new CreateModelMovie
         {
-            Categories = await _categoryService.GetCategories(),
-            Nations = await _nationService.GetNations(),
+            Categories = await _commonService.GetCategories(),
+            Nations = await _commonService.GetNations(),
             Persons = _mapper.Map<PagedList<PersonPreview>>(await _personService.GetPersons(SystemDefault.Page, SystemDefault.EachPage, PersonSortBy.NamePerson))
         };
 

@@ -27,10 +27,8 @@ namespace SMovie.Infrastructure.Configuration
 
             // Set up services
             services.AddScoped<IMailService, MailService>();
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IFeatureService, FeatureService>();
             services.AddScoped<IPersonService, PersonService>();
-            services.AddScoped<INationService, NationService>();
+            services.AddScoped<ICommonService, CommonService>();
             services.AddScoped<IMovieCategoryService, MovieCategoryService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUserService, UserService>();

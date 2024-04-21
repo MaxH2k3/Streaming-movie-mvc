@@ -31,5 +31,7 @@ namespace SMovie.Application.IService
         Task<ResponseDTO> UpdateStatusMovie(Guid movieId, string status);
         Task<ResponseDTO> DeleteMovie(Guid id);
         Task<IEnumerable<NumofMovieCategory>> GetNumOfMovieByCategory();
+        Task<Dictionary<MoviePreview, int>> GetCurrentTopMovie();
+        Task<Dictionary<string, int>> GetStatistic();
     }
 }

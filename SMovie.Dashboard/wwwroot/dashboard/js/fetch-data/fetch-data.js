@@ -25,4 +25,57 @@
     });
 }
 
+const renderTotalCrews = () => {
+    $.ajax({
+        url: "/Api/TotalCrews",
+        type: "GET",
+        success: (data) => {
+            $("#total-crews").text(data);
+        },
+        error: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+const renderTotalAccount = () => {
+    $.ajax({
+        url: "/Api/TotalAccount",
+        type: "GET",
+        success: (data) => {
+            $("#total-account").text(data);
+        },
+        error: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+const renderTotalMovies = () => {
+    $.ajax({
+        url: "/Api/TotalMovies",
+        type: "GET",
+        success: (data) => {
+            $("#total-movies").text(data);
+        },
+        error: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+const renderTotalCategory = () => {
+    $.ajax({
+        url: "/Api/TotalCategory",
+        type: "GET",
+        success: (data) => {
+            $("#total-categories").text(data);
+        },
+        error: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+
 const useSearchPerson = debounce(searchPerson, 500);

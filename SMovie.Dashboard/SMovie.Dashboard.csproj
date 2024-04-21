@@ -23,4 +23,30 @@
     <_ContentIncludedByDefault Remove="Views\Error\ServerError.cshtml" />
   </ItemGroup>
 
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\logo\" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <Content Update="wwwroot\dashboard\images\loader.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\dashboard\images\logo-full-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\dashboard\images\logo-full.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\dashboard\images\logo-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\dashboard\images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

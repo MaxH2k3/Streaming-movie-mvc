@@ -245,9 +245,9 @@ namespace SMovie.Application.Service
         {
             Dictionary<string, int> statistics = new();
             var movies = await _unitOfWork.MovieRepository.GetAll();
-            statistics.Add(MovieStatus.Upcoming.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Upcoming.ToString()) && m.DateDeleted == null));
-            statistics.Add(MovieStatus.Pending.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Pending.ToString()) && m.DateDeleted == null));
-            statistics.Add(MovieStatus.Released.ToString(), movies.Count(m => m.Status.ToLower().Equals(MovieStatus.Deleted.ToString()) && m.DateDeleted == null));
+            statistics.Add(MovieStatus.Upcoming.ToString(), movies.Count(m => m.Status.Equals(MovieStatus.Upcoming.ToString()) && m.DateDeleted == null));
+            statistics.Add(MovieStatus.Pending.ToString(), movies.Count(m => m.Status.Equals(MovieStatus.Pending.ToString()) && m.DateDeleted == null));
+            statistics.Add(MovieStatus.Released.ToString(), movies.Count(m => m.Status.Equals(MovieStatus.Released.ToString()) && m.DateDeleted == null));
             statistics.Add(MovieStatus.Deleted.ToString(), movies.Count(m => m.DateDeleted != null));
 
             return statistics;
@@ -302,6 +302,22 @@ namespace SMovie.Application.Service
         public async Task<IEnumerable<NumofMovieCategory>> GetNumOfMovieByCategory()
         {
             return await _unitOfWork.MovieRepository.GetNumOfMovieByCategory();
+        }
+
+        public async Task<Dictionary<MoviePreview, int>> GetCurrentTopMovie()
+        {
+            var result = new Dictionary<MoviePreview, int>();
+            var tempMoives = (await _unitOfWork.CurrentTopMovieRepository.GetAll(1, 10)).OrderBy(m => m.MovieId);
+            var listId = tempMoives.Select(x => x.MovieId).ToList();
+
+            var movies = (await _unitOfWork.MovieRepository.GetAll(m => listId.Contains(m.MovieId))).OrderBy(m => m.MovieId);
+
+            for(int i = 0; i < movies.Count(); i++)
+            {
+                result.Add(_mapper.Map<MoviePreview>(movies.ElementAtOrDefault(i)), tempMoives.ElementAtOrDefault(i)!.Viewer);
+            }
+
+            return result;
         }
 
     }

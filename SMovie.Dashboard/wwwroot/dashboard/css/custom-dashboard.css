@@ -150,6 +150,22 @@ table tr, table th {
     color: cornflowerblue;
 }
 
+.text-upcoming {
+    color: #f68a04;
+}
+
+.text-pending {
+    color: #08b1ba;
+}
+
+.text-released {
+    color: #1aa053;
+}
+
+.text-deleted {
+    color: #e20e02;
+}
+
 .feature-standalone {
     color: cyan!important;
 }
