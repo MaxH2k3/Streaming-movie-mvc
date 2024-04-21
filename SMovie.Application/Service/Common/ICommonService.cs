@@ -11,5 +11,6 @@ namespace SMovie.Application.IService
         Task<int> TotalAccount();
         Task<int> TotalMovie();
         Task<int> TotalCategory();
+        Task<bool> TestDelete(string id);
     }
 }

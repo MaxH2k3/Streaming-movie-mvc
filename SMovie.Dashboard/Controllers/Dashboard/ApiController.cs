@@ -32,5 +32,10 @@ namespace SMovie.Dashboard.Controllers.Dashboard
             return await _commonService.TotalCategory();
         }
 
+        public async Task<bool> Test(string id)
+        {
+            return await _commonService.TestDelete(id);
+        }
+
     }
 }

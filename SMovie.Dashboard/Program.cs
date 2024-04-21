@@ -1,10 +1,16 @@
+using SMovie.Dashboard.Hub;
+using SMovie.Dashboard.Middleware;
 using SMovie.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(x =>
+{
+    x.Filters.Add(new FilterLogs());
+});
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -29,5 +35,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+
+app.MapHub<NotificationHub>("/notification");
 
 app.Run();

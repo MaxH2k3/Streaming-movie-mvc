@@ -56,5 +56,19 @@ namespace SMovie.Application.Service
             return await _unitOfWork.CategoryRepository.Count();
         }
 
+        public async Task<bool> TestDelete(string id)
+        {
+           Guid guid = Guid.Parse(id);
+            var category = await _unitOfWork.MovieRepository.GetById(guid);
+            category!.Mark = 9999999;
+            await _unitOfWork.MovieRepository.Update(category);
+
+            if(await _unitOfWork.SaveChangesAsync())
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
