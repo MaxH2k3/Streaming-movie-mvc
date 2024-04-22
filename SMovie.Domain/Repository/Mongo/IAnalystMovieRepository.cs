@@ -9,5 +9,7 @@ namespace SMovie.Domain.Repository.Mongo
 {
     public interface IAnalystMovieRepository : IRepository<AnalystMovie>
     {
+        Task UpSert(Guid movieId);
+        Task ConvertToPrevious();
     }
 }

@@ -33,5 +33,6 @@ namespace SMovie.Application.IService
         Task<IEnumerable<NumofMovieCategory>> GetNumOfMovieByCategory();
         Task<Dictionary<MoviePreview, int>> GetCurrentTopMovie();
         Task<Dictionary<string, int>> GetStatistic();
+        Task<ResponseDTO> AddViewerMovie(Guid movieId);
     }
 }

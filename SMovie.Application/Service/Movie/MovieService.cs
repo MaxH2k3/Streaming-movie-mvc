@@ -320,5 +320,17 @@ namespace SMovie.Application.Service
             return result;
         }
 
+        public async Task<ResponseDTO> AddViewerMovie(Guid movieId)
+        {
+            var isExisted = await _unitOfWork.MovieRepository.IsExisted(movieId);
+            if(!isExisted)
+            {
+                return new ResponseDTO(HttpStatusCode.NotFound, MessageMovie.MovieNotFound);
+            }
+
+            await _unitOfWork.CurrentTopMovieRepository.UpSert(movieId);
+
+            return new ResponseDTO(HttpStatusCode.OK, MessageCommon.SavingSuccesfully);
+        }
     }
 }
