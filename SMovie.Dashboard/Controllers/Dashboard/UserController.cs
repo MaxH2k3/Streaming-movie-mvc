@@ -36,7 +36,7 @@ public class UserController : Controller
         return View(ConstantView.UserList, result);
     }
 
-    public async Task<IActionResult> CreateAccount()
+    public async Task<IActionResult> CreateAccountPage()
     {
         ViewData["Menu"] = (int)MenuDashboard.CreateAccount;
         var users = await _userService.GetAdmin();

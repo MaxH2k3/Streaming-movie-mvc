@@ -32,6 +32,13 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="WatchDog.NET" Version="1.4.11" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
     <Content Update="wwwroot\dashboard\images\loader.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

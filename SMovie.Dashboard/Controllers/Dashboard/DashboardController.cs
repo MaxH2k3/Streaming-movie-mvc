@@ -11,6 +11,7 @@ using SMovie.Domain.Models;
 
 namespace SMovie.Dashboard.Controllers;
 
+[Authorize(Policy = "Admin")]
 
 public class DashboardController : Controller
 {
@@ -61,7 +62,7 @@ public class DashboardController : Controller
         return View(ConstantView.MovieList, result);
     }
 
-    public async Task<IActionResult> CreateMovie()
+    public async Task<IActionResult> CreateMoviePage()
     {
         ViewData["Menu"] = (int)MenuDashboard.CreateMovie;
 

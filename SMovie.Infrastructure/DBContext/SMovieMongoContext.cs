@@ -19,6 +19,7 @@ public class SMovieMongoContext
     public IMongoCollection<AnalystMovie> CurrentTopMovies { get; set; }
     public IMongoCollection<AnalystMovie> PreviousTopMovies { get; set; }
     public IMongoCollection<BlackIP> BlackListIP { get; set; }
+    public IMongoCollection<Notification> Notifications { get; set; }
 
     public SMovieMongoContext()
     {
@@ -34,6 +35,7 @@ public class SMovieMongoContext
         CurrentTopMovies = Database.GetCollection<AnalystMovie>("CurrentTopMovie");
         PreviousTopMovies = Database.GetCollection<AnalystMovie>("PreviousTopMovie");
         BlackListIP = Database.GetCollection<BlackIP>("BlackListIP");
+        Notifications = Database.GetCollection<Notification>("Notification");
 
         //Create Index for collection
         if (!_isIndexCreated)
@@ -81,6 +83,12 @@ public class SMovieMongoContext
             var usersIndexOptions = new CreateIndexOptions { ExpireAfter = TimeSpan.Zero };
 
             Users.Indexes.CreateOne(new CreateIndexModel<UserTemporary>(usersIndexKeyDefinition, usersIndexOptions));
+
+            //notification
+            var notificationIndexKeyDefinition = Builders<Notification>.IndexKeys.Ascending(notification => notification.ExpiredDate);
+            var notificationIndexOptions = new CreateIndexOptions { ExpireAfter = TimeSpan.Zero };
+
+            Notifications.Indexes.CreateOne(new CreateIndexModel<Notification>(notificationIndexKeyDefinition, notificationIndexOptions));
 
             //set complete config index
             _isIndexCreated = true;

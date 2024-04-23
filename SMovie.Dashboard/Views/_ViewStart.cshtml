@@ -5,5 +5,8 @@
     } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("User", StringComparison.OrdinalIgnoreCase))
     {
         Layout = "_LayoutDashboard";
+    } else if (ViewContext.RouteData.Values["controller"]!.ToString()!.Equals("Login", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "_Layout";
     }
 }

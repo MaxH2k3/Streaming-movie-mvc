@@ -8,5 +8,7 @@
         public const string CreateMovie = "../Dashboard/Body/CreateMovie";
         public const string IPAdress = "../Dashboard/Body/IPAddress";
         public const string Default = "../Dashboard/Index";
+
+        public const string Login = "../Auth/Login";
     }
 }

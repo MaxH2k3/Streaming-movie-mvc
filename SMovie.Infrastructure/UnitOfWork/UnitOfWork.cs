@@ -1,5 +1,4 @@
 ﻿using SMovie.Domain.Repository;
-using SMovie.Domain.Repository.Mongo;
 using SMovie.Infrastructure.DBContext;
 
 namespace SMovie.Infrastructure.Repository
@@ -23,6 +22,7 @@ namespace SMovie.Infrastructure.Repository
         private readonly IBlackIPRepository _blackIPRepository = null!;
         private readonly IUserTemporaryRepository _userTemporaryRepository = null!;
         private readonly IVerifyTokenRepository _verifyTokenRepository = null!;
+        private readonly INotificationRepository _notificationRepository = null!;
 
         public UnitOfWork(SMovieSQLContext contextSQL, SMovieMongoContext contextMongo)
         {
@@ -65,6 +65,8 @@ namespace SMovie.Infrastructure.Repository
         public IUserTemporaryRepository UserTemporaryRepository => _userTemporaryRepository ?? new UserTemporaryRepository(_contextMongo);
 
         public IVerifyTokenRepository VerifyTokenRepository => _verifyTokenRepository ?? new VerifyTokenRepository(_contextMongo);
+
+        public INotificationRepository NotificationRepository => _notificationRepository ?? new NotificationRepository(_contextMongo);
 
         //release resources when we are done with them (not using the context anymore)
         public void Dispose()

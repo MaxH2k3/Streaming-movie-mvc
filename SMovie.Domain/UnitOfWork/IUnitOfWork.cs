@@ -1,6 +1,4 @@
-﻿using SMovie.Domain.Repository.Mongo;
-
-namespace SMovie.Domain.Repository
+﻿namespace SMovie.Domain.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
@@ -19,6 +17,7 @@ namespace SMovie.Domain.Repository
         IBlackIPRepository BlackIPRepository { get; }
         IUserTemporaryRepository UserTemporaryRepository { get; }
         IVerifyTokenRepository VerifyTokenRepository { get; }
+        INotificationRepository NotificationRepository { get; }
 
         Task<bool> SaveChangesAsync();
     }

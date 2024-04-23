@@ -45,8 +45,8 @@ namespace SMovie.Infrastructure.DBContext
 
         private static string GetConnectionString()
         {
-            /*IWebHostEnvironment environment = new HttpContextAccessor().HttpContext!.RequestServices
-                                        .GetRequiredService<IWebHostEnvironment>();*/
+            IWebHostEnvironment environment = new HttpContextAccessor().HttpContext!.RequestServices
+                                        .GetRequiredService<IWebHostEnvironment>();
 
             IConfiguration config = new ConfigurationBuilder()
 
@@ -56,15 +56,13 @@ namespace SMovie.Infrastructure.DBContext
 
             .Build();
 
-            /*if (environment.IsProduction())
+            if (environment.IsProduction())
             {
                 return config["ConnectionStrings:MyCnn"]!;
-            }
-            else
+            } else
             {
                 return config["LocalDB:MyCnn"]!;
-            }*/
-            return config["LocalDB:MyCnn"]!;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

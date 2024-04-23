@@ -1,5 +1,5 @@
 ﻿using SMovie.Domain.Models;
-using SMovie.Domain.Repository.Mongo;
+using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
 
 namespace SMovie.Infrastructure.Repository

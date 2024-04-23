@@ -5,7 +5,6 @@ using SMovie.Application.Service;
 using SMovie.Domain.Constants;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
-using SMovie.Infrastructure.DBContext;
 using SMovie.Infrastructure.Repository;
 
 namespace SMovie.Infrastructure.Configuration
@@ -33,11 +32,9 @@ namespace SMovie.Infrastructure.Configuration
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IMovieService, MovieService>();
             builder.Services.AddScoped<ICastService, CastService>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddScoped<IIPService, IPService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            // Set up Context
-            builder.Services.AddDbContext<SMovieSQLContext>();
 
             // Set up repositories
             builder.Services.AddHttpContextAccessor();

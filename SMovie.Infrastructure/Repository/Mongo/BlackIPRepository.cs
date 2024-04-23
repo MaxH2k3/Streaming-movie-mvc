@@ -1,11 +1,6 @@
 ﻿using SMovie.Domain.Models;
-using SMovie.Domain.Repository.Mongo;
+using SMovie.Domain.Repository;
 using SMovie.Infrastructure.DBContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMovie.Infrastructure.Repository
 {

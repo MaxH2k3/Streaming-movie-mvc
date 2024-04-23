@@ -1,0 +1,48 @@
+﻿.text-hidden-eclipse {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.block-social-info.custom-block-social {
+    position: unset;
+    margin-top: 0.5rem;
+}
+
+.slider-thumbs.custom-slider-vertical {
+    height: 55em;
+    width: auto;
+}
+
+.custom-description {
+    width: 50%!important;
+    left: 26rem!important;
+}
+
+.swiper-slide.custom-slide-horizontal {
+    width: 21vw !important;
+}
+
+.bold-800 {
+    font-weight: 800;
+}
+
+.tv-series tr {
+    display: none;
+}
+
+.show tr {
+    display: table-row;
+}
+
+.modal-dialog.custom-modal-trailer {
+    --bs-modal-width: 85%;
+}
+
+.h-90vh {
+    height: 90vh;
+}
+
+.z-index-9999 {
+    z-index: 9999;
+}

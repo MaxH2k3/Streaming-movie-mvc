@@ -82,10 +82,10 @@ namespace SMovie.WebUI.Controllers
 
                     if(user.Role.Equals(UserRole.Admin.ToString()))
                     {
-                        return Redirect(SystemDefault.UrlDashboard);
+                        return RedirectToAction("Index", "Dashboard");
                     }
 
-                    return Redirect(SystemDefault.UrlHome);
+                    return RedirectToAction("Index", "Home");
                 }
                 ViewBag.response = response;
             }
