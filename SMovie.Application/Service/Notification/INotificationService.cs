@@ -1,9 +1,10 @@
-﻿using SMovie.Domain.Enum;
+﻿using SMovie.Domain.Models;
 
 namespace SMovie.Application.IService
 {
     public interface INotificationService
     {
-        Task CreateNotification(MethodType methodType, string message, string? userId, string action);
+        Task<Notification> CreateNotification(string? methodType, string message, string avatar, string displayName);
+        Task<PagedList<Notification>> GetNotifications(int page, int pageSize);
     }
 }

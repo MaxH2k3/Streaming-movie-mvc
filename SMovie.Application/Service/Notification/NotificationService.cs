@@ -1,6 +1,4 @@
-﻿using SMovie.Application.Helper;
-using SMovie.Application.IService;
-using SMovie.Domain.Enum;
+﻿using SMovie.Application.IService;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
 
@@ -15,18 +13,25 @@ namespace SMovie.Application.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task CreateNotification(MethodType methodType, string message, string? userId, string action)
+        public async Task<Notification> CreateNotification(string? methodType, string message, string avatar, string displayName)
         {
             var notification = new Notification
             {
                 TypeMessage = methodType,
-                Message = message + " in " + ActionHelper.GetTableUsingAction(action),
-                UserId = string.IsNullOrEmpty(userId) ? null : Guid.Parse(userId),
+                Message = message,
+                Avatar = avatar,
+                DisplayName = displayName
             };
 
             await _unitOfWork.NotificationRepository.Add(notification);
 
-            await _unitOfWork.SaveChangesAsync();
+            return notification;
+        }
+
+        public async Task<PagedList<Notification>> GetNotifications(int page, int pageSize)
+        {
+            var result = await _unitOfWork.NotificationRepository.GetAll(page, pageSize);
+            return result;
         }
     }
 }

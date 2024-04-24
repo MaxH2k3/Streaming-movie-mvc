@@ -12,7 +12,6 @@ using SMovie.Domain.Models;
 namespace SMovie.Dashboard.Controllers;
 
 [Authorize(Policy = "Admin")]
-
 public class DashboardController : Controller
 {
     private readonly IMovieService _movieService;
@@ -83,7 +82,7 @@ public class DashboardController : Controller
         return View(ConstantView.IPAdress, ips);
     }
 
-    public async Task<IActionResult> DeleteMovie(Guid movieId, bool isPermanently)
+    public async Task<RedirectToActionResult> DeleteMovie(Guid movieId, bool isPermanently)
     {
         if(isPermanently)
         {
@@ -95,20 +94,17 @@ public class DashboardController : Controller
         }
 
         ViewData["Menu"] = (int)MenuDashboard.MovieList;
-        var movies = await _movieService.GetMovies(SystemDefault.Page, 999999, MovieSortBy.DateCreated, MovieStatusType.Deleted);
-        var result = _mapper.Map<PagedList<InfoMovie>>(movies);
 
-        return View(ConstantView.MovieList, result);
+        return RedirectToAction("MovieList", "Dashboard");
     }
 
-    public async Task<IActionResult> RestoreMovie(Guid movieId)
+    public async Task<RedirectToActionResult> RestoreMovie(Guid movieId)
     {
         await _movieService.UpdateStatusMovie(movieId, MovieStatus.Reverted);
 
         ViewData["Menu"] = (int)MenuDashboard.Trash;
-        var movies = await _movieService.GetMovieDeleted(SystemDefault.Page, 999999, MovieSortBy.DateCreated);
-        var result = _mapper.Map<PagedList<InfoMovie>>(movies);
-        return View(ConstantView.MovieList, result);
+
+        return RedirectToAction("ListMovieDeleted", "Dashboard");
     }
 
 }

@@ -17,5 +17,6 @@
         public const string DisplayTrailerModal = ConstantPath.PrePathComponentDashboard + "_DisplayTrailerModal";
         public const string DisplayCreatePersonModal = ConstantPath.PrePathComponentDashboard + "_DisplayCreatePersonModal";
         public const string DisplayAddPersonModal = ConstantPath.PrePathComponentDashboard + "_DisplayAddPersonModal";
+        public const string Notification = ConstantPath.PrePathComponentDashboard + "Notification";
     }
 }
