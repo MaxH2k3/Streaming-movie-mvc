@@ -16,7 +16,7 @@ namespace SMovie.Dashboard.Controllers.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var notifications = await _notificationService.GetNotifications(SystemDefault.Page, SystemDefault.EachPage);
+            var notifications = await _notificationService.GetNotifications(SystemDefault.Page, 1);
 
             return View(notifications);
         }

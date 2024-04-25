@@ -5,7 +5,7 @@
 (async () => {
     try {
         await connection.start();
-        console.log("SignalR Connected.");
+        console.log("Connected Successfully.");
     }
     catch (e) {
         console.error(e.toString());
@@ -14,6 +14,7 @@
 
 connection.on("SendNotification", (result) => {
     try {
+        listNotifs.push(result);
         createNotification(result);
     } catch (e) {
         console.error(e.toString());
@@ -43,3 +44,42 @@ const renderNotificationTag = (notification) => {
 
     return tag;
 }
+
+const checkIsExistUnRead = () => {
+    let index = listNotifs.findIndex((item) => !item.isRead);
+
+    if (index > -1) {
+        return true;
+    }
+
+    return false;
+}
+
+listNotifs.forEach((item) => {
+    createNotification(item);
+    createNotification(item);
+    createNotification(item);
+    createNotification(item);
+    createNotification(item);
+    createNotification(item);
+
+    if (checkIsExistUnRead) {
+        $(".dots").addClass("display-noti-unread")
+    }
+})
+
+$(document).ready(() => {
+
+    const element = $("#display-notification");
+    element.on("scroll", () => {
+        const scrollTop = element.scrollTop();
+        const height = element.outerHeight();
+        const scrollHeight = element[0].scrollHeight;
+        console.log(scrollTop + height)
+        console.log(scrollHeight)
+        if (scrollTop + height >= scrollHeight) {
+            getNotification();
+        }
+    })
+
+});

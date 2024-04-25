@@ -77,5 +77,25 @@ const renderTotalCategory = () => {
     });
 }
 
+const getNotification = () => {
+    $.ajax({
+        url: "/Api/GetNotifications",
+        type: "GET",
+        data: {
+            page: pageNotifs
+        },
+        success: (data) => {
+            data.forEach(notif => {
+                createNotification(notif);
+                listNotifs.push(notif);
+            });
+            pageNotifs++;
+        },
+        error: (err) => {
+            console.log(err);
+        }
+    });
+}
+
 
 const useSearchPerson = debounce(searchPerson, 500);

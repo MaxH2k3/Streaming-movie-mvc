@@ -285,3 +285,23 @@ option.flatpickr-monthDropdown-month {
     opacity: 0.5; /* Giá trị opacity để làm mờ phần tử */
     pointer-events: none; /* Ngăn chặn sự tương tác với phần tử */
 }
+
+.dots {
+    display: none;
+}
+
+.dots i {
+    color: red;
+    font-size: 0.7rem;
+    top: 8px;
+    right: 8px;
+}
+
+.display-noti-unread {
+    display: block!important;
+}
+
+.custom-notification {
+    max-height: 40vh;
+    overflow-y: scroll;
+}
