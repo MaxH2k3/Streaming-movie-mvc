@@ -258,8 +258,8 @@ option.flatpickr-monthDropdown-month {
     margin: 1rem;
 }
 
-.select2-container {
-    z-index: 9999;
+span.select2-dropdown {
+    z-index: 2000;
 }
 
 .h-70vh {

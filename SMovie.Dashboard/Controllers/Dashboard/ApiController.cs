@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SMovie.Application.IService;
-using SMovie.Dashboard.Constants;
+using SMovie.Application.Service;
 using SMovie.Domain.Models;
 
 namespace SMovie.Dashboard.Controllers.Dashboard
@@ -9,12 +9,15 @@ namespace SMovie.Dashboard.Controllers.Dashboard
     {
         private readonly ICommonService _commonService;
         private readonly INotificationService _notificationService;
+        private readonly IGeminiService _geminiService;
 
         public ApiController(ICommonService commonService, 
-                    INotificationService notificationService)
+                    INotificationService notificationService, 
+                    IGeminiService geminiService)
         {
             _commonService = commonService;
             _notificationService = notificationService;
+            _geminiService = geminiService;
         }
 
         public async Task<int> TotalCrews()
@@ -45,7 +48,14 @@ namespace SMovie.Dashboard.Controllers.Dashboard
         public async Task<IEnumerable<Notification>> GetNotifications(int page)
         {
             return await _notificationService.GetNotifications(page, 1);
-        } 
+        }
+
+        public async Task<ResponseDTO> GenerateMovie(string content, string? nation = null)
+        {
+            var res = await _geminiService.ChatBotMovie("conan", "Japan");
+
+            return res;
+        }
 
     }
 }

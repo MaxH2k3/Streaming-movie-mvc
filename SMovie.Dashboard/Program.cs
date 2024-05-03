@@ -1,6 +1,7 @@
 using SMovie.Dashboard.Hub;
 using SMovie.Dashboard.Middleware;
 using SMovie.Domain.Constants;
+using SMovie.Domain.Models;
 using SMovie.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddControllersWithViews(x =>
 builder.AddInfrastructure();
 builder.Services.AddSignalR();
 builder.Services.AddQuartzConfig(builder.Configuration);
+builder.Services.Configure<MovieBot>(builder.Configuration.GetSection("MovieBot"));
 
 var app = builder.Build();
 

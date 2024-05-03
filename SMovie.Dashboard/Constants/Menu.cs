@@ -8,10 +8,9 @@
         CreateMovie = 3,
         CreateAccount = 4,
         Notification = 5,
-        SystemLogs = 6,
+        IpAddress = 6,
         Settings = 7,
-        IpAddress = 8,
-        Trash = 9
+        Trash = 8
     }
 
 }

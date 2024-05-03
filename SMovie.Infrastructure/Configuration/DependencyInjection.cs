@@ -32,6 +32,7 @@ namespace SMovie.Infrastructure.Configuration
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IMovieService, MovieService>();
             builder.Services.AddScoped<ICastService, CastService>();
+            builder.Services.AddScoped<IGeminiService, GeminiService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddScoped<IIPService, IPService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

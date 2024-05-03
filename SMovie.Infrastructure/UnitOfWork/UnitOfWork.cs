@@ -23,6 +23,7 @@ namespace SMovie.Infrastructure.Repository
         private readonly IUserTemporaryRepository _userTemporaryRepository = null!;
         private readonly IVerifyTokenRepository _verifyTokenRepository = null!;
         private readonly INotificationRepository _notificationRepository = null!;
+        private readonly IGeminiRepository _geminiRepository = null!;
 
         public UnitOfWork(SMovieSQLContext contextSQL, SMovieMongoContext contextMongo)
         {
@@ -67,6 +68,8 @@ namespace SMovie.Infrastructure.Repository
         public IVerifyTokenRepository VerifyTokenRepository => _verifyTokenRepository ?? new VerifyTokenRepository(_contextMongo);
 
         public INotificationRepository NotificationRepository => _notificationRepository ?? new NotificationRepository(_contextMongo);
+
+        public IGeminiRepository GeminiRepository => _geminiRepository ?? new GeminiRepository(_contextMongo);
 
         //release resources when we are done with them (not using the context anymore)
         public void Dispose()

@@ -80,12 +80,12 @@ namespace SMovie.WebUI.Controllers
                     Response.Cookies.Append(UserClaimType.DisplayName, user!.DisplayName!, cookieOptions);
                     Response.Cookies.Append(UserClaimType.Avatar, user.Avatar!, cookieOptions);
 
-                    if(user.Role.Equals(UserRole.Admin.ToString()))
+                    if(!user.Role.Equals(UserRole.Admin.ToString()))
                     {
-                        return RedirectToAction("Index", "Dashboard");
+                        return RedirectToAction("Index", "Home");
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    response = new ResponseDTO(HttpStatusCode.NotFound, ConstantMessage.UserNameOrPasswordIncorrect);
                 }
                 ViewBag.response = response;
             }

@@ -18,6 +18,7 @@
         IUserTemporaryRepository UserTemporaryRepository { get; }
         IVerifyTokenRepository VerifyTokenRepository { get; }
         INotificationRepository NotificationRepository { get; }
+        IGeminiRepository GeminiRepository { get; }
 
         Task<bool> SaveChangesAsync();
     }

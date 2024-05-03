@@ -18,7 +18,7 @@ namespace SMovie.Infrastructure.Configuration
 
                 q.SchedulerId = quartzSetting.SchedulerId;
                 q.SchedulerName = quartzSetting.SchedulerName;
-                q.UseMicrosoftDependencyInjectionJobFactory();
+                //q.UseMicrosoftDependencyInjectionJobFactory();
                 q.UseDefaultThreadPool(tp =>
                 {
                     tp.MaxConcurrency = quartzSetting.MaxConcurrency;

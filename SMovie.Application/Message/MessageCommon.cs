@@ -14,5 +14,8 @@ namespace SMovie.Application.MessageService
         public const string ValidateSuccessfully = "Validate Successfully!";
 		public const string NationNotFound = "Nation not found!";
 		public const string FeatureFilmNotFound = "Feature Film not found!";
-	}
+
+        public const string NotFound = "Not Found!";
+        public const string Complete = "Complete!";
+    }
 }

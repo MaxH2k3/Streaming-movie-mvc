@@ -20,6 +20,7 @@ public class SMovieMongoContext
     public IMongoCollection<AnalystMovie> PreviousTopMovies { get; set; }
     public IMongoCollection<BlackIP> BlackListIP { get; set; }
     public IMongoCollection<Notification> Notifications { get; set; }
+    public IMongoCollection<string> Geminis { get; set; }
 
     public SMovieMongoContext()
     {
@@ -36,6 +37,7 @@ public class SMovieMongoContext
         PreviousTopMovies = Database.GetCollection<AnalystMovie>("PreviousTopMovie");
         BlackListIP = Database.GetCollection<BlackIP>("BlackListIP");
         Notifications = Database.GetCollection<Notification>("Notification");
+        Geminis = Database.GetCollection<string>("Gemini");
 
         //Create Index for collection
         if (!_isIndexCreated)
