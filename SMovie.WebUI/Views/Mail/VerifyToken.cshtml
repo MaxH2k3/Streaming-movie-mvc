@@ -163,7 +163,7 @@
                                                         var userId = @Model.UserId
                                                                 var token = @Model.Token
 
-                                                                var url = `https://localhost:7248/Verify/VerifyTokentoken=${token}&userId=${userId}`
+                                                                var url = `https://localhost:7248/Verify?VerifyTokentoken=${token}&userId=${userId}`
 
                                                         document.getElementById('verify-link').href = url
                                                         console.log("Start...");
