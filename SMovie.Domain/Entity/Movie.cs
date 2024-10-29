@@ -18,8 +18,8 @@
         public string Description { get; set; } = null!;
         public string EnglishName { get; set; } = null!;
         public string VietnamName { get; set; } = null!;
-        public string Thumbnail { get; set; } = null!;
-        public string Trailer { get; set; } = null!;
+        public string? Thumbnail { get; set; }
+        public string? Trailer { get; set; }
         public string Status { get; set; } = null!;
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
