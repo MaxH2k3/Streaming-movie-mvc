@@ -59,16 +59,11 @@ public class SMovieMongoContext
 
                 .Build();
 
-        if (environment.IsProduction())
-        {
-            return config["ConnectionStrings:MongoDB"]!;
-        }
-
-        return config["LocalDB:MongoDB"]!;
-        
+		return config["ConnectionStrings:MongoDB"]!;
 
 
-    }
+
+	}
 
     private void CreateIndex()
     {

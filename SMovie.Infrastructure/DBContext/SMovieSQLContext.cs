@@ -56,14 +56,8 @@ namespace SMovie.Infrastructure.DBContext
 
             .Build();
 
-            if (environment.IsProduction())
-            {
-                return config["ConnectionStrings:MyCnn"]!;
-            } else
-            {
-                return config["LocalDB:MyCnn"]!;
-            }
-        }
+			return config["ConnectionStrings:MyCnn"]!;
+		}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

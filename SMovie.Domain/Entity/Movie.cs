@@ -12,17 +12,17 @@
         public Guid MovieId { get; set; }
         public int FeatureId { get; set; }
         public string NationId { get; set; } = null!;
-        public double Mark { get; set; }
-        public int Time { get; set; }
-        public int Viewer { get; set; }
+        public double? Mark { get; set; }
+        public int? Time { get; set; }
+        public int? Viewer { get; set; }
         public string Description { get; set; } = null!;
         public string EnglishName { get; set; } = null!;
         public string VietnamName { get; set; } = null!;
         public string? Thumbnail { get; set; }
         public string? Trailer { get; set; }
         public string Status { get; set; } = null!;
-        public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
+        public DateTime? DateCreated { get; set; }
+        public DateTime? DateUpdated { get; set; }
         public DateTime? DateDeleted { get; set; }
         public DateTime ProducedDate { get; set; }
         public virtual FeatureFilm Feature { get; set; } = null!;
