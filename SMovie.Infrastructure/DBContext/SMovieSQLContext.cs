@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Hosting;
 using SMovie.Domain.Entity;
 namespace SMovie.Infrastructure.DBContext
 {
@@ -36,18 +33,12 @@ namespace SMovie.Infrastructure.DBContext
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder
-                        .UseSqlServer(GetConnectionString());
-                        //.LogTo(Console.WriteLine, LogLevel.Information);
-                //.LogTo((message) => WatchLogger.Log($"SQL {message}"), LogLevel.Information);
+                optionsBuilder.UseNpgsql(GetConnectionString());
             }
         }
 
         private static string GetConnectionString()
         {
-            IWebHostEnvironment environment = new HttpContextAccessor().HttpContext!.RequestServices
-                                        .GetRequiredService<IWebHostEnvironment>();
-
             IConfiguration config = new ConfigurationBuilder()
 
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -56,8 +47,8 @@ namespace SMovie.Infrastructure.DBContext
 
             .Build();
 
-			return config["ConnectionStrings:MyCnn"]!;
-		}
+            return config["ConnectionStrings:MyCnn"]!;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -78,7 +69,7 @@ namespace SMovie.Infrastructure.DBContext
                 entity.Property(e => e.Status)
                     .HasMaxLength(255);
 
-                entity.Property(e => e.Username)
+                entity.Property(e => e.Username).HasColumnName("UserName")
                     .HasMaxLength(255);
 
                 entity.Property(e => e.Email)
@@ -198,6 +189,8 @@ namespace SMovie.Infrastructure.DBContext
                 entity.HasKey(e => e.FeatureId)
                     .HasName("PK__featuref__82230BC90FB02B10");
 
+                entity.Property(e => e.FeatureId).HasColumnName("FeatureID");
+
                 entity.ToTable("FeatureFilm");
 
                 entity.Property(e => e.Name)
@@ -260,6 +253,10 @@ namespace SMovie.Infrastructure.DBContext
                 entity.HasKey(mc => new { mc.MovieId, mc.CategoryId });
 
                 entity.ToTable("MovieCategory");
+
+                entity.Property(e => e.MovieId).HasColumnName("MovieID");
+
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
                 entity.HasOne(d => d.Category)
                     .WithMany()

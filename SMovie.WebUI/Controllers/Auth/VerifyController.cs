@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using SMovie.Application.IService;
 using SMovie.Domain.Enum;
 using System.Net;

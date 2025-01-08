@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SMovie.Application.IService;
 using SMovie.Application.Service;
 using SMovie.Domain.Constants;
 using SMovie.Domain.Models;
 using SMovie.Domain.Repository;
+using SMovie.Infrastructure.DBContext;
 using SMovie.Infrastructure.Repository;
 
 namespace SMovie.Infrastructure.Configuration
@@ -22,6 +25,18 @@ namespace SMovie.Infrastructure.Configuration
 
             // Set up AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            // Add PostgresSQL
+            builder.Services.AddDbContext<SMovieSQLContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("MyCnn") ?? throw new Exception("You are not config connection Database!"),
+                    opt =>
+                    {
+                        opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                    });
+                options.EnableSensitiveDataLogging();
+                options.EnableDetailedErrors();
+            });
 
             // Set up builder.Services
             builder.Services.AddScoped<IMailService, MailService>();
