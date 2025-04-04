@@ -74,6 +74,7 @@ namespace SMovie.WebUI.Controllers
                         SameSite = (SameSiteMode)_cookieSetting.SameSite,
                         Expires = DateTime.Now.AddDays(_cookieSetting.ExpireTime)
                     };
+
                     Response.Cookies.Append(UserClaimType.DisplayName, user!.DisplayName!, cookieOptions);
                     Response.Cookies.Append(UserClaimType.Avatar, user.Avatar!, cookieOptions);
 
